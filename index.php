@@ -34,6 +34,8 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
 
     $parser->parse($_POST['report']);
 
+    var_dump($parser);
+
     // use Zend View to render the CR
     $view = new Zend_View();
 

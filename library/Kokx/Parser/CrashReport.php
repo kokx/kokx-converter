@@ -146,30 +146,30 @@ class Kokx_Parser_CrashReport
         $this->_source = strstr($this->_source, 'Aanvaller');
 
 /*
-Verdediger killer1484 ([1:277:5])
+Verdediger Darklord91 ([2:96:11])
 
-Wapens: 50% Schilden: 50% Romp beplating: 50%
+Wapens: 30% Schilden: 0% Romp beplating: 10%
 
-Soort	Zonne-energiesatelliet	Raketten	K.Laser	G.Laser	Ion.K	K.Koepel
+Soort	K.Laser
 
-Aantal	5	51	10	22	5	1
+Aantal	1
 
-Wapens:	2	120	150	375	225	2
+Wapens:	130
 
-Schilden	2	30	38	150	750	3.000
+Schilden	25
 
-Romp	300	300	300	1.200	1.200	3.000
+Romp	220
 
 
 
-De aanvallende vloot vuurt een totaal van 127 keer met een kracht van 241.300 op de verdediger.
+De aanvallende vloot vuurt een totaal van 28 keer met een kracht van 2.505 op de verdediger. De verdediger zijn schilden absorberen 25 schade punten
 */
 
         // complicated regex that extracts all info from a fleet slot
         $regex = '(Aanvaller|Verdediger) (.*?) \(\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]\)\s*'
-               . 'Wapens: ([0-9]{1,2})0% Schilden: ([0-9]{1,2})0% Romp beplating: ([0-9]{1,2})0%\s*'
+               . 'Wapens: ([0-9]{0,2})0% Schilden: ([0-9]{0,2})0% Romp beplating: ([0-9]{0,2})0%\s*'
                . 'Soort([A-Za-z.\s-]*)\s*'
-               . 'Aantal([0-9.\s]*)'
+               . 'Aantal([0-9.\s]*)\s'
                . '.*?(Aanvaller|Verdediger|De aanvallende vloot vuurt)';
 
         $matches = array();
