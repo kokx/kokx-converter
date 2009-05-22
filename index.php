@@ -25,28 +25,37 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 
 $autoloader->registerNamespace('Kokx_');
 
-// first parse the CR
-$parser = new Kokx_Parser_CrashReport();
+$output = '';
 
-$parser->parse(file_get_contents(ROOT . DIRECTORY_SEPARATOR . 'agsreport'));
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // first parse the CR
+    $parser = new Kokx_Parser_CrashReport();
 
-// use Zend View to render the CR
-$view = new Zend_View();
+    $parser->parse($_POST['report']);
 
-$view->setScriptPath(ROOT . DIRECTORY_SEPARATOR . 'views');
+    var_dump($parser);
 
-// now set all the variables
-$view->time   = $parser->getTime();
-$view->rounds = $parser->getRounds();
-$view->result = $parser->getResult();
+    // use Zend View to render the CR
+    $view = new Zend_View();
 
-$view->options = array(
-    'middleText' => 'Powned!!',
-    'showTime'   => false
-);
+    $view->setScriptPath(ROOT . DIRECTORY_SEPARATOR . 'views');
 
-echo '<textarea rows="15" cols="50">';
-echo $view->render('default.phtml');
-echo '</textarea>';
+    // now set all the variables
+    $view->time   = $parser->getTime();
+    $view->rounds = $parser->getRounds();
+    $view->result = $parser->getResult();
 
-var_dump($parser);
+    $view->options = array(
+        'middleText' => 'Powned!!',
+        'showTime'   => false
+    );
+
+    $output = $view->render('default.phtml');
+}
+?>
+<form method="post" action="">
+<textarea name="report" rows="15" cols="50"></textarea>
+
+<textarea rows="15" cols="50"><?= $output ?></textarea><br />
+<input type="submit" name="submit" value="convert" />
+</form>

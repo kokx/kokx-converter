@@ -120,6 +120,7 @@ class Kokx_Parser_CrashReport
 
         $this->_rounds = array($this->_parseFirstRound());
 
+        // something is wrong here
         do {
             $this->_rounds[] = $this->_parseRound();
         } while (preg_match('#De aanvallende vloot vuurt#i', $this->_source));
@@ -145,9 +146,9 @@ class Kokx_Parser_CrashReport
         $this->_source = strstr($this->_source, 'Aanvaller');
 
         // complicated regex that extracts all info from a fleet slot
-        $regex = '(Aanvaller|Verdediger) (.*?) \(\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]\)\s'
-               . 'Wapens: ([0-9]{1,2})0% Schilden: ([0-9]{1,2})0% Romp beplating: ([0-9]{1,2})0%\s'
-               . 'Soort([A-Za-z.\t]*)\s'
+        $regex = '(Aanvaller|Verdediger) (.*?) \(\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]\)\s*'
+               . 'Wapens: ([0-9]{1,2})0% Schilden: ([0-9]{1,2})0% Romp beplating: ([0-9]{1,2})0%\s*'
+               . 'Soort([A-Za-z.\t]*)\s*'
                . 'Aantal([0-9.\t]*)'
                . '.*?(Aanvaller|Verdediger|De aanvallende vloot vuurt)';
 
@@ -213,8 +214,8 @@ class Kokx_Parser_CrashReport
         $this->_source = strstr($this->_source, 'Aanvaller');
 
         // complicated regex that extracts all info from a fleet slot
-        $regex = '(Aanvaller|Verdediger) (.*?) \(\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]\)\s'
-               . '(Soort([A-Za-z.\t]*)\s' . 'Aantal([0-9.\t]*)' . '|Vernietigd)\s'
+        $regex = '(Aanvaller|Verdediger) (.*?) \(\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]\)\s*'
+               . '(Soort([A-Za-z.\t]*)\s*' . 'Aantal([0-9.\t]*)' . '|Vernietigd)\s*'
                . '.*?(Aanvaller|Verdediger|De aanvallende vloot vuurt|De aanvaller heeft|De verdediger heeft|remise)';
 
         $matches = array();
