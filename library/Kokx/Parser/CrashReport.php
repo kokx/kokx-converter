@@ -15,6 +15,10 @@
 class Kokx_Parser_CrashReport
 {
 
+    const ATTACKER = 'attacker';
+    const DEFENDER = 'defender';
+    const NONE     = 'none';
+
     /**
      * Source
      *
@@ -48,6 +52,16 @@ class Kokx_Parser_CrashReport
         'winner'         => '', // 'none', 'defender' or 'attacker'
         'attackerlosses' => 0,  // the attacker's losses
         'defenderlosses' => 0,  // the defender's losses
+    	'stolen'         => array( // the number of stolen goods
+            'metal'   => 0,
+            'crystal' => 0,
+            'deut'    => 0
+        ),
+        'debris' => array( // debris field
+            'metal'   => 0,
+            'crystal' => 0
+        ),
+        'moonchance' => 0
     );
 
 
@@ -226,6 +240,53 @@ class Kokx_Parser_CrashReport
      */
     protected function _parseResult()
     {
-        $this->_result['winner'] = '';
+        // check who has won the fight
+        if (preg_match('#gewonnen#i', $this->_source)) {
+            if (preg_match('#De aanvaller heeft#i', $this->_source)) {
+                $this->_result['winner'] = self::ATTACKER;
+
+                // the attacker won, get the number of stolen resources
+
+                $regex = 'De aanvaller steelt\s*?([0-9.]*) Metaal, ([0-9.]*) Kristal en ([0-9.]*) Deuterium';
+
+                $matches = array();
+                preg_match('#' . $regex . '#si', $this->_source, $matches);
+
+                $this->_result['stolen'] = array(
+                    'metal'   => (int) str_replace('.', '', $matches[1]),
+                    'crystal' => (int) str_replace('.', '', $matches[2]),
+                    'deut'    => (int) str_replace('.', '', $matches[3]),
+                );
+            } else {
+                $this->_result['winner'] = self::DEFENDER;
+            }
+        } else {
+            $this->_result['winner'] = self::NONE;
+        }
+
+        // get the attacker's losses
+        $matches = array();
+        preg_match('#De aanvaller heeft een totaal van ([0-9.]*) Eenheden verloren.#i', $this->_source, $matches);
+
+        $this->_result['attackerlosses'] = (int) str_replace('.', '', $matches[1]);
+
+        // get the defender's losses
+        $matches = array();
+        preg_match('#De verdediger heeft een totaal van ([0-9.]*) Eenheden verloren.#i', $this->_source, $matches);
+
+        $this->_result['defenderlosses'] = (int) str_replace('.', '', $matches[1]);
+
+        // get the debris
+        $matches = array();
+        preg_match('#in de ruimte zweven nu ([0-9.]*) Metaal en ([0-9.]*) Kristal.#i', $this->_source, $matches);
+
+        $this->_result['debris']['metal']   = (int) str_replace('.', '', $matches[1]);
+        $this->_result['debris']['crystal'] = (int) str_replace('.', '', $matches[2]);
+
+        // moonchance
+        $matches = array();
+        if (preg_match('#De kans dat een maan ontstaat uit het puin is ([0-9]{1,2})#i', $this->_source, $matches)) {
+            $this->_result['moonchance'] = (int) str_replace('.', '', $matches[1]);
+        }
     }
 }
