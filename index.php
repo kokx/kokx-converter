@@ -12,19 +12,18 @@ define('LIB', ROOT . DIRECTORY_SEPARATOR . 'library');
 
 ini_set('xdebug.var_display_max_depth', 20);
 
-/**
- * Autoload function
- *
- * @param string $class
- *
- * @return void
- */
-function myAutoload($class)
-{
-    require_once LIB . DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
-}
+$includePath = array(
+    LIB,
+    get_include_path()
+);
 
-spl_autoload_register('myAutoload');
+set_include_path(implode(PATH_SEPARATOR, $includePath));
+
+require_once 'Zend/Loader/Autoloader.php';
+
+$autoloader = Zend_Loader_Autoloader::getInstance();
+
+$autoloader->registerNamespace('Kokx_');
 
 $parser = new Kokx_Parser_CrashReport();
 

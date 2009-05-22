@@ -66,6 +66,36 @@ class Kokx_Parser_CrashReport
 
 
     /**
+     * Get all the rounds
+     *
+     * @return array
+     */
+    public function getRounds()
+    {
+        return $this->_rounds;
+    }
+
+    /**
+     * Get the battle time
+     *
+     * @return array
+     */
+    public function getTime()
+    {
+        return $this->_time;
+    }
+
+    /**
+     * Get the battle result
+     *
+     * @return array
+     */
+    public function getResult()
+    {
+        return $this->_result;
+    }
+
+    /**
      * Parse a crash report
      *
      * @return array
