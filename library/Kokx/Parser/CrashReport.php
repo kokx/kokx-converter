@@ -145,11 +145,31 @@ class Kokx_Parser_CrashReport
         // first find the first attacker
         $this->_source = strstr($this->_source, 'Aanvaller');
 
+/*
+Verdediger killer1484 ([1:277:5])
+
+Wapens: 50% Schilden: 50% Romp beplating: 50%
+
+Soort	Zonne-energiesatelliet	Raketten	K.Laser	G.Laser	Ion.K	K.Koepel
+
+Aantal	5	51	10	22	5	1
+
+Wapens:	2	120	150	375	225	2
+
+Schilden	2	30	38	150	750	3.000
+
+Romp	300	300	300	1.200	1.200	3.000
+
+
+
+De aanvallende vloot vuurt een totaal van 127 keer met een kracht van 241.300 op de verdediger.
+*/
+
         // complicated regex that extracts all info from a fleet slot
         $regex = '(Aanvaller|Verdediger) (.*?) \(\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]\)\s*'
                . 'Wapens: ([0-9]{1,2})0% Schilden: ([0-9]{1,2})0% Romp beplating: ([0-9]{1,2})0%\s*'
-               . 'Soort([A-Za-z.\t]*)\s*'
-               . 'Aantal([0-9.\t]*)'
+               . 'Soort([A-Za-z.\s-]*)\s*'
+               . 'Aantal([0-9.\s]*)'
                . '.*?(Aanvaller|Verdediger|De aanvallende vloot vuurt)';
 
         $matches = array();
@@ -215,7 +235,7 @@ class Kokx_Parser_CrashReport
 
         // complicated regex that extracts all info from a fleet slot
         $regex = '(Aanvaller|Verdediger) (.*?) \(\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]\)\s*'
-               . '(Soort([A-Za-z.\t]*)\s*' . 'Aantal([0-9.\t]*)' . '|Vernietigd)\s*'
+               . '(Soort([A-Za-z.\s]*)\s*' . 'Aantal([0-9.\s]*)' . '|Vernietigd)\s*'
                . '.*?(Aanvaller|Verdediger|De aanvallende vloot vuurt|De aanvaller heeft|De verdediger heeft|remise)';
 
         $matches = array();
