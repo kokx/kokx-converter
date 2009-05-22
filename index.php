@@ -19,21 +19,20 @@ $includePath = array(
 
 set_include_path(implode(PATH_SEPARATOR, $includePath));
 
+// initialize the autoloader
 require_once 'Zend/Loader/Autoloader.php';
 
 $autoloader = Zend_Loader_Autoloader::getInstance();
-
 $autoloader->registerNamespace('Kokx_');
 
 $output = '';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// convert the CR if it is there
+if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
     // first parse the CR
     $parser = new Kokx_Parser_CrashReport();
 
     $parser->parse($_POST['report']);
-
-    var_dump($parser);
 
     // use Zend View to render the CR
     $view = new Zend_View();
@@ -51,10 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
 
     $output = $view->render('default.phtml');
+} else {
+    $_POST['report'] = '';
 }
 ?>
 <form method="post" action="">
-<textarea name="report" rows="15" cols="50"></textarea>
+<textarea name="report" rows="15" cols="50"><?= $_POST['report'] ?></textarea>
 
 <textarea rows="15" cols="50"><?= $output ?></textarea><br />
 <input type="submit" name="submit" value="convert" />
