@@ -235,7 +235,7 @@ De aanvallende vloot vuurt een totaal van 127 keer met een kracht van 241.300 op
 
         // complicated regex that extracts all info from a fleet slot
         $regex = '(Aanvaller|Verdediger) (.*?) \(\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]\)\s*'
-               . '(Soort([A-Za-z.\s]*)\s*' . 'Aantal([0-9.\s]*)' . '|Vernietigd)\s*'
+               . '(Soort([A-Za-z.-\s]*)\s*' . 'Aantal([0-9.\s]*)' . '|Vernietigd)\s*'
                . '.*?(Aanvaller|Verdediger|De aanvallende vloot vuurt|De aanvaller heeft|De verdediger heeft|remise)';
 
         $matches = array();
