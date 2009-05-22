@@ -25,6 +25,28 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 
 $autoloader->registerNamespace('Kokx_');
 
+// first parse the CR
 $parser = new Kokx_Parser_CrashReport();
 
-var_dump($parser->parse(file_get_contents(ROOT . DIRECTORY_SEPARATOR . 'agsreport')));
+$parser->parse(file_get_contents(ROOT . DIRECTORY_SEPARATOR . 'agsreport'));
+
+// use Zend View to render the CR
+$view = new Zend_View();
+
+$view->setScriptPath(ROOT . DIRECTORY_SEPARATOR . 'views');
+
+// now set all the variables
+$view->time   = $parser->getTime();
+$view->rounds = $parser->getRounds();
+$view->result = $parser->getResult();
+
+$view->options = array(
+    'middleText' => 'Powned!!',
+    'showTime'   => false
+);
+
+echo '<textarea rows="15" cols="50">';
+echo $view->render('default.phtml');
+echo '</textarea>';
+
+var_dump($parser);

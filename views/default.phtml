@@ -1,0 +1,73 @@
+[quote][center]De volgende vloten kwamen elkaar tegen op <?php
+echo $this->time['date'];
+if ($this->options['showTime']) {
+    echo ' ' . $this->time['time'];
+} else {
+    echo ' --:--:--';
+}
+?> , toen het tot een gevecht kwam:
+
+<? /* the first round, attackers */ ?>
+<? foreach ($this->rounds[0]['attackers'] as $slot): ?>
+    [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
+    Wapens: XXX% Schilden: XXX% Romp beplating: XXX%
+    [color=red]________________________________________________[/color]
+    <? foreach ($slot['fleet'] as $ship => $number): ?>
+        [color=#FC850C]<?= $ship ?> <?= $number ?>[/color]
+    <? endforeach; ?>
+    [color=red]_________________________________________[/color]
+
+<? endforeach; ?>
+
+<? /* the first round */ ?>
+<? foreach ($this->rounds[0]['defenders'] as $slot): ?>
+    [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
+    Wapens: XXX% Schilden: XXX% Romp beplating: XXX%
+    [color=green]________________________________________________[/color]
+    <? foreach ($slot['fleet'] as $ship => $number): ?>
+        [color=#1C84BE]<?= $ship ?> <?= $number ?>[/color]
+    <? endforeach; ?>
+    [color=green]_________________________________________[/color]
+
+<? endforeach; ?>
+
+<?= $this->options['middleText'] ?>
+
+
+<?php
+// make some simple calculations
+
+$last = count($this->rounds) - 1;
+
+/* the first round, attackers */ ?>
+<? foreach ($this->rounds[$last]['attackers'] as $slot): ?>
+    [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
+    [color=red]________________________________________________[/color]
+    <? if (empty($slot['fleet'])): ?>
+    	[b]Vernietigd![/b]
+    <? else: ?>
+        <? foreach ($slot['fleet'] as $ship => $number): ?>
+            [color=#FC850C]<?= $ship ?> <?= $number ?>[/color]
+        <? endforeach; ?>
+    <? endif; ?>
+    [color=red]_________________________________________[/color]
+
+<? endforeach; ?>
+
+<? /* the first round */ ?>
+<? foreach ($this->rounds[$last]['defenders'] as $slot): ?>
+    [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
+    [color=green]________________________________________________[/color]
+    <? if (empty($slot['fleet'])): ?>
+    	[b]Vernietigd![/b]
+    <? else: ?>
+        <? foreach ($slot['fleet'] as $ship => $number): ?>
+            [color=#1C84AE]<?= $ship ?> <?= $number ?>[/color]
+        <? endforeach; ?>
+    <? endif; ?>
+    [color=green]_________________________________________[/color]
+
+<? endforeach; ?>
+
+<? /* and a link to the A Team site*/ ?>
+[size=8][url=http://converter.ateam-ogame.nl/]Converted by the A Team CR converter 1.0.0[/url][/size][/quote][/center]
