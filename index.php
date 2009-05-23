@@ -49,7 +49,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
         'showTime'   => false
     );
 
-    $output = $view->render('default.phtml');
+    $output = $view->render('report/default.phtml');
 } else {
     $_POST['report'] = '';
 }
