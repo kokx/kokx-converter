@@ -78,7 +78,6 @@ $last = count($this->rounds) - 1;
 <? else: ?>
 	De verdediger heeft het gevecht gewonnen!
 <? endif; ?>
-
 De aanvaller steelt:
 <? if ($this->result['winner'] == Kokx_Parser_CrashReport::ATTACKER): ?>
 	<?= number_format($this->result['stolen']['metal'], 0, ',', '.') ?> Metaal, <?= number_format($this->result['stolen']['crystal'], 0, ',', '.') ?> Kristal, <?= number_format($this->result['stolen']['deut'], 0, ',', '.') ?> Deuterium
@@ -88,6 +87,9 @@ De aanvaller steelt:
 
 De aanvaller heeft een totaal van <?= number_format($this->result['attackerlosses'], 0, ',', '.') ?> Eenheden verloren.
 De verdediger heeft een totaal van <?= number_format($this->result['defenderlosses'], 0, ',', '.') ?> Eenheden verloren.
-Op deze coÃ¶rdinaten in de ruimte zweven nu <?= number_format($this->result['debris']['metal'], 0, ',', '.') ?> Metaal en <?= number_format($this->result['debris']['crystal'], 0, ',', '.') ?> Kristal.
+Op deze coördinaten in de ruimte zweven nu <?= number_format($this->result['debris']['metal'], 0, ',', '.') ?> Metaal en <?= number_format($this->result['debris']['crystal'], 0, ',', '.') ?> Kristal.
+<? if ($this->result['moonchance'] > 0): ?>
+	De kans dat een maan ontstaat uit het puin is <?= $this->result['moonchance'] ?> %
+<? endif; ?>
 <? /* and a link to the A Team site*/ ?>
 [size=10][url=http://converter.ateam-ogame.nl/]Converted by the A Team CR converter 1.0.0[/url][/size][/center][/quote]
