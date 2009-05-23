@@ -1,0 +1,57 @@
+<html>
+
+<head>
+<title>The A Team CR converter</title>
+
+<script type="text/javascript">
+function toggleOptions()
+{
+	var options = document.getElementById('options');
+	var link    = document.getElementById('hide');
+	
+	if (options.style.display == 'block') {
+		options.style.display = 'none';
+		link.innerHTML = 'Toon Opties';
+	} else {
+		options.style.display = 'block';
+		link.innerHTML = 'Verberg Opties';
+	}
+}
+</script>
+<style type="text/css">
+div#options-container {
+	border: 1px solid #000000;
+}
+div#options {
+	display: none;
+	border-top: 1px solid #000000;
+	padding: 5px;
+}
+div#options-top {
+	padding: 5px;
+}
+</style>
+</head>
+
+<body>
+<form method="post" action="">
+<?= $this->formTextarea('report', $this->report) ?> 
+<?= $this->formTextarea('output', $this->render($this->script)) ?><br />
+<br />
+<div id="options-container">
+	<div id="options-top">
+		<a href="javascript: void(0)" id="hide" onclick="toggleOptions()">Toon Opties</a>
+	</div>
+    <div id="options">
+    <dl>
+    	<dt><label for="wontext">Tekst in het midden van de CR</label></dt>
+    	<dd><?= $this->formText('middletext', $this->options['middleText']) ?>
+    </dl>
+    </div>
+</div>
+<br />
+<?= $this->formSubmit('submit', 'Converteer!') ?>
+</form>
+</body>
+
+</html>

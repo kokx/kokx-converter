@@ -25,7 +25,8 @@ require_once 'Zend/Loader/Autoloader.php';
 $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('Kokx_');
 
-$output = '';
+$view->script = '';
+$view->report = '';
 
 // convert the CR if it is there
 if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
@@ -49,14 +50,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
         'showTime'   => false
     );
 
-    $output = $view->render('report/default.phtml');
-} else {
-    $_POST['report'] = '';
+    $view->script = 'report/default.phtml';
+    $view->report = $_POST['report'];
 }
-?>
-<form method="post" action="">
-<textarea name="report" rows="15" cols="50"><?= $_POST['report'] ?></textarea>
-
-<textarea rows="15" cols="50"><?= $output ?></textarea><br />
-<input type="submit" name="submit" value="convert" />
-</form>
+echo $view->render('layout.phtml');
