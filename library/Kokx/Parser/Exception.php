@@ -12,6 +12,6 @@
  * @category   Kokx
  * @package    Kokx_Parser
  */
-class Kokx_Parser_Exception
+class Kokx_Parser_Exception extends Zend_Exception
 {
 }

@@ -37,7 +37,12 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
     // first parse the CR
     $parser = new Kokx_Parser_CrashReport();
 
-    $parser->parse($_POST['report']);
+    try {
+        $parser->parse($_POST['report']);
+    } catch (Kokx_Parser_Exception $e) {
+        $view->error = true;
+        exit($view->render('layout.phtml'));
+    }
 
     // use Zend View to render the shit
 
@@ -46,10 +51,23 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
     $view->rounds = $parser->getRounds();
     $view->result = $parser->getResult();
 
+    // default options
     $view->options = array(
-        'middleText' => 'Powned!!',
-        'showTime'   => false
+        'middleText' => 'Na het gevecht...',
+        'hideTime'   => true
     );
+    
+    // check for options
+    if (isset($_POST['middletext']) && is_string($_POST['middletext'])) {
+        $view->options['middleText'] = $_POST['middletext'];
+    }
+    if (isset($_POST['hidetime'])) {
+        if ($_POST['hidetime'] == '1') {
+            $view->options['hideTime'] = true;
+        } else {
+            $view->options['hideTime'] = false;
+        }
+    }
 
     $view->script = 'report/default.phtml';
     $view->report = $_POST['report'];

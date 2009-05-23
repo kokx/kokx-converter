@@ -19,8 +19,53 @@ function toggleOptions()
 }
 </script>
 <style type="text/css">
+body {
+	background-color: #0A101D;
+	margin: 0px;
+	padding: 0px;
+	color: #7B90B8;
+}
+a:link, a:visited, a:active {
+	color: #B0C4DE;
+}
+a:hover {
+	color: #FFFFFF;
+}
+
+div#header {
+	margin-left: auto;
+	margin-right: auto;
+	width: 520px;
+}
+
+div#container {
+	background-color: #171E2F;
+	margin-left: auto;
+	margin-right: auto;
+	width: 933px;
+	border: 1px solid #000000;
+}
+
+textarea {
+	border: 1px solid #000000;
+	background-color: #1F273C;
+	color: #7B90B8;
+}
+
+input {
+	border: 1px solid #000000;
+	background-color: #2F374C;
+	color: #7B90B8;
+}
+
+div#cr-container {
+	padding: 15px;
+}
+
 div#options-container {
 	border: 1px solid #000000;
+	margin: 15px;
+	margin-top: 0px;
 }
 div#options {
 	display: none;
@@ -30,28 +75,63 @@ div#options {
 div#options-top {
 	padding: 5px;
 }
+
+div#options-left {
+	float: left;
+}
+div#options-right {
+	float: right;
+}
+div#options-clear {
+	clear: both;
+}
+
+div#submit-container {
+	margin: 15px;
+}
 </style>
 </head>
 
 <body>
-<form method="post" action="">
-<?= $this->formTextarea('report', $this->report) ?>
-<?= $this->formTextarea('output', empty($this->script) ? '': $this->render($this->script)) ?><br />
-<br />
-<div id="options-container">
-	<div id="options-top">
-		<a href="javascript: void(0)" id="hide" onclick="toggleOptions()">Toon Opties</a>
+<div id="container">
+	<br />
+	<div id="header">
+		<img src="http://img171.imageshack.us/img171/6281/ateamtt8.png" alt="The A Team" />
 	</div>
-    <div id="options">
-    <dl>
-    	<dt><label for="wontext">Tekst in het midden van de CR</label></dt>
-    	<dd><?= $this->formText('middletext', $this->options['middleText']) ?>
-    </dl>
+    <form method="post" action="">
+    <div id="cr-container">
+        <? if ($this->error): ?>
+        	Incorrect gevechtsrapport
+        <? endif; ?>
+        <?= $this->formTextarea('report', $this->report, array('rows' => 20, 'cols' => 60)) ?>
+        &nbsp;&nbsp;&nbsp;
+        <?= $this->formTextarea('output', empty($this->script) ? '': $this->render($this->script), array('rows' => 20, 'cols' => 60)) ?>
     </div>
+    <div id="options-container">
+    	<div id="options-top">
+    		<a href="javascript: void(0)" id="hide" onclick="toggleOptions()">Toon Opties</a>
+    	</div>
+        <div id="options">
+        	<div id="options-left">
+                <dl>
+                	<dt><label for="middletext">Tekst in het midden van de CR</label></dt>
+                	<dd><?= $this->formText('middletext', $this->options['middleText']) ?>
+                </dl>
+            </div>
+            <div id="options-right">
+            	<dl>
+                	<dt><label for="hidetime">Verberg de tijd</label></dt>
+                	<dd><?= $this->formCheckbox('hidetime', null, array('checked' => $this->options['hideTime'])) ?>
+                </dl>
+            </div>
+            <div id="options-clear">&nbsp;</div>
+        </div>
+    </div>
+    <div id="submit-container">
+        <?= $this->formSubmit('submit', 'Converteer!') ?>
+    </div>
+    </form>
 </div>
-<br />
-<?= $this->formSubmit('submit', 'Converteer!') ?>
-</form>
 </body>
 
 </html>
