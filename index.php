@@ -25,6 +25,10 @@ require_once 'Zend/Loader/Autoloader.php';
 $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('Kokx_');
 
+$view = new Zend_View();
+
+$view->setScriptPath(ROOT . DIRECTORY_SEPARATOR . 'views');
+
 $view->script = '';
 $view->report = '';
 
@@ -35,10 +39,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
 
     $parser->parse($_POST['report']);
 
-    // use Zend View to render the CR
-    $view = new Zend_View();
-
-    $view->setScriptPath(ROOT . DIRECTORY_SEPARATOR . 'views');
+    // use Zend View to render the shit
 
     // now set all the variables
     $view->time   = $parser->getTime();

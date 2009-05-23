@@ -35,8 +35,8 @@ div#options-top {
 
 <body>
 <form method="post" action="">
-<?= $this->formTextarea('report', $this->report) ?> 
-<?= $this->formTextarea('output', $this->render($this->script)) ?><br />
+<?= $this->formTextarea('report', $this->report) ?>
+<?= $this->formTextarea('output', empty($this->script) ? '': $this->render($this->script)) ?><br />
 <br />
 <div id="options-container">
 	<div id="options-top">
