@@ -1,3 +1,15 @@
+<?php
+function formatNumber($number, $color = false)
+{
+	$number = number_format($number, 0, ',', '.');
+	
+	if ($color) {
+		return '[color=#3183E7][b]' . $number . '[/b][/color]';
+	} else {
+		return $number;
+	}
+}
+?>
 [quote][center]De volgende vloten kwamen elkaar tegen op <?php
 echo $this->time['date'];
 if ($this->options['showTime']) {
@@ -13,7 +25,7 @@ if ($this->options['showTime']) {
     Wapens: XXX% Schilden: XXX% Romp beplating: XXX%
     [color=red]________________________________________________[/color]
     <? foreach ($slot['fleet'] as $ship => $number): ?>
-        [color=#FC850C]<?= $ship ?> <?= number_format($number, 0, ',', '.') ?>[/color]
+        [color=#FC850C]<?= $ship ?> <?= formatNumber($number) ?>[/color]
     <? endforeach; ?>
     [color=red]_________________________________________[/color]
 
@@ -25,7 +37,7 @@ if ($this->options['showTime']) {
     Wapens: XXX% Schilden: XXX% Romp beplating: XXX%
     [color=green]________________________________________________[/color]
     <? foreach ($slot['fleet'] as $ship => $number): ?>
-        [color=#1C84BE]<?= $ship ?> <?= number_format($number, 0, ',', '.') ?>[/color]
+        [color=#1C84BE]<?= $ship ?> <?= formatNumber($number) ?>[/color]
     <? endforeach; ?>
     [color=green]_________________________________________[/color]
 
@@ -47,7 +59,7 @@ $last = count($this->rounds) - 1;
     	[b]Vernietigd![/b]
     <? else: ?>
         <? foreach ($slot['fleet'] as $ship => $number): ?>
-            [color=#FC850C]<?= $ship ?> <?= number_format($number, 0, ',', '.') ?>[/color]
+            [color=#FC850C]<?= $ship ?> <?= formatNumber($number) ?>[/color]
         <? endforeach; ?>
     <? endif; ?>
     [color=red]_________________________________________[/color]
@@ -62,7 +74,7 @@ $last = count($this->rounds) - 1;
     	[b]Vernietigd![/b]
     <? else: ?>
         <? foreach ($slot['fleet'] as $ship => $number): ?>
-            [color=#1C84AE]<?= $ship ?> <?= number_format($number, 0, ',', '.') ?>[/color]
+            [color=#1C84AE]<?= $ship ?> <?= formatNumber($number) ?>[/color]
         <? endforeach; ?>
     <? endif; ?>
     [color=green]_________________________________________[/color]
@@ -80,16 +92,16 @@ $last = count($this->rounds) - 1;
 <? endif; ?>
 De aanvaller steelt:
 <? if ($this->result['winner'] == Kokx_Parser_CrashReport::ATTACKER): ?>
-	<?= number_format($this->result['stolen']['metal'], 0, ',', '.') ?> Metaal, <?= number_format($this->result['stolen']['crystal'], 0, ',', '.') ?> Kristal, <?= number_format($this->result['stolen']['deut'], 0, ',', '.') ?> Deuterium
+	<?= formatNumber($this->result['stolen']['metal'], true) ?> Metaal, <?= formatNumber($this->result['stolen']['crystal'], true) ?> Kristal, <?= formatNumber($this->result['stolen']['deut'], true) ?> Deuterium
 <? else: ?>
 	- Metaal, - Kristal en - Deuterium
 <? endif; ?>
 
-De aanvaller heeft een totaal van <?= number_format($this->result['attackerlosses'], 0, ',', '.') ?> Eenheden verloren.
-De verdediger heeft een totaal van <?= number_format($this->result['defenderlosses'], 0, ',', '.') ?> Eenheden verloren.
-Op deze coördinaten in de ruimte zweven nu <?= number_format($this->result['debris']['metal'], 0, ',', '.') ?> Metaal en <?= number_format($this->result['debris']['crystal'], 0, ',', '.') ?> Kristal.
+De aanvaller heeft een totaal van <?= formatNumber($this->result['attackerlosses'], true) ?> Eenheden verloren.
+De verdediger heeft een totaal van <?= formatNumber($this->result['defenderlosses'], true) ?> Eenheden verloren.
+Op deze coördinaten in de ruimte zweven nu <?= formatNumber($this->result['debris']['metal'], true) ?> Metaal en <?= formatNumber($this->result['debris']['crystal'], true) ?> Kristal.
 <? if ($this->result['moonchance'] > 0): ?>
-	De kans dat een maan ontstaat uit het puin is <?= $this->result['moonchance'] ?> %
+	De kans dat een maan ontstaat uit het puin is <?= formatNumber($this->result['moonchance'], true) ?> %
 <? endif; ?>
 <? /* and a link to the A Team site*/ ?>
 [size=10][url=http://converter.ateam-ogame.nl/]Converted by the A Team CR converter 1.0.0[/url][/size][/center][/quote]
