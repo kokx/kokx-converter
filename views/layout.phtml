@@ -48,15 +48,21 @@ div#container {
 	border: 1px solid #000000;
 }
 
-textarea {
+input {
+	border: 1px solid #000000;
+	background-color: #2F374C;
+	color: #7B90B8;
+}
+
+input#title {
 	border: 1px solid #000000;
 	background-color: #1F273C;
 	color: #7B90B8;
 }
 
-input {
+textarea {
 	border: 1px solid #000000;
-	background-color: #2F374C;
+	background-color: #1F273C;
 	color: #7B90B8;
 }
 
@@ -64,10 +70,20 @@ div#cr-container {
 	padding: 15px;
 }
 
+div#cr-left {
+	float: left;
+}
+div#cr-right {
+	float: right;
+}
+div#cr-clear {
+	clear: both;
+}
+
 div#options-container {
 	border: 1px solid #000000;
 	margin: 15px;
-	margin-top: 0px;
+	margin-top: -15px;
 }
 div#options {
 	display: none;
@@ -105,9 +121,14 @@ div#submit-container {
         <? if ($this->error): ?>
         	Incorrect gevechtsrapport
         <? endif; ?>
-        <?= $this->formTextarea('report', $this->report, array('rows' => 20, 'cols' => 60)) ?>
-        &nbsp;&nbsp;&nbsp;
-        <?= $this->formTextarea('output', empty($this->script) ? '': $this->render($this->script), array('rows' => 20, 'cols' => 60)) ?>
+        <div id="cr-left">
+            <?= $this->formTextarea('report', $this->report, array('rows' => 22, 'cols' => 60)) ?>
+        </div>
+        <div id="cr-right">
+        	<?= $this->formText('title', $this->title, array('style' => 'width: 439px;')) ?><br />
+            <?= $this->formTextarea('output', empty($this->script) ? '': $this->render($this->script), array('cols' => 60, 'style' => 'height: 326px;')) ?>
+        </div>
+        <div id="cr-clear">&nbsp;</div>
     </div>
     <div id="options-container">
     	<div id="options-top">
