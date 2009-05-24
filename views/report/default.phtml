@@ -2,7 +2,7 @@
 function formatNumber($number, $color = false)
 {
 	$number = number_format($number, 0, ',', '.');
-	
+
 	if ($color) {
 		return '[color=#3183E7][b]' . $number . '[/b][/color]';
 	} else {
@@ -53,32 +53,64 @@ if ($this->options['hideTime']) {
 $last = count($this->rounds) - 1;
 
 /* the first round, attackers */ ?>
-<? foreach ($this->rounds[$last]['attackers'] as $slot): ?>
+<? foreach ($this->rounds[$last]['attackers'] as $key => $slot): ?>
     [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
     [color=red]________________________________________________[/color]
+    <?php
+    // calculations for the first round
+    if (isset($this->rounds[0]['attackers'][$key])) {
+        $oldSlot = $this->rounds[0]['attackers'][$key];
+
+        if ($slot['player']['name'] != $oldSlot['player']['name']) {
+            unset($oldSlot);
+        }
+    }
+    ?>
     <? if (empty($slot['fleet'])): ?>
     	[b]Vernietigd![/b]
+    <? elseif(isset($oldSlot)): ?>
+    	<? foreach ($oldSlot['fleet'] as $ship => $number): ?>
+    		<? $slot['fleet'][$ship] = isset($slot['fleet'][$ship]) ? $slot['fleet'][$ship] : 0 ?>
+            [color=#FC850C]<?= $ship ?> <?= formatNumber($slot['fleet'][$ship]) ?> [b](-<?= formatNumber($number - $slot['fleet'][$ship]) ?>)[/b][/color]
+        <? endforeach; ?>
     <? else: ?>
         <? foreach ($slot['fleet'] as $ship => $number): ?>
             [color=#FC850C]<?= $ship ?> <?= formatNumber($number) ?>[/color]
         <? endforeach; ?>
     <? endif; ?>
     [color=red]_________________________________________[/color]
+    <? unset($oldSlot) ?>
 
 <? endforeach; ?>
 
 <? /* the first round */ ?>
-<? foreach ($this->rounds[$last]['defenders'] as $slot): ?>
+<? foreach ($this->rounds[$last]['defenders'] as $key => $slot): ?>
     [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
     [color=green]________________________________________________[/color]
+    <?php
+    // calculations for the first round
+    if (isset($this->rounds[0]['defenders'][$key])) {
+        $oldSlot = $this->rounds[0]['defenders'][$key];
+
+        if ($slot['player']['name'] != $oldSlot['player']['name']) {
+            unset($oldSlot);
+        }
+    }
+    ?>
     <? if (empty($slot['fleet'])): ?>
     	[b]Vernietigd![/b]
+    <? elseif(isset($oldSlot)): ?>
+    	<? foreach ($oldSlot['fleet'] as $ship => $number): ?>
+    		<? $slot['fleet'][$ship] = isset($slot['fleet'][$ship]) ? $slot['fleet'][$ship] : 0 ?>
+            [color=#1C84AE]<?= $ship ?> <?= formatNumber($slot['fleet'][$ship]) ?> [b](-<?= formatNumber($number - $slot['fleet'][$ship]) ?>)[/b][/color]
+        <? endforeach; ?>
     <? else: ?>
         <? foreach ($slot['fleet'] as $ship => $number): ?>
             [color=#1C84AE]<?= $ship ?> <?= formatNumber($number) ?>[/color]
         <? endforeach; ?>
     <? endif; ?>
     [color=green]_________________________________________[/color]
+    <? unset($oldSlot) ?>
 
 <? endforeach; ?>
 
@@ -106,4 +138,4 @@ Op deze coördinaten in de ruimte zweven nu <?= formatNumber($this->result['debr
 <? endif; ?>
 
 <? /* and a link to the A Team site*/ ?>
-[size=10][url=http://converter.ateam-ogame.nl/]Converted by the A Team CR converter <?= VERSION ?>/url][/size][/center][/quote]
+[size=10][url=http://converter.ateam-ogame.nl/]Converted by the A Team CR converter <?= VERSION ?>[/url][/size][/center][/quote]

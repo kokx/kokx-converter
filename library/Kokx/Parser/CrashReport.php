@@ -145,26 +145,6 @@ class Kokx_Parser_CrashReport
         // first find the first attacker
         $this->_source = strstr($this->_source, 'Aanvaller');
 
-/*
-Verdediger Darklord91 ([2:96:11])
-
-Wapens: 30% Schilden: 0% Romp beplating: 10%
-
-Soort	K.Laser
-
-Aantal	1
-
-Wapens:	130
-
-Schilden	25
-
-Romp	220
-
-
-
-De aanvallende vloot vuurt een totaal van 28 keer met een kracht van 2.505 op de verdediger. De verdediger zijn schilden absorberen 25 schade punten
-*/
-
         // complicated regex that extracts all info from a fleet slot
         $regex = '(Aanvaller|Verdediger) (.*?) \(\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]\)\s*'
                . 'Wapens: ([0-9]{0,2})0% Schilden: ([0-9]{0,2})0% Romp beplating: ([0-9]{0,2})0%\s*'
@@ -339,5 +319,6 @@ De aanvallende vloot vuurt een totaal van 28 keer met een kracht van 2.505 op de
         if (preg_match('#De kans dat een maan ontstaat uit het puin is ([0-9]{1,2})#i', $this->_source, $matches)) {
             $this->_result['moonchance'] = (int) str_replace('.', '', $matches[1]);
         }
+        //De enorme hoeveelheden van rondzwevende metaal- en kristaldeeltjes trekken elkaar aan en vormen langzaam een maan, in een baan rond de planeet.
     }
 }
