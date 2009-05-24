@@ -12,10 +12,10 @@ function formatNumber($number, $color = false)
 ?>
 [quote][center]De volgende vloten kwamen elkaar tegen op <?php
 echo $this->time['date'];
-if ($this->options['showTime']) {
-    echo ' ' . $this->time['time'];
-} else {
+if ($this->options['hideTime']) {
     echo ' --:--:--';
+} else {
+    echo ' ' . $this->time['time'];
 }
 ?> , toen het tot een gevecht kwam:
 
@@ -44,6 +44,7 @@ if ($this->options['showTime']) {
 <? endforeach; ?>
 
 <?= $this->options['middleText'] ?>
+
 
 
 <?php
@@ -103,5 +104,6 @@ Op deze coördinaten in de ruimte zweven nu <?= formatNumber($this->result['debr
 <? if ($this->result['moonchance'] > 0): ?>
 	De kans dat een maan ontstaat uit het puin is <?= formatNumber($this->result['moonchance'], true) ?> %
 <? endif; ?>
+
 <? /* and a link to the A Team site*/ ?>
-[size=10][url=http://converter.ateam-ogame.nl/]Converted by the A Team CR converter 1.0.0[/url][/size][/center][/quote]
+[size=10][url=http://converter.ateam-ogame.nl/]Converted by the A Team CR converter <?= VERSION ?>/url][/size][/center][/quote]
