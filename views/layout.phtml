@@ -8,7 +8,7 @@ function toggleOptions()
 {
 	var options = document.getElementById('options');
 	var link    = document.getElementById('hide');
-	
+
 	if (options.style.display == 'block') {
 		options.style.display = 'none';
 		link.innerHTML = 'Toon Opties';
@@ -67,13 +67,17 @@ textarea {
 }
 
 div#cr-container {
+	vertical-align: top;
 	padding: 15px;
 }
 
 div#cr-left {
+	vertical-align: top;
 	float: left;
+	margin-top: -1px;
 }
 div#cr-right {
+	vertical-align: top;
 	float: right;
 }
 div#cr-clear {
@@ -95,9 +99,11 @@ div#options-top {
 }
 
 div#options-left {
+	vertical-align: top;
 	float: left;
 }
 div#options-right {
+	vertical-align: top;
 	float: right;
 }
 div#options-clear {
@@ -126,7 +132,7 @@ div#submit-container {
         </div>
         <div id="cr-right">
         	<?= $this->formText('title', $this->title, array('style' => 'width: 439px;')) ?><br />
-            <?= $this->formTextarea('output', empty($this->script) ? '': $this->render($this->script), array('cols' => 60, 'style' => 'height: 326px;')) ?>
+            <?= $this->formTextarea('output', empty($this->script) ? '': $this->render($this->script), array('cols' => 60, 'style' => 'height: 325px;')) ?>
         </div>
         <div id="cr-clear">&nbsp;</div>
     </div>

@@ -52,7 +52,7 @@ if ($this->options['hideTime']) {
 
 $last = count($this->rounds) - 1;
 
-/* the first round, attackers */ ?>
+/* the last round, attackers */ ?>
 <? foreach ($this->rounds[$last]['attackers'] as $key => $slot): ?>
     [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
     [color=red]________________________________________________[/color]
@@ -83,7 +83,7 @@ $last = count($this->rounds) - 1;
 
 <? endforeach; ?>
 
-<? /* the first round */ ?>
+<? /* the last round for the defenders */ ?>
 <? foreach ($this->rounds[$last]['defenders'] as $key => $slot): ?>
     [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
     [color=green]________________________________________________[/color]
@@ -138,4 +138,4 @@ Op deze coördinaten in de ruimte zweven nu <?= formatNumber($this->result['debr
 <? endif; ?>
 
 <? /* and a link to the A Team site*/ ?>
-[size=10][url=http://converter.ateam-ogame.nl/]Converted by the A Team CR converter <?= VERSION ?>[/url][/size][/center][/quote]
+[size=10][url=http://converter.ateam-ogame.nl/]Converted by the A Team CR converter <?= VERSION ?> - with the kokx skin[/url][/size][/center][/quote]
