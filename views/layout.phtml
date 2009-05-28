@@ -141,6 +141,7 @@ div#submit-container {
     		<a href="javascript: void(0)" id="hide" onclick="toggleOptions()">Toon Opties</a>
     	</div>
         <div id="options">
+        	<h2>Algemene opties</h2>
         	<div id="options-left">
                 <dl>
                 	<dt><label for="middletext">Tekst in het midden van de CR</label></dt>
@@ -153,7 +154,17 @@ div#submit-container {
                 	<dd><?= $this->formCheckbox('hidetime', null, array('checked' => $this->options['hideTime'])) ?>
                 </dl>
             </div>
-            <div id="options-clear">&nbsp;</div>
+            <div id="options-clear">
+            	<br />
+            	<hr />
+            	<h2>Puinrapporten</h2>
+            	<?= $this->formTextarea('debris_reports', $this->debrisReports, array('rows' => 5, 'cols' => 100)) ?>
+				<br />
+				<br />
+            	<hr />
+            	<h2>Naraids</h2>
+            	<?= $this->formTextarea('after_raids', $this->debrisReports, array('rows' => 5, 'cols' => 100)) ?>
+			</div>
         </div>
     </div>
     <div id="submit-container">
