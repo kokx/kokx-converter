@@ -176,7 +176,7 @@ class Kokx_Parser_CrashReport
             $numbers = explode("\t", trim($matches[8]));
 
             foreach ($ships as $key => $ship) {
-                $info['fleet'][$ship] = $numbers[$key];
+                $info['fleet'][$ship] = str_replace('.', '', $numbers[$key]);
             }
 
             // check if it is an attacker or a defender
@@ -238,7 +238,7 @@ class Kokx_Parser_CrashReport
                 $numbers = explode("\t", trim($matches[6]));
 
                 foreach ($ships as $key => $ship) {
-                    $info['fleet'][$ship] = $numbers[$key];
+                    $info['fleet'][$ship] = str_replace('.', '', $numbers[$key]);
                 }
             }
 
