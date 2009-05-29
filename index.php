@@ -1,6 +1,6 @@
 <?php
 
-define('VERSION', '1.1.0');
+define('VERSION', '1.1.1');
 
 /**
  * Root location
@@ -119,6 +119,14 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
         $raidsParser = new Kokx_Parser_Raid();
 
         $view->raids = $raidsParser->parse($_POST['after_raids'])->getRaids();
+    }
+    // debris reports option
+    if (isset($_POST['debris_reports']) && is_string($_POST['debris_reports'])) {
+        $view->debrisReports = $_POST['debris_reports'];
+
+        $debrisParser = new Kokx_Parser_Debris();
+
+        $view->debris = $debrisParser->parse($_POST['debris_reports'])->getHarvest();
     }
 
     $view->script = 'report/default.phtml';
