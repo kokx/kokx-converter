@@ -57,9 +57,9 @@ class Kokx_Parser_Raid
 
         foreach ($matches as $match) {
             $this->_raids[] = array(
-                'metal'   => $match[1],
-                'crystal' => $match[2],
-                'deut'    => $match[3]
+                'metal'   => (int) str_replace('.', '', $match[1]),
+                'crystal' => (int) str_replace('.', '', $match[2]),
+                'deut'    => (int) str_replace('.', '', $match[3])
             );
         }
 
