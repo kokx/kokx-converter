@@ -24,6 +24,7 @@ if ($this->options['hideTime']) {
     [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
     Wapens: XXX% Schilden: XXX% Romp beplating: XXX%
     [color=red]________________________________________________[/color]
+
     <? foreach ($slot['fleet'] as $ship => $number): ?>
         [color=#FC850C]<?= $ship ?> <?= formatNumber($number) ?>[/color]
     <? endforeach; ?>
@@ -36,6 +37,7 @@ if ($this->options['hideTime']) {
     [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
     Wapens: XXX% Schilden: XXX% Romp beplating: XXX%
     [color=green]________________________________________________[/color]
+
     <? foreach ($slot['fleet'] as $ship => $number): ?>
         [color=#1C84BE]<?= $ship ?> <?= formatNumber($number) ?>[/color]
     <? endforeach; ?>
@@ -56,6 +58,7 @@ $last = count($this->rounds) - 1;
 <? foreach ($this->rounds[$last]['attackers'] as $key => $slot): ?>
     [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
     [color=red]________________________________________________[/color]
+
     <?php
     // calculations for the first round
     if (isset($this->rounds[0]['attackers'][$key])) {
@@ -87,6 +90,7 @@ $last = count($this->rounds) - 1;
 <? foreach ($this->rounds[$last]['defenders'] as $key => $slot): ?>
     [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
     [color=green]________________________________________________[/color]
+
     <?php
     // calculations for the first round
     if (isset($this->rounds[0]['defenders'][$key])) {
@@ -138,6 +142,15 @@ De verdediger heeft een totaal van <?= formatNumber($this->result['defenderlosse
 Op deze coördinaten in de ruimte zweven nu <?= formatNumber($this->result['debris']['metal'], true) ?> Metaal en <?= formatNumber($this->result['debris']['crystal'], true) ?> Kristal.
 <? if ($this->result['moonchance'] > 0): ?>
 	De kans dat een maan ontstaat uit het puin is <?= formatNumber($this->result['moonchance'], true) ?> %
+<? endif; ?>
+<? if (!empty($this->debris)): ?>
+
+	<? foreach ($this->debris as $debris): ?>
+		_____________________________________
+
+		Je <?= formatNumber($debris['recs'], true) ?> recyclers hebben een totale opslagcapaciteit van <?= formatNumber($debris['storage'], true) ?>. In het bestemmingsveld zweven <?= formatNumber($debris['fieldmetal'], true) ?> metaal en <?= formatNumber($debris['fieldcrystal'], true) ?> kristal in de ruimte. Je hebt <?= formatNumber($debris['metal'], true) ?> metaal en <?= formatNumber($debris['crystal'], true) ?> kristal opgehaald.
+    <? endforeach; ?>
+
 <? endif; ?>
 
 <? /* and a link to the A Team site*/ ?>
