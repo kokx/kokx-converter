@@ -126,6 +126,9 @@ $last = count($this->rounds) - 1;
 De aanvaller steelt:
 <? if ($this->result['winner'] == Kokx_Parser_CrashReport::ATTACKER): ?>
 	<?= formatNumber($this->result['stolen']['metal'], true) ?> Metaal, <?= formatNumber($this->result['stolen']['crystal'], true) ?> Kristal, <?= formatNumber($this->result['stolen']['deut'], true) ?> Deuterium
+	<? foreach ($this->raids as $raid): ?>
+	    <?= formatNumber($raid['metal'], true) ?> Metaal, <?= formatNumber($raid['crystal'], true) ?> Kristal, <?= formatNumber($raid['deut'], true) ?> Deuterium
+	<? endforeach; ?>
 <? else: ?>
 	- Metaal, - Kristal en - Deuterium
 <? endif; ?>

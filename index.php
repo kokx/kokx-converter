@@ -35,6 +35,7 @@ $view->setScriptPath(ROOT . DIRECTORY_SEPARATOR . 'views');
 $view->script = '';
 $view->report = '';
 $view->title  = '';
+$view->raids  = array();
 
 // default options
 $view->options = array(
@@ -83,7 +84,8 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
 
     $defenders = array_keys(array_flip($defenders));
 
-    // ViRuS & kokx vs rasta & joop (A: 55.000.000, V: 88.000.000) [TOT: 20.000.000]
+    // will be something like:
+    // ViRuS & kokx vs. rasta & joop (A: 55.000.000, V: 88.000.000) [TOT: 20.000.000]
 
     $view->result['totallosses'] = $view->result['attackerlosses'] + $view->result['defenderlosses'];
 
@@ -99,6 +101,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
      * Check and use the options
      */
 
+    // just simple options
     if (isset($_POST['middletext']) && is_string($_POST['middletext'])) {
         $view->options['middleText'] = $_POST['middletext'];
     }
@@ -108,6 +111,14 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
         } else {
             $view->options['hideTime'] = false;
         }
+    }
+    // after raids option
+    if (isset($_POST['after_raids']) && is_string($_POST['after_raids'])) {
+        $view->afterRaids = $_POST['after_raids'];
+
+        $raidsParser = new Kokx_Parser_Raid();
+
+        $view->raids = $raidsParser->parse($_POST['after_raids'])->getRaids();
     }
 
     $view->script = 'report/default.phtml';

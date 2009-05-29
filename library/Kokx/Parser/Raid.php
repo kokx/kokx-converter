@@ -38,7 +38,7 @@ class Kokx_Parser_Raid
      *
      * @param string $source
      *
-     * @return array
+     * @return Kokx_Parser_Raid
      */
     public function parse($source)
     {
