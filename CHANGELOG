@@ -1,0 +1,26 @@
+1.0.0
+----------
+- Rewritten from scratch.
+- Basic CR converter functionality.
+
+1.0.1
+----------
+- Added difference in numbers.
+
+1.0.2
+----------
+- Fixed a bug, didn't parse the '.' in numbers correctly.
+
+1.1.0
+----------
+- Added after raids.
+- Preparations for debris reports.
+
+1.1.1
+----------
+- Added debris report parsing
+- Made some layout updates
+
+1.1.2
+----------
+- Added summary at the end of the report

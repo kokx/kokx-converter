@@ -3,12 +3,20 @@ function formatNumber($number, $color = false)
 {
 	$number = number_format($number, 0, ',', '.');
 
-	if ($color) {
-		return '[color=#3183E7][b]' . $number . '[/b][/color]';
-	} else {
-		return $number;
+	if ($color === false) {
+	    return $number;
 	}
+
+	if ($color === true) {
+	    $color = '#3183E7';
+	}
+
+	return '[color=' . $color . '][b]' . $number . '[/b][/color]';
 }
+
+// initialization of some variables
+$totalDebris = 0;
+$totalRaids  = 0;
 ?>
 [quote][center]De volgende vloten kwamen elkaar tegen op <?php
 echo $this->time['date'];
@@ -129,9 +137,11 @@ $last = count($this->rounds) - 1;
 <? endif; ?>
 De aanvaller steelt:
 <? if ($this->result['winner'] == Kokx_Parser_CrashReport::ATTACKER): ?>
-	<?= formatNumber($this->result['stolen']['metal'], true) ?> Metaal, <?= formatNumber($this->result['stolen']['crystal'], true) ?> Kristal, <?= formatNumber($this->result['stolen']['deut'], true) ?> Deuterium
+	<? $totalRaids += $this->result['stolen']['metal'] + $this->result['stolen']['crystal'] + $this->result['stolen']['deut'] ?>
+	<?= formatNumber($this->result['stolen']['metal'], true) ?> Metaal, <?= formatNumber($this->result['stolen']['crystal'], true) ?> Kristal en <?= formatNumber($this->result['stolen']['deut'], true) ?> Deuterium
 	<? foreach ($this->raids as $raid): ?>
-	    <?= formatNumber($raid['metal'], true) ?> Metaal, <?= formatNumber($raid['crystal'], true) ?> Kristal, <?= formatNumber($raid['deut'], true) ?> Deuterium
+		<? $totalRaids += $raid['metal'] + $raid['crystal'] + $raid['deut'] ?>
+	    <?= formatNumber($raid['metal'], true) ?> Metaal, <?= formatNumber($raid['crystal'], true) ?> Kristal en <?= formatNumber($raid['deut'], true) ?> Deuterium
 	<? endforeach; ?>
 <? else: ?>
 	- Metaal, - Kristal en - Deuterium
@@ -144,13 +154,43 @@ Op deze coördinaten in de ruimte zweven nu <?= formatNumber($this->result['debr
 	De kans dat een maan ontstaat uit het puin is <?= formatNumber($this->result['moonchance'], true) ?> %
 <? endif; ?>
 <? if (!empty($this->debris)): ?>
-
 	<? foreach ($this->debris as $debris): ?>
+
+		<? $totalDebris += $debris['metal'] + $debris['crystal'] ?>
 		_____________________________________
 
-		Je <?= formatNumber($debris['recs'], true) ?> recyclers hebben een totale opslagcapaciteit van <?= formatNumber($debris['storage'], true) ?>. In het bestemmingsveld zweven <?= formatNumber($debris['fieldmetal'], true) ?> metaal en <?= formatNumber($debris['fieldcrystal'], true) ?> kristal in de ruimte. Je hebt <?= formatNumber($debris['metal'], true) ?> metaal en <?= formatNumber($debris['crystal'], true) ?> kristal opgehaald.
+		Je <?= formatNumber($debris['recs'], '#FC850C') ?> recyclers hebben een totale opslagcapaciteit van <?= formatNumber($debris['storage'], '#FC850C') ?>. In het bestemmingsveld zweven <?= formatNumber($debris['fieldmetal'], '#FC850C') ?> metaal en <?= formatNumber($debris['fieldcrystal'], '#FC850C') ?> kristal in de ruimte. Je hebt <?= formatNumber($debris['metal'], '#FC850C') ?> metaal en <?= formatNumber($debris['crystal'], '#FC850C') ?> kristal opgehaald.
     <? endforeach; ?>
 
+    __________________________
+
+	Er is een totaal van <?= formatNumber($totalDebris, '#FC850C') ?> Eenheden puin opgehaald.
+<? endif; ?>
+<? if ($totalRaids > 0): ?>
+	De aanvaller heeft een totaal van <?= formatNumber($totalRaids, '#FC850C') ?> Eenheden gestolen.
+<? endif; ?>
+<? if ($this->result['winner'] == Kokx_Parser_CrashReport::ATTACKER): ?>
+<?php
+// calculate the result
+$attackerResult = $totalDebris + $totalRaids - $this->result['attackerlosses'];
+$defenderResult = $this->result['defenderlosses'];
+?>
+	__________________
+
+	[color=#3183E7][size=16][b]Totale samenvatting winst/verlies:[/b][/size][/color]
+	De aanvaller heeft <?= formatNumber(abs($attackerResult), '#FC850C') ?> Eenheden <?= ($attackerResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
+	De verdediger heeft <?= formatNumber($defenderResult, '#FC850C') ?> Eenheden verlies gemaakt.
+<? else: ?>
+<?php
+// calculate the result
+$attackerResult = $this->result['attackerlosses'];
+$defenderResult = $totalDebris - $this->result['defenderlosses'];
+?>
+	__________________
+
+	[color=#3183E7][size=16][b]Totale samenvatting winst/verlies:[/b][/size][/color]
+	De aanvaller heeft <?= formatNumber($attackerResult, '#FC850C') ?> Eenheden verlies gemaakt.
+	De verdediger heeft <?= formatNumber(abs($defenderResult), '#FC850C') ?> Eenheden <?= ($defenderResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
 <? endif; ?>
 
 <? /* and a link to the A Team site*/ ?>
