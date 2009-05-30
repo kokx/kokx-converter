@@ -1,6 +1,6 @@
 <?php
 
-define('VERSION', '1.1.3-dev');
+define('VERSION', '1.1.3');
 
 /**
  * Root location
@@ -111,6 +111,13 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
             $view->options['hideTime'] = true;
         } else {
             $view->options['hideTime'] = false;
+        }
+    }
+    if (isset($_POST['merge_fleets'])) {
+        if ($_POST['merge_fleets'] == '1') {
+            $view->options['mergeFleets'] = true;
+        } else {
+            $view->options['mergeFleets'] = false;
         }
     }
     // after raids option
