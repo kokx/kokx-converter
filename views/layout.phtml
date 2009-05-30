@@ -99,20 +99,18 @@ div#options {
 	border-top: 1px solid #000000;
 	padding: 5px;
 }
+div#options table {
+	width: 100%;
+	/*border: 1px solid #000000;*/
+	border-collapse: collapse;
+}
+div#options td {
+	font-size: 10pt;
+	width: 25%;
+	/*border: 1px solid #000000;*/
+}
 div#options-top {
 	padding: 5px;
-}
-
-div#options-left {
-	vertical-align: top;
-	float: left;
-}
-div#options-right {
-	vertical-align: top;
-	float: right;
-}
-div#options-clear {
-	clear: both;
 }
 
 div#submit-container {
@@ -160,19 +158,19 @@ div#submit-container {
     	</div>
         <div id="options">
         	<h2>Algemene opties</h2>
-        	<div id="options-left">
-                <dl>
-                	<dt><label for="middletext">Tekst in het midden van de CR</label></dt>
-                	<dd><?= $this->formText('middletext', $this->options['middleText']) ?>
-                </dl>
-            </div>
-            <div id="options-right">
-            	<dl>
-                	<dt><label for="hidetime">Verberg de tijd</label></dt>
-                	<dd><?= $this->formCheckbox('hidetime', null, array('checked' => $this->options['hideTime'])) ?>
-                </dl>
-            </div>
-            <div id="options-clear">
+        	<table border="0">
+        		<tr>
+        			<td><label for="middletext">Tekst in het midden van de CR</label></td>
+        			<td><?= $this->formText('middletext', $this->options['middleText']) ?></td>
+        			<td><label for="hidetime">Verberg de tijd</label></td>
+        			<td><?= $this->formCheckbox('hidetime', null, array('checked' => $this->options['hideTime'])) ?></td>
+        		</tr>
+        		<tr>
+        			<td><label for="merge_fleets">Voeg vloten samen</label></td>
+        			<td><?= $this->formCheckbox('merge_fleets', null, array('checked' => $this->options['middleText'])) ?></td>
+        		</tr>
+        	</table>
+            <div>
             	<br />
             	<hr />
             	<h2>Naraids</h2>

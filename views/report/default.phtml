@@ -17,6 +17,51 @@ function formatNumber($number, $color = false)
 // initialization of some variables
 $totalDebris = 0;
 $totalRaids  = 0;
+
+function mergeFleet($fleet1, $fleet2)
+{
+    foreach ($fleet2 as $ship => $number) {
+        if (isset($fleet1[$ship])) {
+            $fleet1[$ship] = $fleet1[$ship] + $number;
+        } else {
+            $fleet1[$ship] = $number;
+        }
+    }
+
+    return $fleet1;
+}
+
+// merge fleets
+if ($this->options['mergeFleets']) {
+    foreach ($this->rounds as $key => $round) {
+        // merge the attacker fleets
+        $attackers = array();
+        foreach ($round['attackers'] as $slot) {
+            $name = $slot['player']['name'];
+            if (isset($attackers[$name])) {
+                $attackers[$name]['fleet'] = mergeFleet($attackers[$name]['fleet'], $slot['fleet']);
+            } else {
+                $attackers[$name] = $slot;
+            }
+        }
+
+        // merge the defender fleets
+        $defenders = array();
+        foreach ($round['defenders'] as $slot) {
+            $name = $slot['player']['name'];
+            if (isset($defenders[$name])) {
+                $defenders[$name]['fleet'] = mergeFleet($defenders[$name]['fleet'], $slot['fleet']);
+            } else {
+                $defenders[$name] = $slot;
+            }
+        }
+
+        $this->rounds[$key] = array(
+            'attackers' => array_values($attackers),
+            'defenders' => array_values($defenders)
+        );
+    }
+}
 ?>
 [quote][center]De volgende vloten kwamen elkaar tegen op <?php
 echo $this->time['date'];
@@ -153,15 +198,17 @@ Op deze coördinaten in de ruimte zweven nu <?= formatNumber($this->result['debr
 <? if ($this->result['moonchance'] > 0): ?>
 	De kans dat een maan ontstaat uit het puin is <?= formatNumber($this->result['moonchance'], true) ?> %
 <? endif; ?>
+
 <? if (!empty($this->debris)): ?>
 	<? foreach ($this->debris as $debris): ?>
-
 		<? $totalDebris += $debris['metal'] + $debris['crystal'] ?>
 		_____________________________________
 
 		Je <?= formatNumber($debris['recs'], '#FC850C') ?> recyclers hebben een totale opslagcapaciteit van <?= formatNumber($debris['storage'], '#FC850C') ?>. In het bestemmingsveld zweven <?= formatNumber($debris['fieldmetal'], '#FC850C') ?> metaal en <?= formatNumber($debris['fieldcrystal'], '#FC850C') ?> kristal in de ruimte. Je hebt <?= formatNumber($debris['metal'], '#FC850C') ?> metaal en <?= formatNumber($debris['crystal'], '#FC850C') ?> kristal opgehaald.
-    <? endforeach; ?>
 
+		<? $percent = ($debris['metal'] + $debris['crystal']) / ($debris['fieldmetal'] + $debris['fieldcrystal']) * 100 ?>
+		Opgehaald: [b][color=#3183E7]<?= round($percent) ?>%[/color][/b]
+    <? endforeach; ?>
     __________________________
 
 	Er is een totaal van <?= formatNumber($totalDebris, '#FC850C') ?> Eenheden puin opgehaald.

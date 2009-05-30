@@ -24,3 +24,9 @@
 1.1.2
 ----------
 - Added summary at the end of the report.
+
+1.1.3
+----------
+- Added yield percentage for debris reports.
+- Added fleet slot merging.
+- Made a minor layout change.

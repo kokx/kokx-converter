@@ -1,6 +1,6 @@
 <?php
 
-define('VERSION', '1.1.2');
+define('VERSION', '1.1.3-dev');
 
 /**
  * Root location
@@ -39,8 +39,9 @@ $view->raids  = array();
 
 // default options
 $view->options = array(
-    'middleText' => 'Na het gevecht...',
-    'hideTime'   => true
+    'middleText'  => 'Na het gevecht...',
+    'hideTime'    => true,
+    'mergeFleets' => true
 );
 
 // convert the CR if it is there
