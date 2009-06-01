@@ -273,7 +273,7 @@ class Kokx_Parser_CrashReport
     {
         // check who has won the fight
         if (preg_match('#gewonnen#i', $this->_source)) {
-            if (preg_match('#De aanvaller heeft#i', $this->_source)) {
+            if (preg_match('#De aanvaller heeft het gevecht#i', $this->_source)) {
                 $this->_result['winner'] = self::ATTACKER;
 
                 // the attacker won, get the number of stolen resources
