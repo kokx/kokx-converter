@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<title>The A Team OGame CR converter</title>
+<title>FaP OGame CR converter</title>
 
 <script type="text/javascript">
 function toggleOptions()
@@ -35,9 +35,10 @@ a:hover {
 }
 
 div#header {
-	margin-left: auto;
+	/*margin-left: auto;
 	margin-right: auto;
-	width: 520px;
+	width: 520px;*/
+	text-align: center;
 }
 div#adsense {
 	margin-left: auto;
@@ -123,7 +124,7 @@ div#submit-container {
 <div id="container">
 	<br />
 	<div id="header">
-		<img src="http://img171.imageshack.us/img171/6281/ateamtt8.png" alt="The A Team" />
+		<h1><acronym title="Fleet and Pride">FaP</acronym> OGame CR converter</h1>
 	</div>
 	<br />
 	<div id="adsense">
@@ -160,14 +161,20 @@ div#submit-container {
         	<h2>Algemene opties</h2>
         	<table border="0">
         		<tr>
-        			<td><label for="middletext">Tekst in het midden van de CR</label></td>
-        			<td><?= $this->formText('middletext', $this->options['middleText']) ?></td>
+        			<td><label for="not">not</label></td>
+        			<td><?= $this->formText('not') ?></td>
         			<td><label for="hidetime">Verberg de tijd</label></td>
         			<td><?= $this->formCheckbox('hidetime', null, array('checked' => $this->options['hideTime'])) ?></td>
         		</tr>
         		<tr>
+        			<td><label for="middletext">Tekst in het midden van de CR</label></td>
+        			<td><?= $this->formText('middletext', $this->options['middleText']) ?></td>
         			<td><label for="merge_fleets">Voeg vloten samen</label></td>
         			<td><?= $this->formCheckbox('merge_fleets', null, array('checked' => $this->options['mergeFleets'])) ?></td>
+        		</tr>
+        		<tr>
+        			<td><label for="deut">Vliegkosten (deuterium)</label></td>
+        			<td><?= $this->formText('deut', 0) ?></td>
         		</tr>
         	</table>
             <div>

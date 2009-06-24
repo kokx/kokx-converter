@@ -30,3 +30,5 @@
 - Added yield percentage for debris reports.
 - Added fleet slot merging.
 - Made a minor layout change.
+- Fixed winner detection.
+- Renamed to FaP converter
