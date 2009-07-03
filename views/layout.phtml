@@ -54,10 +54,14 @@ div#container {
 	border: 1px solid #000000;
 }
 
-input {
+input, select {
 	border: 1px solid #000000;
 	background-color: #2F374C;
 	color: #7B90B8;
+	width: 181px;
+}
+input#submit {
+	width: auto;
 }
 
 input#title {
@@ -161,8 +165,8 @@ div#submit-container {
         	<h2>Algemene opties</h2>
         	<table border="0">
         		<tr>
-        			<td><label for="not">not</label></td>
-        			<td><?= $this->formText('not') ?></td>
+        			<td><label for="theme">Thema</label></td>
+        			<td><?= $this->formSelect('theme', 'fish', null, array('kokx' => 'kokx', 'fish' => 'Albert Fish', 'hydra' => 'Hydra')) ?></td>
         			<td><label for="hidetime">Verberg de tijd</label></td>
         			<td><?= $this->formCheckbox('hidetime', null, array('checked' => $this->options['hideTime'])) ?></td>
         		</tr>

@@ -171,6 +171,9 @@ class Kokx_Parser_CrashReport
                 'fleet' => array()
             );
 
+            $matches[7] = str_replace(array("\n", "\r", " "), "\t", $matches[7]);
+            $matches[8] = str_replace(array("\n", "\r", " "), "\t", $matches[8]);
+
             // add the fleet info
             $ships   = explode("\t", trim($matches[7]));
             $numbers = explode("\t", trim($matches[8]));
@@ -234,6 +237,9 @@ class Kokx_Parser_CrashReport
 
             // if the fleet isn't destroyed, add it to the info
             if ($matches[4] != 'Vernietigd') {
+                $matches[5] = str_replace(array("\n", "\r", " "), "\t", $matches[5]);
+                $matches[6] = str_replace(array("\n", "\r", " "), "\t", $matches[6]);
+
                 $ships   = explode("\t", trim($matches[5]));
                 $numbers = explode("\t", trim($matches[6]));
 

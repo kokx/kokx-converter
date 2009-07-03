@@ -63,7 +63,7 @@ if ($this->options['mergeFleets']) {
     }
 }
 ?>
-[quote][center]De volgende vloten kwamen elkaar tegen op <?php
+[quote][align=center]De volgende vloten kwamen elkaar tegen op <?php
 echo $this->time['date'];
 if ($this->options['hideTime']) {
     echo ' --:--:--';
@@ -204,7 +204,9 @@ Op deze coördinaten in de ruimte zweven nu <?= formatNumber($this->result['debr
 		<? $totalDebris += $debris['metal'] + $debris['crystal'] ?>
 		_____________________________________
 
-		Je <?= formatNumber($debris['recs'], '#FC850C') ?> recyclers hebben een totale opslagcapaciteit van <?= formatNumber($debris['storage'], '#FC850C') ?>. In het bestemmingsveld zweven <?= formatNumber($debris['fieldmetal'], '#FC850C') ?> metaal en <?= formatNumber($debris['fieldcrystal'], '#FC850C') ?> kristal in de ruimte. Je hebt <?= formatNumber($debris['metal'], '#FC850C') ?> metaal en <?= formatNumber($debris['crystal'], '#FC850C') ?> kristal opgehaald.
+		Je <?= formatNumber($debris['recs'], '#FC850C') ?> recyclers hebben een totale opslagcapaciteit van <?= formatNumber($debris['storage'], '#FC850C') ?>.
+		In het bestemmingsveld zweven <?= formatNumber($debris['fieldmetal'], '#FC850C') ?> metaal en <?= formatNumber($debris['fieldcrystal'], '#FC850C') ?> kristal in de ruimte.
+		Je hebt <?= formatNumber($debris['metal'], '#FC850C') ?> metaal en <?= formatNumber($debris['crystal'], '#FC850C') ?> kristal opgehaald.
 
 		<? $percent = ($debris['metal'] + $debris['crystal']) / ($debris['fieldmetal'] + $debris['fieldcrystal']) * 100 ?>
 		Opgehaald: [b][color=#3183E7]<?= round($percent) ?>%[/color][/b]
@@ -240,5 +242,5 @@ $defenderResult = $totalDebris - $this->result['defenderlosses'];
 	De verdediger heeft <?= formatNumber(abs($defenderResult), '#FC850C') ?> Eenheden <?= ($defenderResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
 <? endif; ?>
 
-<? /* and a link to the I.S. site*/ ?>
-[size=10][url=http://converter.ateam-ogame.nl/]Converted by the FaP CR converter <?= VERSION ?>[/url][/size][/center][/quote]
+<? /* and a link to the FaP site*/ ?>
+[size=10][url=http://converter.ateam-ogame.nl/]Converted by the FaP CR converter <?= VERSION ?> (skin: kokx)[/url][/size][/align][/quote]

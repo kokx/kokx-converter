@@ -1,6 +1,6 @@
 <?php
 
-define('VERSION', '1.1.3');
+define('VERSION', '1.2.0-dev');
 
 /**
  * Root location
@@ -55,6 +55,8 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
         $view->error = true;
         exit($view->render('layout.phtml'));
     }
+
+    var_dump($parser);
 
     // we are using Zend_View to render the shit
 
@@ -137,7 +139,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
         $view->debris = $debrisParser->parse($_POST['debris_reports'])->getHarvest();
     }
 
-    $view->script = 'report/default.phtml';
+    $view->script = 'report/kokx.phtml';
     $view->report = $_POST['report'];
 }
 echo $view->render('layout.phtml');

@@ -32,3 +32,8 @@
 - Made a minor layout change.
 - Fixed winner detection.
 - Renamed to FaP converter
+
+1.2.0
+----------
+- Added template system
+- Changed [center] tags to [align=center] for wbb3
