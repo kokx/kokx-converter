@@ -37,3 +37,4 @@
 ----------
 - Added template system
 - Changed [center] tags to [align=center] for wbb3
+- Fixed a bug on some systems that made the CR parse badly because there are no tabs but spaces.

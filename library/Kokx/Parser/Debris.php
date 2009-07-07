@@ -59,12 +59,12 @@ class Kokx_Parser_Debris
 
         foreach ($matches as $match) {
             $this->_harvest[] = array(
-                'recs'         => (int) str_replace('.', '', $match[1]),
-                'storage'      => (int) str_replace('.', '', $match[2]),
-                'fieldmetal'   => (int) str_replace('.', '', $match[3]),
-                'fieldcrystal' => (int) str_replace('.', '', $match[4]),
-                'metal'        => (int) str_replace('.', '', $match[5]),
-                'crystal'      => (int) str_replace('.', '', $match[6])
+                'recs'         => str_replace('.', '', $match[1]),
+                'storage'      => str_replace('.', '', $match[2]),
+                'fieldmetal'   => str_replace('.', '', $match[3]),
+                'fieldcrystal' => str_replace('.', '', $match[4]),
+                'metal'        => str_replace('.', '', $match[5]),
+                'crystal'      => str_replace('.', '', $match[6])
             );
         }
 

@@ -61,7 +61,8 @@ class Kokx_Parser_CrashReport
             'metal'   => 0,
             'crystal' => 0
         ),
-        'moonchance' => 0
+        'moonchance' => 0,
+        'moon'       => false
     );
 
 
@@ -305,26 +306,36 @@ class Kokx_Parser_CrashReport
         $matches = array();
         preg_match('#De aanvaller heeft een totaal van ([0-9.]*) Eenheden verloren.#i', $this->_source, $matches);
 
-        $this->_result['attackerlosses'] = (int) str_replace('.', '', $matches[1]);
+        $this->_result['attackerlosses'] = str_replace('.', '', $matches[1]);
 
         // get the defender's losses
         $matches = array();
         preg_match('#De verdediger heeft een totaal van ([0-9.]*) Eenheden verloren.#i', $this->_source, $matches);
 
-        $this->_result['defenderlosses'] = (int) str_replace('.', '', $matches[1]);
+        $this->_result['defenderlosses'] = str_replace('.', '', $matches[1]);
 
         // get the debris
         $matches = array();
         preg_match('#in de ruimte zweven nu ([0-9.]*) Metaal en ([0-9.]*) Kristal.#i', $this->_source, $matches);
 
-        $this->_result['debris']['metal']   = (int) str_replace('.', '', $matches[1]);
-        $this->_result['debris']['crystal'] = (int) str_replace('.', '', $matches[2]);
+        $this->_result['debris']['metal']   = str_replace('.', '', $matches[1]);
+        $this->_result['debris']['crystal'] = str_replace('.', '', $matches[2]);
 
         // moonchance
         $matches = array();
         if (preg_match('#De kans dat een maan ontstaat uit het puin is ([0-9]{1,2})#i', $this->_source, $matches)) {
             $this->_result['moonchance'] = (int) str_replace('.', '', $matches[1]);
         }
-        //De enorme hoeveelheden van rondzwevende metaal- en kristaldeeltjes trekken elkaar aan en vormen langzaam een maan, in een baan rond de planeet.
+
+        // moon creation
+
+        // De enorme hoeveelheden van rondzwevende metaal- en kristaldeeltjes trekken elkaar aan
+        // en vormen langzaam een maan, in een baan rond de planeet.
+        $regex = 'De enorme hoeveelheden van rondzwevende metaal- en kristaldeeltjes trekken elkaar aan '
+               . 'en vormen langzaam een maan, in een baan rond de planeet.';
+        $matches = array();
+        if (preg_match("#{$regex}#i", $this->_source, $matches)) {
+            $this->_result['moon'] = true;
+        }
     }
 }

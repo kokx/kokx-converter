@@ -153,7 +153,7 @@ div#submit-container {
         </div>
         <div id="cr-right">
         	<?= $this->formText('title', $this->title, array('style' => 'width: 439px;')) ?><br />
-            <?= $this->formTextarea('output', empty($this->script) ? '': $this->render($this->script), array('cols' => 60, 'style' => 'height: 325px;')) ?>
+            <?= $this->formTextarea('output', empty($this->rounds) ? '': $this->render('report/' . $this->theme . '.phtml'), array('cols' => 60, 'style' => 'height: 325px;')) ?>
         </div>
         <div id="cr-clear">&nbsp;</div>
     </div>
@@ -165,8 +165,8 @@ div#submit-container {
         	<h2>Algemene opties</h2>
         	<table border="0">
         		<tr>
-        			<td><label for="theme">Thema</label></td>
-        			<td><?= $this->formSelect('theme', 'fish', null, array('kokx' => 'kokx', 'fish' => 'Albert Fish', 'hydra' => 'Hydra')) ?></td>
+        			<td><label for="theme">Skin</label></td>
+        			<td><?= $this->formSelect('theme', $this->theme, null, array('kokx' => 'kokx', 'kokx-nolines' => 'kokx-nolines')) ?></td>
         			<td><label for="hidetime">Verberg de tijd</label></td>
         			<td><?= $this->formCheckbox('hidetime', null, array('checked' => $this->options['hideTime'])) ?></td>
         		</tr>
@@ -176,10 +176,10 @@ div#submit-container {
         			<td><label for="merge_fleets">Voeg vloten samen</label></td>
         			<td><?= $this->formCheckbox('merge_fleets', null, array('checked' => $this->options['mergeFleets'])) ?></td>
         		</tr>
-        		<tr>
+        		<? /* <tr>
         			<td><label for="deut">Vliegkosten (deuterium)</label></td>
         			<td><?= $this->formText('deut', 0) ?></td>
-        		</tr>
+        		</tr> */ ?>
         	</table>
             <div>
             	<br />

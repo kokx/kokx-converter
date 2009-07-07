@@ -102,12 +102,10 @@ if ($this->options['hideTime']) {
 <? foreach ($this->rounds[0]['attackers'] as $slot): ?>
     [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
     Wapens: XXX% Schilden: XXX% Romp beplating: XXX%
-    [color=red]________________________________________________[/color]
 
     <? foreach ($slot['fleet'] as $ship => $number): ?>
         [color=#FC850C]<?= $ship ?> <?= formatNumber($number) ?>[/color]
     <? endforeach; ?>
-    [color=red]_________________________________________[/color]
 
 <? endforeach; ?>
 
@@ -115,12 +113,10 @@ if ($this->options['hideTime']) {
 <? foreach ($this->rounds[0]['defenders'] as $slot): ?>
     [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
     Wapens: XXX% Schilden: XXX% Romp beplating: XXX%
-    [color=green]________________________________________________[/color]
 
     <? foreach ($slot['fleet'] as $ship => $number): ?>
         [color=#1C84BE]<?= $ship ?> <?= formatNumber($number) ?>[/color]
     <? endforeach; ?>
-    [color=green]_________________________________________[/color]
 
 <? endforeach; ?>
 
@@ -136,7 +132,6 @@ $last = count($this->rounds) - 1;
 /* the last round, attackers */ ?>
 <? foreach ($this->rounds[$last]['attackers'] as $key => $slot): ?>
     [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
-    [color=red]________________________________________________[/color]
 
     <?php
     // calculations for the first round
@@ -160,7 +155,6 @@ $last = count($this->rounds) - 1;
             [color=#FC850C]<?= $ship ?> <?= formatNumber($number) ?>[/color]
         <? endforeach; ?>
     <? endif; ?>
-    [color=red]_________________________________________[/color]
     <? unset($oldSlot) ?>
 
 <? endforeach; ?>
@@ -168,7 +162,6 @@ $last = count($this->rounds) - 1;
 <? /* the last round for the defenders */ ?>
 <? foreach ($this->rounds[$last]['defenders'] as $key => $slot): ?>
     [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
-    [color=green]________________________________________________[/color]
 
     <?php
     // calculations for the first round
@@ -192,7 +185,6 @@ $last = count($this->rounds) - 1;
             [color=#1C84AE]<?= $ship ?> <?= formatNumber($number) ?>[/color]
         <? endforeach; ?>
     <? endif; ?>
-    [color=green]_________________________________________[/color]
     <? unset($oldSlot) ?>
 
 <? endforeach; ?>
@@ -269,4 +261,4 @@ $defenderResult = $totalDebris - $this->result['defenderlosses'];
 <? endif; ?>
 
 <? /* and a link to the FaP site*/ ?>
-[size=10][url=http://converter.ateam-ogame.nl/]Converted by the FaP CR converter <?= VERSION ?> (skin: kokx)[/url][/size][/align][/quote]
+[size=10][url=http://converter.ateam-ogame.nl/]Converted by the FaP CR converter <?= VERSION ?> (skin: kokx-nolines)[/url][/size][/align][/quote]

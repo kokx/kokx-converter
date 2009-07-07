@@ -1,6 +1,6 @@
 <?php
 
-define('VERSION', '1.2.0-dev');
+define('VERSION', '1.2.0');
 
 /**
  * Root location
@@ -32,7 +32,7 @@ $view = new Zend_View();
 
 $view->setScriptPath(ROOT . DIRECTORY_SEPARATOR . 'views');
 
-$view->script = '';
+$view->theme  = 'kokx';
 $view->report = '';
 $view->title  = '';
 $view->raids  = array();
@@ -55,8 +55,6 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
         $view->error = true;
         exit($view->render('layout.phtml'));
     }
-
-    var_dump($parser);
 
     // we are using Zend_View to render the shit
 
@@ -138,8 +136,13 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
 
         $view->debris = $debrisParser->parse($_POST['debris_reports'])->getHarvest();
     }
+    // skin
+    if (isset($_POST['theme']) && in_array($_POST['theme'], array('kokx', 'kokx-nolines'))) {
+        $view->theme = $_POST['theme'];
+    } else {
+        $view->theme = 'kokx';
+    }
 
-    $view->script = 'report/kokx.phtml';
     $view->report = $_POST['report'];
 }
 echo $view->render('layout.phtml');
