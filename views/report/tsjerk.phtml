@@ -1,0 +1,273 @@
+<?php
+function stringnumFormat($number, $decimals = 0, $decPoint = '.', $thousandsSep = ',')
+{
+    if (is_int($number) || is_float($number)) {
+        return number_format($number, $decimals, $decPoint, $thousandsSep);
+    } elseif (is_string($number)) {
+        $number = explode('.', $number);
+
+        $num       = strrev($number[0]);
+        $number[0] = '';
+
+        while (strlen($num) > 0) {
+            $number[0] .= $thousandsSep . substr($num, 0, 3);
+            $num        = substr($num, 3);
+        }
+        $number[0] = substr(strrev($number[0]), 0, -1);
+
+        if (isset($number[1])) {
+            return $number[0] . $decPoint . $number[1];
+        } else {
+            return $number[0];
+        }
+    } else {
+        return '0';
+    }
+}
+
+function formatNumber($number, $color = false)
+{
+	$number = stringnumFormat($number, 0, ',', '.');
+
+	if ($color === false) {
+	    return $number;
+	}
+
+	if ($color === true) {
+	    $color = '#3183E7';
+	}
+
+	return '[color=' . $color . '][b]' . $number . '[/b][/color]';
+}
+
+// initialization of some variables
+$totalDebris = 0;
+$totalRaids  = 0;
+
+function mergeFleet($fleet1, $fleet2)
+{
+    foreach ($fleet2 as $ship => $number) {
+        if (isset($fleet1[$ship])) {
+            $fleet1[$ship] = $fleet1[$ship] + $number;
+        } else {
+            $fleet1[$ship] = $number;
+        }
+    }
+
+    return $fleet1;
+}
+
+// merge fleets
+if ($this->options['mergeFleets']) {
+    foreach ($this->rounds as $key => $round) {
+        // merge the attacker fleets
+        $attackers = array();
+        foreach ($round['attackers'] as $slot) {
+            $name = $slot['player']['name'];
+            if (isset($attackers[$name])) {
+                $attackers[$name]['fleet'] = mergeFleet($attackers[$name]['fleet'], $slot['fleet']);
+            } else {
+                $attackers[$name] = $slot;
+            }
+        }
+
+        // merge the defender fleets
+        $defenders = array();
+        foreach ($round['defenders'] as $slot) {
+            $name = $slot['player']['name'];
+            if (isset($defenders[$name])) {
+                $defenders[$name]['fleet'] = mergeFleet($defenders[$name]['fleet'], $slot['fleet']);
+            } else {
+                $defenders[$name] = $slot;
+            }
+        }
+
+        $this->rounds[$key] = array(
+            'attackers' => array_values($attackers),
+            'defenders' => array_values($defenders)
+        );
+    }
+}
+?>
+[quote][align=center]De volgende vloten kwamen elkaar tegen op <?php
+echo $this->time['date'];
+if ($this->options['hideTime']) {
+    echo ' --:--:--';
+} else {
+    echo ' ' . $this->time['time'];
+}
+?> , toen het tot een gevecht kwam:
+
+<? /* the first round, attackers */ ?>
+<? foreach ($this->rounds[0]['attackers'] as $slot): ?>
+    [color=red][b]Aanvaller[/b][/color] [b][size=12][color=#ff00ff]<?= $slot['player']['name'] ?>[/color][/size][/b] ([X:XXX:XX])
+    [i]Wapens: XXX% Schilden: XXX% Romp beplating: XXX%[/i]
+    (6) [color=#ff99ff]________________________________________________[/color] (6)
+
+    <? foreach ($slot['fleet'] as $ship => $number): ?>
+        [color=#ff00ff]<?= $ship ?> <?= formatNumber($number) ?>[/color]
+    <? endforeach; ?>
+    (6)[color=#ff99ff]_________________________________________ [/color](6)
+
+<? endforeach; ?>
+
+<? /* the first round */ ?>
+<? foreach ($this->rounds[0]['defenders'] as $slot): ?>
+    [color=green][b]Verdediger[/b][/color] [size=12][b][color=#00ff00]<?= $slot['player']['name'] ?>[/color][/b][/size] ([X:XXX:XX])
+    [i]Wapens: XXX% Schilden: XXX% Romp beplating: XXX%[/i]
+    [color=green]________________________________________________[/color]
+
+    <? foreach ($slot['fleet'] as $ship => $number): ?>
+        [color=#00ff00]<?= $ship ?> <?= formatNumber($number) ?>[/color]
+    <? endforeach; ?>
+    [color=green]_________________________________________[/color]
+
+<? endforeach; ?>
+
+<?= $this->options['middleText'] ?>
+
+
+
+<?php
+// make some simple calculations
+
+$last = count($this->rounds) - 1;
+
+/* the last round, attackers */ ?>
+<? foreach ($this->rounds[$last]['attackers'] as $key => $slot): ?>
+    [color=red][b]Aanvaller[/b][/color] [size=12][b][color=#ff00ff]<?= $slot['player']['name'] ?>[/color][/b][/size] ([X:XXX:XX])
+    (6) [color=#ff99ff]________________________________________________[/color] (6)
+
+    <?php
+    // calculations for the first round
+    if (isset($this->rounds[0]['attackers'][$key])) {
+        $oldSlot = $this->rounds[0]['attackers'][$key];
+
+        if ($slot['player']['name'] != $oldSlot['player']['name']) {
+            unset($oldSlot);
+        }
+    }
+    ?>
+    <? if (empty($slot['fleet'])): ?>
+    	[b][size=12][color=#ff0000]Vernietigd![/color][/size][/b]
+    <? elseif(isset($oldSlot)): ?>
+    	<? foreach ($oldSlot['fleet'] as $ship => $number): ?>
+    		<? $slot['fleet'][$ship] = isset($slot['fleet'][$ship]) ? $slot['fleet'][$ship] : 0 ?>
+            [color=#ff00ff]<?= $ship ?> <?= formatNumber($slot['fleet'][$ship]) ?> [b]( -<?= formatNumber($number - $slot['fleet'][$ship]) ?> )[/b][/color]
+        <? endforeach; ?>
+    <? else: ?>
+        <? foreach ($slot['fleet'] as $ship => $number): ?>
+            [color=#ff00ff]<?= $ship ?> <?= formatNumber($number) ?>[/color]
+        <? endforeach; ?>
+    <? endif; ?>
+    (6) [color=#ff99ff]_________________________________________[/color] (6)
+    <? unset($oldSlot) ?>
+
+<? endforeach; ?>
+
+<? /* the last round for the defenders */ ?>
+<? foreach ($this->rounds[$last]['defenders'] as $key => $slot): ?>
+    [color=green][b]Verdediger[/b][/color] [size=12][b][color=#00ff00]<?= $slot['player']['name'] ?>[/color][/b][/size] ([X:XXX:XX])
+    [color=green]________________________________________________[/color]
+
+    <?php
+    // calculations for the first round
+    if (isset($this->rounds[0]['defenders'][$key])) {
+        $oldSlot = $this->rounds[0]['defenders'][$key];
+
+        if ($slot['player']['name'] != $oldSlot['player']['name']) {
+            unset($oldSlot);
+        }
+    }
+    ?>
+    <? if (empty($slot['fleet'])): ?>
+    	[b][size=12][color=#ff0000]Vernietigd![/color][/size][/b]
+    <? elseif(isset($oldSlot)): ?>
+    	<? foreach ($oldSlot['fleet'] as $ship => $number): ?>
+    		<? $slot['fleet'][$ship] = isset($slot['fleet'][$ship]) ? $slot['fleet'][$ship] : 0 ?>
+            [color=#00ff00]<?= $ship ?> <?= formatNumber($slot['fleet'][$ship]) ?> [b]( -<?= formatNumber($number - $slot['fleet'][$ship]) ?> )[/b][/color]
+        <? endforeach; ?>
+    <? else: ?>
+        <? foreach ($slot['fleet'] as $ship => $number): ?>
+            [color=#00ff00]<?= $ship ?> <?= formatNumber($number) ?>[/color]
+        <? endforeach; ?>
+    <? endif; ?>
+    [color=green]_________________________________________[/color]
+    <? unset($oldSlot) ?>
+
+<? endforeach; ?>
+
+<? /* Make up the results */ ?>
+
+<? if ($this->result['winner'] == Kokx_Parser_CrashReport::NONE): ?>
+	Het gevecht eindigt in een remise.
+<? elseif ($this->result['winner'] == Kokx_Parser_CrashReport::ATTACKER): ?>
+	De aanvaller heeft het gevecht gewonnen!
+<? else: ?>
+	De verdediger heeft het gevecht gewonnen!
+<? endif; ?>
+De aanvaller steelt:
+<? if ($this->result['winner'] == Kokx_Parser_CrashReport::ATTACKER): ?>
+	<? $totalRaids += $this->result['stolen']['metal'] + $this->result['stolen']['crystal'] + $this->result['stolen']['deut'] ?>
+	[color=#ff00ff][b]<?= formatNumber($this->result['stolen']['metal']) ?>[/b][/color] Metaal, [color=#ff00ff][b]<?= formatNumber($this->result['stolen']['crystal']) ?>[/b][/color] Kristal en [color=#ff00ff][b]<?= formatNumber($this->result['stolen']['deut']) ?>[/b][/color] Deuterium
+	<? foreach ($this->raids as $raid): ?>
+		<? $totalRaids += $raid['metal'] + $raid['crystal'] + $raid['deut'] ?>
+	    <?= formatNumber($raid['metal'], true) ?> Metaal, <?= formatNumber($raid['crystal'], true) ?> Kristal en <?= formatNumber($raid['deut'], true) ?> Deuterium
+	<? endforeach; ?>
+<? else: ?>
+	[color=#ff00ff][b]-[/b][/color] Metaal, [color=#ff00ff][b]-[/b][/color] Kristal en [color=#ff00ff][b]-[/b][/color] Deuterium
+	- Metaal, - Kristal en - Deuterium
+<? endif; ?>
+
+De aanvaller heeft een totaal van <?= formatNumber($this->result['attackerlosses'], '#ff00ff') ?> Eenheden verloren.
+De verdediger heeft een totaal van [size=12]<?= formatNumber($this->result['defenderlosses'], '#00ff00') ?>[/size] Eenheden verloren.
+Op deze coördinaten in de ruimte zweven nu [size=12]<?= formatNumber($this->result['debris']['metal'], '#ff0000') ?>[/size] Metaal en [size=12]<?= formatNumber($this->result['debris']['crystal'], '#ff0000') ?>[/size] Kristal.
+<? if ($this->result['moonchance'] > 0): ?>
+	De kans dat een maan ontstaat uit het puin is <?= formatNumber($this->result['moonchance'], '#ff0000') ?> %
+<? endif; ?>
+
+<? if (!empty($this->debris)): ?>
+	<? foreach ($this->debris as $debris): ?>
+		<? $totalDebris += $debris['metal'] + $debris['crystal'] ?>
+		_____________________________________
+
+		Je <?= formatNumber($debris['recs'], '#ff00ff') ?> recyclers hebben een totale opslagcapaciteit van <?= formatNumber($debris['storage'], '#ff00ff') ?>.
+		In het bestemmingsveld zweven <?= formatNumber($debris['fieldmetal'], '#ff00ff') ?> metaal en <?= formatNumber($debris['fieldcrystal'], '#ff00ff') ?> kristal in de ruimte.
+		Je hebt <?= formatNumber($debris['metal'], '#ff00ff') ?> metaal en <?= formatNumber($debris['crystal'], '#ff00ff') ?> kristal opgehaald.
+
+		<? $percent = ($debris['metal'] + $debris['crystal']) / ($debris['fieldmetal'] + $debris['fieldcrystal']) * 100 ?>
+		Opgehaald: [b][color=#009900]<?= round($percent) ?>%[/color][/b]
+    <? endforeach; ?>
+    __________________________
+
+	Er is een totaal van <?= formatNumber($totalDebris, '#ff00ff') ?> Eenheden puin opgehaald.
+<? endif; ?>
+<? if ($totalRaids > 0): ?>
+	De aanvaller heeft een totaal van <?= formatNumber($totalRaids, '#ff00ff') ?> Eenheden gestolen.
+<? endif; ?>
+<? if ($this->result['winner'] == Kokx_Parser_CrashReport::ATTACKER): ?>
+<?php
+// calculate the result
+$attackerResult = $totalDebris + $totalRaids - $this->result['attackerlosses'];
+$defenderResult = $this->result['defenderlosses'];
+?>
+	__________________
+
+	[color=#ff0000][size=10][b]Totale samenvatting winst/verlies:[/b][/size][/color]
+	De aanvaller heeft <?= formatNumber(abs($attackerResult), '#ff00ff') ?> Eenheden <?= ($attackerResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
+	De verdediger heeft <?= formatNumber($defenderResult, '#ff00ff') ?> Eenheden verlies gemaakt.
+<? else: ?>
+<?php
+// calculate the result
+$attackerResult = $this->result['attackerlosses'];
+$defenderResult = $totalDebris - $this->result['defenderlosses'];
+?>
+	__________________
+
+	[color=#3183E7][size=16][b]Totale samenvatting winst/verlies:[/b][/size][/color]
+	De aanvaller heeft <?= formatNumber($attackerResult, '#ff00ff') ?> Eenheden verlies gemaakt.
+	De verdediger heeft <?= formatNumber(abs($defenderResult), '#ff00ff') ?> Eenheden <?= ($defenderResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
+<? endif; ?>
+
+<? /* and a link to the FaP site*/ ?>
+[size=10][url=http://converter.ateam-ogame.nl/]Converted by the FaP CR converter <?= VERSION ?> (skin: Albert Fish)[/url][/size][/align][/quote]

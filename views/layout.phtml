@@ -166,7 +166,11 @@ div#submit-container {
         	<table border="0">
         		<tr>
         			<td><label for="theme">Skin</label></td>
-        			<td><?= $this->formSelect('theme', $this->theme, null, array('kokx' => 'kokx', 'kokx-nolines' => 'kokx-nolines')) ?></td>
+        			<td><?= $this->formSelect('theme', $this->theme, null, array(
+           				'kokx'         => 'kokx',
+           				'kokx-nolines' => 'kokx-nolines',
+           				'tsjerk'       => 'Albert Fish'
+        			)) ?></td>
         			<td><label for="hidetime">Verberg de tijd</label></td>
         			<td><?= $this->formCheckbox('hidetime', null, array('checked' => $this->options['hideTime'])) ?></td>
         		</tr>
