@@ -1,6 +1,6 @@
 <?php
 
-define('VERSION', '1.3.0-dev');
+define('VERSION', '1.3.0-beta1');
 
 /**
  * Root location

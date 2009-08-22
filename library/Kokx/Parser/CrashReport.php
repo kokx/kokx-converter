@@ -147,7 +147,7 @@ class Kokx_Parser_CrashReport
                 $this->_rounds[] = $this->_parseRound();
             } while (preg_match('#De aanvallende vloot vuurt#i', $this->_source));
         } else {
-            while (preg_match('#Aanvaller (.*) \[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]#i', $this->_source)) {
+            while (preg_match('#(Aanvaller|Verdediger) (.*) \[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]#i', $this->_source)) {
                 $this->_rounds[] = $this->_parseRedesignRound();
             }
         }
@@ -337,6 +337,7 @@ class Kokx_Parser_CrashReport
         $matches = array();
         // loop trough the text until we have found all fleets in the round
         while (preg_match('#' . $regex . '#s', $this->_source, $matches)) {
+            //var_dump($matches);
             // extract the info from the matches array
             $info = array(
                 'player' => array(
@@ -382,6 +383,8 @@ class Kokx_Parser_CrashReport
             // always reset this array at the end
             $matches = array();
         }
+
+        //var_dump($round);
 
         return $round;
     }
@@ -454,3 +457,39 @@ class Kokx_Parser_CrashReport
         }
     }
 }
+
+/*
+De volgende vloten kwamen elkaar tegen op (22.08.2009 18:07:21):
+
+de_peetvader vs. Dry Bones
+Aanvaller de_peetvader [1:20:5] Wapens: 0% Schilden: 0% Pantser: 0%
+Soort K. Vrachtschip
+Aantal 1
+Wapens: 5
+Schilden 10
+Romp 400
+Verdediger Dry Bones [1:20:6] Wapens: 0% Schilden: 0% Pantser: 0%
+Soort Raketten
+Aantal 2
+Wapens: 80
+Schilden 20
+Romp 200
+
+De aanvallende vloot schiet 1 keer op de verdediger, met een totale impact van 5. De schilden van de verdediger absorberen 5 schadepunten.
+
+De verdedigende vloot schiet 2 keer op de aanvaller, met een totale impact van 160. De schilden van de aanvaller absorberen 10 schadepunten.
+Aanvaller de_peetvader vernietigd.
+Verdediger Dry Bones [1:20:6]
+Soort Raketten
+Aantal 2
+Wapens: 80
+Schilden 20
+Romp 200
+
+De verdediger heeft het gevecht gewonnen!
+
+De aanvaller heeft een totaal van 4.000 eenheden verloren.
+De verdediger heeft een totaal van 0 eenheden verloren.
+Op deze coördinaten in de ruimte zweven nu 600 metaal en 600 kristal.
+
+ */
