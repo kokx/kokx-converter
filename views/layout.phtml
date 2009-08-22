@@ -9,12 +9,12 @@ function toggleOptions()
 	var options = document.getElementById('options');
 	var link    = document.getElementById('hide');
 
-	if (options.style.display == 'block') {
-		options.style.display = 'none';
-		link.innerHTML = 'Toon Opties';
-	} else {
+	if (options.style.display == 'none') {
 		options.style.display = 'block';
 		link.innerHTML = 'Verberg Opties';
+	} else {
+		options.style.display = 'none';
+		link.innerHTML = 'Toon Opties';
 	}
 }
 </script>
@@ -100,7 +100,6 @@ div#options-container {
 	margin-top: -15px;
 }
 div#options {
-	display: none;
 	border-top: 1px solid #000000;
 	padding: 5px;
 }
@@ -119,7 +118,9 @@ div#options-top {
 }
 
 div#submit-container {
-	margin: 15px;
+	margin-left: 15px;
+	margin-top: -20px;
+	margin-bottom: 28px;
 }
 </style>
 </head>
@@ -152,14 +153,17 @@ div#submit-container {
             <?= $this->formTextarea('report', $this->report, array('rows' => 22, 'cols' => 60)) ?>
         </div>
         <div id="cr-right">
-        	<?= $this->formText('title', $this->title, array('style' => 'width: 439px;')) ?><br />
+        	Titel: <?= $this->formText('title', $this->title, array('style' => 'width: 406px;')) ?><br />
             <?= $this->formTextarea('output', empty($this->rounds) ? '': $this->render('report/' . $this->theme . '.phtml'), array('cols' => 60, 'style' => 'height: 325px;')) ?>
         </div>
         <div id="cr-clear">&nbsp;</div>
     </div>
+    <div id="submit-container">
+        <?= $this->formSubmit('submit', 'Converteer!') ?>
+    </div>
     <div id="options-container">
     	<div id="options-top">
-    		<a href="javascript: void(0)" id="hide" onclick="toggleOptions()">Toon Opties</a>
+    		<a href="javascript: void(0)" id="hide" onclick="toggleOptions()">Verberg Opties</a>
     	</div>
         <div id="options">
         	<h2>Algemene opties</h2>
@@ -197,9 +201,6 @@ div#submit-container {
             	<?= $this->formTextarea('debris_reports', $this->debrisReports, array('rows' => 5, 'cols' => 100)) ?>
 			</div>
         </div>
-    </div>
-    <div id="submit-container">
-        <?= $this->formSubmit('submit', 'Converteer!') ?>
     </div>
     </form>
 </div>

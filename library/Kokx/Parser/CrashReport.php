@@ -19,6 +19,9 @@ class Kokx_Parser_CrashReport
     const DEFENDER = 'defender';
     const NONE     = 'none';
 
+    const TYPE_REDESIGN = 'redesign';
+    const TYPE_OLD      = 'old';
+
     /**
      * Source
      *
@@ -42,6 +45,13 @@ class Kokx_Parser_CrashReport
         'time' => '',
         'date' => ''
     );
+
+    /**
+     * Protected CR type, redesign or old
+     *
+     * @var type
+     */
+    protected $_type = 'old';
 
     /**
      * The battle's result
@@ -112,19 +122,35 @@ class Kokx_Parser_CrashReport
 
         $matches = array();
 
-        preg_match('#^De volgende vloten kwamen elkaar tegen op ([0-9]{2}-[0-9]{2}) ([0-9]{2}:[0-9]{2}:[0-9]{2}) , toen het tot een gevecht kwam::#i', $this->_source, $matches);
+        if (preg_match('#^De volgende vloten kwamen elkaar tegen op ([0-9]{2}-[0-9]{2}) ([0-9]{2}:[0-9]{2}:[0-9]{2}) , toen het tot een gevecht kwam::#i', $this->_source, $matches)) {
+            // old style
+            $this->_time['date'] = $matches[1];
+            $this->_time['time'] = $matches[2];
 
-        $this->_time['date'] = $matches[1];
-        $this->_time['time'] = $matches[2];
+            $this->_type = self::TYPE_OLD;
+        } elseif (preg_match('#^De volgende vloten kwamen elkaar tegen op \(([0-9]{2}.[0-9]{2}.[0-9]{4}) ([0-9]{2}:[0-9]{2}:[0-9]{2})\):#i', $this->_source, $matches)) {
+            // redesign style
+            $this->_time['date'] = $matches[1];
+            $this->_time['time'] = $matches[2];
+
+            $this->_type = self::TYPE_REDESIGN;
+        }
 
         $this->_source = substr($this->_source, strlen($matches[0]));
 
-        $this->_rounds = array($this->_parseFirstRound());
+        $this->_rounds = array();
 
-        // something is wrong here
-        do {
-            $this->_rounds[] = $this->_parseRound();
-        } while (preg_match('#De aanvallende vloot vuurt#i', $this->_source));
+        if ($this->_type == self::TYPE_OLD) {
+            $this->_rounds[] = $this->_parseFirstRound();
+
+            do {
+                $this->_rounds[] = $this->_parseRound();
+            } while (preg_match('#De aanvallende vloot vuurt#i', $this->_source));
+        } else {
+            while (preg_match('#Aanvaller (.*) \[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]#i', $this->_source)) {
+                $this->_rounds[] = $this->_parseRedesignRound();
+            }
+        }
 
         $this->_parseResult();
 
@@ -263,6 +289,95 @@ class Kokx_Parser_CrashReport
             || ($matches[7] == 'remise')) {
                 break;
             }
+
+            // always reset this array at the end
+            $matches = array();
+        }
+
+        return $round;
+    }
+
+    /**
+     * Parse a redesign round
+     *
+     * @return array
+     */
+    protected function _parseRedesignRound()
+    {
+        $round = array(
+            'attackers' => array(),
+            'defenders' => array()
+        );
+
+        // first find the first attacker
+        $this->_source = strstr($this->_source, 'Aanvaller');
+
+        /*
+         * Aanvaller Preacher [1:115:4] Wapens: 0% Schilden: 0% Pantser: 0%
+         * Soort 	K. Vrachtschip
+         * Aantal 	1
+         * Wapens: 	5
+         * Schilden 	10
+         * Romp 	400
+         *
+         *
+         *
+         *
+         * Verdediger Rambi vernietigd.
+         */
+
+        // complicated regex that extracts all info from a fleet slot
+        $regex = '(Aanvaller|Verdediger) (.*?)( \[([0-9]:[0-9]{1,3}:[0-9]{1,2})\])?'
+               . '( Wapens: ([0-9]{0,2})0% Schilden: ([0-9]{0,2})0% Pantser: ([0-9]{0,2})0%)?\s*'
+               . '(Soort([A-Za-z.-\s]*)\s*' . 'Aantal([0-9.\s]*)' . '|vernietigd.)\s*'
+               . '.*?(Wapens)?';
+
+        $foundDefender = false;
+
+        $matches = array();
+        // loop trough the text until we have found all fleets in the round
+        while (preg_match('#' . $regex . '#s', $this->_source, $matches)) {
+            // extract the info from the matches array
+            $info = array(
+                'player' => array(
+                    'name'   => $matches[2],
+                    'coords' => $matches[4],
+                    'techs'  => array(
+                        'weapon' => (int) $matches[6],
+                        'shield' => (int) $matches[7],
+                        'armor'  => (int) $matches[8],
+                    )
+                ),
+                'fleet' => array()
+            );
+
+            if ($matches[9] != 'vernietigd.') {
+                $matches[10] = str_replace(array("\n", "\r", "  "), "\t", $matches[10]);
+                $matches[11] = str_replace(array("\n", "\r", "  "), "\t", $matches[11]);
+
+                // add the fleet info
+                $ships   = explode("\t", trim($matches[10]));
+                $numbers = explode("\t", trim($matches[11]));
+
+                foreach ($ships as $key => $ship) {
+                    $info['fleet'][$ship] = str_replace('.', '', $numbers[$key]);
+                }
+            }
+
+            // check if it is an attacker or a defender
+            if ($matches[1] == 'Aanvaller') {
+                if ($foundDefender) {
+                    break;
+                }
+
+                $round['attackers'][] = $info;
+            } else {
+                $round['defenders'][] = $info;
+
+                $foundDefender = true;
+            }
+
+            $this->_source = substr($this->_source, strlen($matches[0]));
 
             // always reset this array at the end
             $matches = array();

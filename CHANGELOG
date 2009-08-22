@@ -39,3 +39,7 @@
 - Changed [center] tags to [align=center] for wbb3
 - Fixed a bug on some systems that made the CR parse badly because there are no tabs but spaces.
 - Fixed the smile '8)' bug for wbb3
+
+1.2.1
+----------
+- Added 'Albert Fish' skin
