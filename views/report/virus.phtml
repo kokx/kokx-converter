@@ -255,6 +255,17 @@ $defenderResult = $this->result['defenderlosses'];
     [color=blue][size=16][b]Totale samenvatting winst/verlies:[/b][/size][/color]
     De aanvaller heeft <?= formatNumber(abs($attackerResult), true) ?> Eenheden <?= ($attackerResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
     De verdediger heeft <?= formatNumber($defenderResult, true) ?> Eenheden verlies gemaakt.
+<? elseif ($this->result['winner'] == Kokx_Parser_CrashReport::NONE): ?>
+<?php
+// calculate the result
+$attackerResult = $totalDebris + $totalRaids - $this->result['attackerlosses'];
+$defenderResult = $this->result['defenderlosses'];
+?>
+    __________________
+
+    [color=blue][size=16][b]Totale samenvatting winst/verlies:[/b][/size][/color]
+    De aanvaller heeft <?= formatNumber(abs($attackerResult), true) ?> Eenheden <?= ($attackerResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
+    De verdediger heeft <?= formatNumber($defenderResult, true) ?> Eenheden verlies gemaakt.
 <? else: ?>
 <?php
 // calculate the result

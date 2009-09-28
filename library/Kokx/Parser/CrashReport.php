@@ -158,6 +158,36 @@ class Kokx_Parser_CrashReport
     }
 
     /**
+     * Filter function
+     *
+     * @param string $ships
+     *
+     * @return string
+     */
+    protected function _filterShips($ships)
+    {
+        $ships = str_replace('Kol. Schip.', 'Kol.Schip.', $ships);
+        $ships = str_replace('ster des doods', 'rip', $ships);
+
+        return $ships;
+    }
+
+    /**
+     * Undo the filtering
+     *
+     * @param string $ship
+     *
+     * @return string
+     */
+    protected function _undoFilter($ship)
+    {
+        $ship = str_replace('Kol.Schip.', 'Kol. Schip.', $ship);
+        $ship = str_replace('rip', 'ster des doods', $ship);
+
+        return $ship;
+    }
+
+    /**
      * Parse the first round
      *
      * @return array
@@ -198,7 +228,7 @@ class Kokx_Parser_CrashReport
                 'fleet' => array()
             );
 
-            $matches[7] = str_replace(array("\n", "\r", " "), "\t", $matches[7]);
+            $matches[7] = str_replace(array("\n", "\r", " "), "\t", $this->_filterShips($matches[7]));
             $matches[8] = str_replace(array("\n", "\r", " "), "\t", $matches[8]);
 
             // add the fleet info
@@ -206,7 +236,7 @@ class Kokx_Parser_CrashReport
             $numbers = explode("\t", trim($matches[8]));
 
             foreach ($ships as $key => $ship) {
-                $info['fleet'][$ship] = str_replace('.', '', $numbers[$key]);
+                $info['fleet'][$this->_undoFilter($ship)] = str_replace('.', '', $numbers[$key]);
             }
 
             // check if it is an attacker or a defender
@@ -264,14 +294,14 @@ class Kokx_Parser_CrashReport
 
             // if the fleet isn't destroyed, add it to the info
             if ($matches[4] != 'Vernietigd') {
-                $matches[5] = str_replace(array("\n", "\r", " "), "\t", $matches[5]);
+                $matches[5] = str_replace(array("\n", "\r", " "), "\t", $this->_filterShips($matches[5]));
                 $matches[6] = str_replace(array("\n", "\r", " "), "\t", $matches[6]);
 
                 $ships   = explode("\t", trim($matches[5]));
                 $numbers = explode("\t", trim($matches[6]));
 
                 foreach ($ships as $key => $ship) {
-                    $info['fleet'][$ship] = str_replace('.', '', $numbers[$key]);
+                    $info['fleet'][$this->_undoFilter($ship)] = str_replace('.', '', $numbers[$key]);
                 }
             }
 
@@ -457,39 +487,3 @@ class Kokx_Parser_CrashReport
         }
     }
 }
-
-/*
-De volgende vloten kwamen elkaar tegen op (22.08.2009 18:07:21):
-
-de_peetvader vs. Dry Bones
-Aanvaller de_peetvader [1:20:5] Wapens: 0% Schilden: 0% Pantser: 0%
-Soort K. Vrachtschip
-Aantal 1
-Wapens: 5
-Schilden 10
-Romp 400
-Verdediger Dry Bones [1:20:6] Wapens: 0% Schilden: 0% Pantser: 0%
-Soort Raketten
-Aantal 2
-Wapens: 80
-Schilden 20
-Romp 200
-
-De aanvallende vloot schiet 1 keer op de verdediger, met een totale impact van 5. De schilden van de verdediger absorberen 5 schadepunten.
-
-De verdedigende vloot schiet 2 keer op de aanvaller, met een totale impact van 160. De schilden van de aanvaller absorberen 10 schadepunten.
-Aanvaller de_peetvader vernietigd.
-Verdediger Dry Bones [1:20:6]
-Soort Raketten
-Aantal 2
-Wapens: 80
-Schilden 20
-Romp 200
-
-De verdediger heeft het gevecht gewonnen!
-
-De aanvaller heeft een totaal van 4.000 eenheden verloren.
-De verdediger heeft een totaal van 0 eenheden verloren.
-Op deze coördinaten in de ruimte zweven nu 600 metaal en 600 kristal.
-
- */
