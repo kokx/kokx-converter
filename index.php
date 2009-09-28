@@ -137,7 +137,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
         $view->debris = $debrisParser->parse($_POST['debris_reports'])->getHarvest();
     }
     // skin
-    if (isset($_POST['theme']) && in_array($_POST['theme'], array('kokx', 'kokx-nolines', 'tsjerk'))) {
+    if (isset($_POST['theme']) && in_array($_POST['theme'], array('kokx', 'kokx-nolines', 'tsjerk', 'virus'))) {
         $view->theme = $_POST['theme'];
     } else {
         $view->theme = 'kokx';
