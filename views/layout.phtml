@@ -1,7 +1,30 @@
+<?php
+/**
+ * This file is part of Kokx's CR Converter.
+ *
+ * Kokx's CR Converter is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Kokx's CR Converter is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Kokx's CR Converter.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category   KokxConverter
+ * @license    http://www.gnu.org/licenses/gpl.txt
+ * @copyright  Copyright (c) 2009 Kokx
+ * @package    Kokx_Render
+ */
+?>
 <html>
 
 <head>
-<title>FaP OGame CR converter</title>
+<title>Kokx's OGame CR converter</title>
 
 <script type="text/javascript">
 function toggleOptions()
@@ -129,13 +152,13 @@ div#submit-container {
 <div id="container">
 	<br />
 	<div id="header">
-		<h1><acronym title="Fleet and Pride">FaP</acronym> OGame CR converter</h1>
+		<h1>Kokx's OGame CR converter</h1>
 	</div>
 	<br />
 	<div id="adsense">
 		<script type="text/javascript"><!--
-        google_ad_client = "pub-2117246455436779";
-        google_ad_slot = "0492312042";
+        google_ad_client = "<?= GOOGLE_AD_CLIENT ?>";
+        google_ad_slot = "<?= GOOGLE_AD_SLOT ?>";
         google_ad_width = 728;
         google_ad_height = 90;
         //-->
@@ -185,10 +208,6 @@ div#submit-container {
         			<td><label for="merge_fleets">Voeg vloten samen</label></td>
         			<td><?= $this->formCheckbox('merge_fleets', null, array('checked' => $this->options['mergeFleets'])) ?></td>
         		</tr>
-        		<? /* <tr>
-        			<td><label for="deut">Vliegkosten (deuterium)</label></td>
-        			<td><?= $this->formText('deut', 0) ?></td>
-        		</tr> */ ?>
         	</table>
             <div>
             	<br />
@@ -204,6 +223,15 @@ div#submit-container {
         </div>
     </div>
     </form>
+    <div style="text-align: center;">&copy; 2009 Kokx<br />
+    <br />
+    <pre>
+    Kokx's CR Converter  Copyright (C) 2009  Kokx
+    This program comes with ABSOLUTELY NO WARRANTY; for details, <a href="COPYING.html#section15">click here</a>.
+    This is free software, and you are welcome to redistribute it
+    under certain conditions; <a href="COPYING.html#terms">click here</a> for details.
+
+    </pre></div>
 </div>
 
 <? /* Google Analytics code */ ?>
@@ -213,7 +241,7 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-	var pageTracker = _gat._getTracker("UA-9087312-1");
+	var pageTracker = _gat._getTracker("<?= GOOGLE_GA_TRACKER_ID ?>");
 	pageTracker._trackPageview();
 } catch(err) {}</script>
 </body>

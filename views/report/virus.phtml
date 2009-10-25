@@ -1,4 +1,27 @@
 <?php
+/**
+ * This file is part of Kokx's CR Converter.
+ *
+ * Kokx's CR Converter is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Kokx's CR Converter is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Kokx's CR Converter.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category   KokxConverter
+ * @license    http://www.gnu.org/licenses/gpl.txt
+ * @copyright  Copyright (c) 2009 Kokx
+ * @package    Kokx_Render
+ */
+
+
 function stringnumFormat($number, $decimals = 0, $decPoint = '.', $thousandsSep = ',')
 {
     if (is_int($number) || is_float($number)) {
@@ -279,5 +302,5 @@ $defenderResult = $totalDebris - $this->result['defenderlosses'];
     De verdediger heeft <?= formatNumber(abs($defenderResult), true) ?> Eenheden <?= ($defenderResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
 <? endif; ?>
 
-<? /* and a link to the FaP site*/ ?>
-[size=10][url=http://converter.ateam-ogame.nl/]Converted by the FaP CR converter <?= VERSION ?> (skin: ViRuS)[/url][/size][/align][/quote]
+<? /* and a link to the Converter site*/ ?>
+[size=10][url=<?= LINK ?>]Converted by Kokx's CR Converter <?= VERSION ?>  (skin: ViRuS)[/url][/size][/align][/quote]
