@@ -191,7 +191,7 @@ class Kokx_Parser_CrashReport
          */
 
         // complicated regex that extracts all info from a fleet slot
-        $regex = '(Aanvaller|Verdediger) (.*?)(\s*?\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\])?'
+        $regex = '(Aanvaller|Verdediger) ([^\n\r]*?)(\s*?\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\])?'
                . '(\s*?Wapens: ([0-9]{0,2})0% Schilden: ([0-9]{0,2})0% Pantser: ([0-9]{0,2})0%)?\s*'
                . '(Soort([A-Za-z.-\s]*)\s*' . 'Aantal([0-9.\s]*)' . '|vernietigd.)\s*'
                . '.*?(Wapens)?';
@@ -201,7 +201,7 @@ class Kokx_Parser_CrashReport
         $matches = array();
         // loop trough the text until we have found all fleets in the round
         while (preg_match('#' . $regex . '#si', $this->_source, $matches)) {
-            //var_dump($matches);
+            var_dump($matches);
             // extract the info from the matches array
             $info = array(
                 'player' => array(
