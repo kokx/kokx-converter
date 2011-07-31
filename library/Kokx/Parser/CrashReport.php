@@ -201,7 +201,7 @@ class Kokx_Parser_CrashReport
         $matches = array();
         // loop trough the text until we have found all fleets in the round
         while (preg_match('#' . $regex . '#si', $this->_source, $matches)) {
-            var_dump($matches);
+            //var_dump($matches);
             // extract the info from the matches array
             $info = array(
                 'player' => array(
