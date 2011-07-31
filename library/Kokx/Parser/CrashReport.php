@@ -118,7 +118,7 @@ class Kokx_Parser_CrashReport
      */
     public function parse($source)
     {
-        $this->_source = strstr($source, 'De volgende vloten kwamen elkaar tegen op');
+        $this->_source = stristr($source, 'De volgende vloten kwamen elkaar tegen op');
 
         // check the CR
         if (false === $this->_source) {
@@ -141,11 +141,19 @@ class Kokx_Parser_CrashReport
 
         while (preg_match('#(Aanvaller|Verdediger) (.*) \[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]#i', $this->_source)) {
             $this->_rounds[] = $this->_parseRedesignRound();
-    }
+        }
 
         $this->_parseResult();
 
         return $this;
+    }
+
+    /**
+     * Normalize the name of a ship.
+     */
+    public function normalizeShipName($ship)
+    {
+        return ucwords(strtolower($ship));
     }
 
     /**
@@ -192,7 +200,7 @@ class Kokx_Parser_CrashReport
 
         $matches = array();
         // loop trough the text until we have found all fleets in the round
-        while (preg_match('#' . $regex . '#s', $this->_source, $matches)) {
+        while (preg_match('#' . $regex . '#si', $this->_source, $matches)) {
             //var_dump($matches);
             // extract the info from the matches array
             $info = array(
@@ -217,7 +225,7 @@ class Kokx_Parser_CrashReport
                 $numbers = explode("\t", trim($matches[11]));
 
                 foreach ($ships as $key => $ship) {
-                    $info['fleet'][$ship] = trim(str_replace('.', '', $numbers[$key]));
+                    $info['fleet'][$this->normalizeShipName($ship)] = trim(str_replace('.', '', $numbers[$key]));
                 }
             }
 
