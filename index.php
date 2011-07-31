@@ -75,8 +75,13 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
     // first parse the CR
     $parser = new Kokx_Parser_CrashReport();
 
+    $mergeFleets = false;
+    if ($_POST['merge_fleets'] == '1') {
+        $mergeFleets = true;
+    }
+
     try {
-        $parser->parse($_POST['report']);
+        $parser->parse($_POST['report'], $mergeFleets);
     } catch (Kokx_Parser_Exception $e) {
         $view->error = true;
         exit($view->render('layout.phtml'));
@@ -139,13 +144,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
             $view->options['hideTime'] = false;
         }
     }
-    if (isset($_POST['merge_fleets'])) {
-        if ($_POST['merge_fleets'] == '1') {
-            $view->options['mergeFleets'] = true;
-        } else {
-            $view->options['mergeFleets'] = false;
-        }
-    }
+    $view->options['mergeFleets'] = $mergeFleets;
     // after raids option
     if (isset($_POST['after_raids']) && is_string($_POST['after_raids'])) {
         $view->afterRaids = $_POST['after_raids'];

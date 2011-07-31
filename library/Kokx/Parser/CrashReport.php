@@ -114,9 +114,12 @@ class Kokx_Parser_CrashReport
     /**
      * Parse a crash report
      *
+     * @param string $source
+     * @param boolean $mergeFleets
+     *
      * @return array
      */
-    public function parse($source)
+    public function parse($source, $mergeFleets = false)
     {
         $this->_source = stristr($source, 'De volgende vloten kwamen elkaar tegen op');
 
@@ -145,6 +148,11 @@ class Kokx_Parser_CrashReport
 
         $this->_parseResult();
 
+        // check if we should merge multiple fleets of the same attacker or defender into one
+        if ($mergeFleets) {
+            $this->_mergeFleets();
+        }
+
         return $this;
     }
 
@@ -169,7 +177,7 @@ class Kokx_Parser_CrashReport
         );
 
         // first find the first attacker
-        $this->_source = strstr($this->_source, 'Aanvaller');
+        $this->_source = stristr($this->_source, 'Aanvaller');
 
         /*
          * Aanvaller Preacher [1:115:4] Wapens: 0% Schilden: 0% Pantser: 0%
@@ -191,17 +199,16 @@ class Kokx_Parser_CrashReport
          */
 
         // complicated regex that extracts all info from a fleet slot
-        $regex = '(Aanvaller|Verdediger) ([^\n\r]*?)(\s*?\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\])?'
+        $regex = '.*?(Aanvaller|Verdediger) ([^\n\r]*?)(\s*?\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\])?'
                . '(\s*?Wapens: ([0-9]{0,2})0% Schilden: ([0-9]{0,2})0% Pantser: ([0-9]{0,2})0%)?\s*'
-               . '(Soort([A-Za-z.-\s]*)\s*' . 'Aantal([0-9.\s]*)' . '|vernietigd.)\s*'
-               . '.*?(Wapens)?';
+               . '(Soort([A-Za-z.-\s]*)\s*' . 'Aantal([0-9.\s]*).*?Wapens' . '|vernietigd.)\s*'
+               . '.*?(?=Aanvaller|Verdediger)';
 
         $foundDefender = false;
 
         $matches = array();
         // loop trough the text until we have found all fleets in the round
         while (preg_match('#' . $regex . '#si', $this->_source, $matches)) {
-            //var_dump($matches);
             // extract the info from the matches array
             $info = array(
                 'player' => array(
@@ -225,12 +232,12 @@ class Kokx_Parser_CrashReport
                 $numbers = explode("\t", trim($matches[11]));
 
                 foreach ($ships as $key => $ship) {
-                    $info['fleet'][$this->normalizeShipName($ship)] = trim(str_replace('.', '', $numbers[$key]));
+                    $info['fleet'][$this->normalizeShipName($ship)] = (int) trim(str_replace('.', '', $numbers[$key]));
                 }
             }
 
             // check if it is an attacker or a defender
-            if ($matches[1] == 'Aanvaller') {
+            if (strtolower($matches[1]) == 'aanvaller') {
                 if ($foundDefender) {
                     break;
                 }
@@ -248,8 +255,6 @@ class Kokx_Parser_CrashReport
             $matches = array();
         }
 
-        //var_dump($round);
-
         return $round;
     }
 
@@ -262,12 +267,13 @@ class Kokx_Parser_CrashReport
     {
         // check who has won the fight
         if (preg_match('#gewonnen#i', $this->_source)) {
-            if (preg_match('#De aanvaller heeft het gevecht#i', $this->_source)) {
+            if (preg_match('#aanvaller heeft het gevecht#i', $this->_source)) {
                 $this->_result['winner'] = self::ATTACKER;
 
                 // the attacker won, get the number of stolen resources
 
-                $regex = 'De aanvaller steelt\s*?([0-9.]*) Metaal, ([0-9.]*) Kristal en ([0-9.]*) Deuterium';
+                // De aanvaller heeft het gevecht gewonnen! De aanvaller steelt 26.971 metaal, 16.303 kristal en 11.528 deuterium.
+                $regex = 'De aanvaller steelt\s*?([0-9.]*) metaal, ([0-9.]*) kristal en ([0-9.]*) deuterium';
 
                 $matches = array();
                 preg_match('#' . $regex . '#si', $this->_source, $matches);
@@ -286,13 +292,13 @@ class Kokx_Parser_CrashReport
 
         // get the attacker's losses
         $matches = array();
-        preg_match('#De aanvaller heeft een totaal van ([0-9.]*) Eenheden verloren.#i', $this->_source, $matches);
+        preg_match('#De aanvaller heeft een totaal van ([0-9.]*) eenheden verloren.#i', $this->_source, $matches);
 
         $this->_result['attackerlosses'] = str_replace('.', '', $matches[1]);
 
         // get the defender's losses
         $matches = array();
-        preg_match('#De verdediger heeft een totaal van ([0-9.]*) Eenheden verloren.#i', $this->_source, $matches);
+        preg_match('#De verdediger heeft een totaal van ([0-9.]*) eenheden verloren.#i', $this->_source, $matches);
 
         $this->_result['defenderlosses'] = str_replace('.', '', $matches[1]);
 
@@ -319,5 +325,68 @@ class Kokx_Parser_CrashReport
         if (preg_match("#{$regex}#i", $this->_source, $matches)) {
             $this->_result['moon'] = true;
         }
+    }
+
+    /**
+     * Merge fleets together.
+     *
+     * @return void
+     */
+    private function _mergeFleets()
+    {
+        foreach ($this->_rounds as $key => $round) {
+
+            // first merge the fleets of the attackers
+            $attackers = array();
+            foreach ($round['attackers'] as $slot) {
+                $name = $slot['player']['name'];
+                if (isset($attackers[$name])) {
+                    // merge this fleet into the previous one
+                    $attackers[$name]['fleet'] = $this->_mergeFleet($attackers[$name]['fleet'], $slot['fleet']);
+                } else {
+                    // we haven't seen this attacker before, create a new slot
+                    $attackers[$name] = $slot;
+                }
+            }
+
+            // now merge the fleets of the defenders
+            $defenders = array();
+            foreach ($round['defenders'] as $slot) {
+                $name = $slot['player']['name'];
+                if (isset($attackers[$name])) {
+                    // merge this fleet into the previous one
+                    $defenders[$name]['fleet'] = $this->_mergeFleet($defenders[$name]['fleet'], $slot['fleet']);
+                } else {
+                    // we haven't seen this attacker before, create a new slot
+                    $defenders[$name] = $slot;
+                }
+            }
+
+            $round['attackers'] = array_values($attackers);
+            $round['defenders'] = array_values($defenders);
+
+            // at the end, change the round
+            $this->_rounds[$key] = $round;
+        }
+    }
+
+    /**
+     * Merge two fleets
+     *
+     * @param array $fleet1
+     * @param array $fleet2
+     *
+     * @return array
+     */
+    public function _mergeFleet(array $fleet1, array $fleet2)
+    {
+        foreach ($fleet2 as $ship => $amount) {
+            if (isset($fleet1[$ship])) {
+                $fleet1[$ship] += $amount;
+            } else {
+                $fleet1[$ship] = $amount;
+            }
+        }
+        return $fleet1;
     }
 }

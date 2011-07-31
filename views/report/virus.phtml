@@ -66,51 +66,6 @@ function formatNumber($number, $color = false)
 // initialization of some variables
 $totalDebris = 0;
 $totalRaids  = 0;
-
-function mergeFleet($fleet1, $fleet2)
-{
-    foreach ($fleet2 as $ship => $number) {
-        if (isset($fleet1[$ship])) {
-            $fleet1[$ship] = $fleet1[$ship] + $number;
-        } else {
-            $fleet1[$ship] = $number;
-        }
-    }
-
-    return $fleet1;
-}
-
-// merge fleets
-if ($this->options['mergeFleets']) {
-    foreach ($this->rounds as $key => $round) {
-        // merge the attacker fleets
-        $attackers = array();
-        foreach ($round['attackers'] as $slot) {
-            $name = $slot['player']['name'];
-            if (isset($attackers[$name])) {
-                $attackers[$name]['fleet'] = mergeFleet($attackers[$name]['fleet'], $slot['fleet']);
-            } else {
-                $attackers[$name] = $slot;
-            }
-        }
-
-        // merge the defender fleets
-        $defenders = array();
-        foreach ($round['defenders'] as $slot) {
-            $name = $slot['player']['name'];
-            if (isset($defenders[$name])) {
-                $defenders[$name]['fleet'] = mergeFleet($defenders[$name]['fleet'], $slot['fleet']);
-            } else {
-                $defenders[$name] = $slot;
-            }
-        }
-
-        $this->rounds[$key] = array(
-            'attackers' => array_values($attackers),
-            'defenders' => array_values($defenders)
-        );
-    }
-}
 ?>
 [align=center]De volgende vloten kwamen elkaar tegen op <?php
 echo $this->time['date'];
