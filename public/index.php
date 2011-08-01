@@ -29,9 +29,14 @@ define('GOOGLE_AD_SLOT', '0492312042');
 define('GOOGLE_GA_TRACKER_ID', 'UA-9087312-1');
 
 /**
+ * Public location
+ */
+define('PUB', dirname(__FILE__));
+
+/**
  * Root location
  */
-define('ROOT', dirname(__FILE__));
+define('ROOT', realpath(PUB . "/../"));
 
 /**
  * Library location
