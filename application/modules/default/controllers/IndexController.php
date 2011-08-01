@@ -25,8 +25,8 @@
 /**
  * Index controller
  *
- * @category   KokxConverter
- * @package    Kokx_Parser
+ * @package    Default
+ * @subpackage Controllers
  */
 class IndexController extends Zend_Controller_Action
 {
