@@ -32,26 +32,30 @@ define('GOOGLE_GA_TRACKER_ID', 'UA-9087312-1');
  * Public location
  */
 define('PUB', dirname(__FILE__));
-
 /**
  * Root location
  */
 define('ROOT', realpath(PUB . "/../"));
-
 /**
  * Library location
  */
 define('LIB', ROOT . DIRECTORY_SEPARATOR . 'library');
-
 /**
  * ZF library location.
  */
 define('LIB_ZF', LIB . DIRECTORY_SEPARATOR . 'zend');
-
 /**
  * Kokx library location.
  */
 define('LIB_KOKX', LIB . DIRECTORY_SEPARATOR . 'kokx');
+/**
+ * Application location.
+ */
+define('APP', ROOT . DIRECTORY_SEPARATOR . 'application');
+/**
+ * Modules location.
+ */
+define('MODULES', APP . DIRECTORY_SEPARATOR . 'modules');
 
 ini_set('xdebug.var_display_max_depth', 20);
 
@@ -69,6 +73,15 @@ require_once 'Zend/Loader/Autoloader.php';
 $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('Kokx_');
 
+// front controller
+$front = Zend_Controller_Front::getInstance();
+
+$front->throwExceptions(true);
+$front->addModuleDirectory(MODULES);
+
+$front->dispatch();
+
+/*
 // view initialization
 $view = new Zend_View();
 
@@ -112,7 +125,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
 
     /**
      * Generate the title
-     */
+     *
 
     // attackers first
     $attackers = array();
@@ -147,7 +160,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
 
     /**
      * Check and use the options
-     */
+     *
 
     // just simple options
     if (isset($_POST['middletext']) && is_string($_POST['middletext'])) {
@@ -187,3 +200,4 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
     $view->report = $_POST['report'];
 }
 echo $view->render('layout.phtml');
+ */
