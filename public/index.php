@@ -43,10 +43,21 @@ define('ROOT', realpath(PUB . "/../"));
  */
 define('LIB', ROOT . DIRECTORY_SEPARATOR . 'library');
 
+/**
+ * ZF library location.
+ */
+define('LIB_ZF', LIB . DIRECTORY_SEPARATOR . 'zend');
+
+/**
+ * Kokx library location.
+ */
+define('LIB_KOKX', LIB . DIRECTORY_SEPARATOR . 'kokx');
+
 ini_set('xdebug.var_display_max_depth', 20);
 
 $includePath = array(
-    LIB,
+    LIB_KOKX,
+    LIB_ZF,
     get_include_path()
 );
 
