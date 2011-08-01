@@ -54,6 +54,15 @@ textarea {
 	background-color: #1F273C;
 	color: #7B90B8;
 }
+div#cr-container textarea {
+    width: 440px;
+}
+textarea#cr-input {
+    height: 400px;
+}
+textarea#cr-output {
+    height: 375px;
+}
 
 div#cr-container {
 	vertical-align: top;

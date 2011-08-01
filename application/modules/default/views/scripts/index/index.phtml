@@ -4,11 +4,11 @@
         Incorrect gevechtsrapport
     <? endif; ?>
     <div id="cr-left">
-        <?= $this->formTextarea('report', $this->report, array('rows' => 22, 'cols' => 60)) ?>
+        <?= $this->formTextarea('report', $this->report, array('id' => 'cr-input')) ?>
     </div>
     <div id="cr-right">
         Titel: <?= $this->formText('title', $this->title, array('style' => 'width: 406px;')) ?><br />
-        <?= $this->formTextarea('output', empty($this->rounds) ? '': $this->render('report/' . $this->theme . '.phtml'), array('cols' => 60, 'style' => 'height: 325px;')) ?>
+        <?= $this->formTextarea('output', empty($this->rounds) ? '': $this->render('report/' . $this->theme . '.phtml'), array('id' => 'cr-output')) ?>
     </div>
     <div id="cr-clear">&nbsp;</div>
 </div>
