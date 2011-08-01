@@ -1,1 +1,56 @@
-Hello, World!
+<form method="post" action="">
+<div id="cr-container">
+    <? if ($this->error): ?>
+        Incorrect gevechtsrapport
+    <? endif; ?>
+    <div id="cr-left">
+        <?= $this->formTextarea('report', $this->report, array('rows' => 22, 'cols' => 60)) ?>
+    </div>
+    <div id="cr-right">
+        Titel: <?= $this->formText('title', $this->title, array('style' => 'width: 406px;')) ?><br />
+        <?= $this->formTextarea('output', empty($this->rounds) ? '': $this->render('report/' . $this->theme . '.phtml'), array('cols' => 60, 'style' => 'height: 325px;')) ?>
+    </div>
+    <div id="cr-clear">&nbsp;</div>
+</div>
+<div id="submit-container">
+    <?= $this->formSubmit('submit', 'Converteer!') ?>
+</div>
+<div id="options-container">
+    <div id="options-top">
+        <a href="javascript: void(0)" id="hide" onclick="toggleOptions()">Verberg Opties</a>
+    </div>
+    <div id="options">
+        <h2>Algemene opties</h2>
+        <table border="0">
+            <tr>
+                <td><label for="theme">Skin</label></td>
+                <td><?= $this->formSelect('theme', $this->theme, null, array(
+                    'kokx'         => 'kokx',
+                    'kokx-nolines' => 'kokx-nolines',
+                    'tsjerk'       => 'Albert Fish',
+                    'virus'        => 'ViRuS'
+                )) ?></td>
+                <td><label for="hidetime">Verberg de tijd</label></td>
+                <td><?= $this->formCheckbox('hidetime', null, array('checked' => $this->options['hideTime'])) ?></td>
+            </tr>
+            <tr>
+                <td><label for="middletext">Tekst in het midden van de CR</label></td>
+                <td><?= $this->formText('middletext', $this->options['middleText']) ?></td>
+                <td><label for="merge_fleets">Voeg vloten samen</label></td>
+                <td><?= $this->formCheckbox('merge_fleets', null, array('checked' => $this->options['mergeFleets'])) ?></td>
+            </tr>
+        </table>
+        <div>
+            <br />
+            <hr />
+            <h2>Naraids</h2>
+            <?= $this->formTextarea('after_raids', $this->afterRaids, array('rows' => 5, 'cols' => 100)) ?>
+            <br />
+            <br />
+            <hr />
+            <h2>Puinrapporten</h2>
+            <?= $this->formTextarea('debris_reports', $this->debrisReports, array('rows' => 5, 'cols' => 100)) ?>
+        </div>
+    </div>
+</div>
+</form>

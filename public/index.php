@@ -79,6 +79,11 @@ $front = Zend_Controller_Front::getInstance();
 $front->throwExceptions(true);
 $front->addModuleDirectory(MODULES);
 
+// layout config
+$layout = Zend_Layout::startMvc();
+$layout->setLayoutPath(APP . DIRECTORY_SEPARATOR . 'layouts');
+$layout->setLayout('default');
+
 $front->dispatch();
 
 /*
