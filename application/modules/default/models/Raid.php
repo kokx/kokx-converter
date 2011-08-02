@@ -52,4 +52,18 @@ class Default_Model_Raid
      * @var int
      */
     protected $_deuterium;
+
+    /**
+     * Losses the attacker made in this raid.
+     *
+     * @var int
+     */
+    protected $_lossesAttacker;
+
+    /**
+     * Losses the defender made in this raid.
+     *
+     * @var int
+     */
+    protected $_lossesDefender;
 }

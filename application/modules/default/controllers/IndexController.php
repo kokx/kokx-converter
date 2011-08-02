@@ -25,6 +25,7 @@
 /**
  * Index controller
  *
+ * @category   KokxConverter
  * @package    Default
  * @subpackage Controllers
  */
