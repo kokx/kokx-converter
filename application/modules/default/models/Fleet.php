@@ -28,7 +28,7 @@
  * @package    Default
  * @subpackage Models
  */
-class Default_Fleet
+class Default_Model_Fleet
 {
 
     /**
@@ -39,7 +39,7 @@ class Default_Fleet
     protected $_player;
 
     /**
-     * An array of {@link Default_Ship} in this fleet.
+     * An array of {@link Default_Model_Ship} in this fleet.
      *
      * @var array
      */

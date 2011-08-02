@@ -28,7 +28,7 @@
  * @package    Default
  * @subpackage Models
  */
-class Default_HarvestReport
+class Default_Model_HarvestReport
 {
 
     /**

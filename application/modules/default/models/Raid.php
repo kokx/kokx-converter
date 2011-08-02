@@ -25,10 +25,11 @@
 /**
  * Raid model.
  *
+ * @category   KokxConverter
  * @package    Default
  * @subpackage Models
  */
-class Default_Raid
+class Default_Model_Raid
 {
 
     /**

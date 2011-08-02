@@ -28,19 +28,19 @@
  * @package    Default
  * @subpackage Models
  */
-class Default_CombatReport
+class Default_Model_CombatReport
 {
 
     // references to other classes
     /**
-     * Array of {@link Default_HarvestReport}, for the debris field.
+     * Array of {@link Default_Model_HarvestReport}, for the debris field.
      *
      * @var array
      */
     protected $_hrs;
 
     /**
-     * Array of {@link Default_Raid}, for raids after the target has been
+     * Array of {@link Default_Model_Raid}, for raids after the target has been
      * crushed.
      *
      * @var array
@@ -48,7 +48,7 @@ class Default_CombatReport
     protected $_raids;
 
     /**
-     * Array of {@link Default_CombatRound}, for founds of the combat.
+     * Array of {@link Default_Model_CombatRound}, for founds of the combat.
      *
      * @var array
      */

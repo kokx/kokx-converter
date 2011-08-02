@@ -28,18 +28,18 @@
  * @package    Default
  * @subpackage Models
  */
-class Default_CombatRound
+class Default_Model_CombatRound
 {
 
     /**
-     * Array of attacking {@link Default_Fleet}'s.
+     * Array of attacking {@link Default_Model_Fleet}'s.
      *
      * @param array
      */
     protected $_attackers;
 
     /**
-     * Array of defending {@link Default_Fleet}'s
+     * Array of defending {@link Default_Model_Fleet}'s
      *
      * @param array
      */

@@ -25,10 +25,11 @@
 /**
  * Ship model.
  *
+ * @category   KokxConverter
  * @package    Default
  * @subpackage Models
  */
-class Default_Ship
+class Default_Model_Ship
 {
 
     /**
