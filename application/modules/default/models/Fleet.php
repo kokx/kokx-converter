@@ -44,4 +44,53 @@ class Default_Model_Fleet
      * @var array
      */
     protected $_ships;
+
+
+    /**
+     * Set the player.
+     *
+     * @param string $player
+     *
+     * @return Default_Model_Fleet
+     */
+    public function setPlayer($player)
+    {
+        $this->_player = $player;
+
+        return $this;
+    }
+
+    /**
+     * Get the player.
+     *
+     * @return string
+     */
+    public function getPlayer()
+    {
+        return $this->_player;
+    }
+
+    /**
+     * Add a ship.
+     *
+     * @param Default_Model_Ship $ship
+     *
+     * @return Default_Model_Fleet
+     */
+    public function addShip(Default_Model_Ship $ship)
+    {
+        $this->_ships[] = $ship;
+
+        return $this;
+    }
+
+    /**
+     * Get the ships
+     *
+     * @return array of {@link Default_Model_Ship}'s
+     */
+    public function getShip()
+    {
+        return $this->_ships;
+    }
 }

@@ -180,7 +180,7 @@ class Default_Reader_CombatReport
         $this->_source = substr($this->_source, strlen($matches[0]));
 
         while (preg_match('#(Aanvaller|Verdediger) (.*) \[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]#i', $this->_source)) {
-            $this->_report->addRound($this->_parseRedesignRound());
+            $this->_report->addRound($this->_parseRound());
         }
 
         $this->_parseResult();
@@ -206,24 +206,14 @@ class Default_Reader_CombatReport
      *
      * @return array
      */
-    protected function _parseRedesignRound()
+    protected function _parseRound()
     {
-        $round = array(
-            'attackers' => array(),
-            'defenders' => array()
-        );
+        $round = new Default_Model_CombatRound();
 
         // first find the first attacker
         $this->_source = stristr($this->_source, 'Aanvaller');
 
         /*
-         * Aanvaller Preacher [1:115:4] Wapens: 0% Schilden: 0% Pantser: 0%
-         * Soort 	K. Vrachtschip
-         * Aantal 	1
-         * Wapens: 	5
-         * Schilden 	10
-         * Romp 	400
-         *
          * Aanvaller Touch [2:193:9] Wapens: 110% Schilden: 90% Pantser: 110%
          * Soort 	L. Gevechtsschip 	Kruiser 	Slagschip 	Interceptor.
          * Aantal 	6.531 	1.139 	457 	315
@@ -246,30 +236,22 @@ class Default_Reader_CombatReport
         $matches = array();
         // loop trough the text until we have found all fleets in the round
         while (preg_match('#' . $regex . '#si', $this->_source, $matches)) {
+            var_dump($matches);
             // extract the info from the matches array
-            $info = array(
-                'player' => array(
-                    'name'   => $matches[2],
-                    'coords' => $matches[4],
-                    'techs'  => array(
-                        'weapon' => (int) $matches[6],
-                        'shield' => (int) $matches[7],
-                        'armor'  => (int) $matches[8],
-                    )
-                ),
-                'fleet' => array()
-            );
+            $fleet = new Default_Model_Fleet();
+
+            $fleet->setPlayer($matches[2]);
 
             if ($matches[9] != 'vernietigd.') {
                 $matches[10] = str_replace(array("\n", "\r", "  "), "\t", $matches[10]);
                 $matches[11] = str_replace(array("\n", "\r", "  "), "\t", $matches[11]);
 
-                // add the fleet info
+                // add the ships info
                 $ships   = explode("\t", trim($matches[10]));
                 $numbers = explode("\t", trim($matches[11]));
 
                 foreach ($ships as $key => $ship) {
-                    $info['fleet'][$this->normalizeShipName($ship)] = (int) trim(str_replace('.', '', $numbers[$key]));
+                    $fleet->addShip(new Default_Model_Ship($ship, $numbers[$key]));
                 }
             }
 
@@ -279,9 +261,9 @@ class Default_Reader_CombatReport
                     break;
                 }
 
-                $round['attackers'][] = $info;
+                $round->addAttackingFleet($fleet);
             } else {
-                $round['defenders'][] = $info;
+                $round->addDefendingFleet($fleet);
 
                 $foundDefender = true;
             }

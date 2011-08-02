@@ -44,4 +44,33 @@ class Default_Model_CombatRound
      * @param array
      */
     protected $_defenders;
+
+
+    /**
+     * Add an attacking fleet
+     *
+     * @param Default_Model_Fleet $fleet
+     *
+     * @return Default_Model_CombatRound
+     */
+    public function addAttackingFleet(Default_Model_Fleet $fleet)
+    {
+        $this->_attackers[] = $fleet;
+
+        return $this;
+    }
+
+    /**
+     * Add a defending fleet
+     *
+     * @param Default_Model_Fleet $fleet
+     *
+     * @return Default_Model_CombatRound
+     */
+    public function addDefendingFleet(Default_Model_Fleet $fleet)
+    {
+        $this->_defenders[] = $fleet;
+
+        return $this;
+    }
 }

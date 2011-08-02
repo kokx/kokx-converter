@@ -45,4 +45,39 @@ class Default_Model_Ship
      * @var int
      */
     protected $_count;
+
+
+    /**
+     * Constructor
+     *
+     * @param string $name
+     * @param int $count
+     *
+     * @return void
+     */
+    public function __construct($name, $count)
+    {
+        $this->_name  = $name;
+        $this->_count = $count;
+    }
+
+    /**
+     * Get the name of the ship.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+
+    /**
+     * Get the number of ships
+     *
+     * @return int
+     */
+    public function getCount()
+    {
+        return $this->_count;
+    }
 }
