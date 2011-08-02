@@ -73,6 +73,12 @@ require_once 'Zend/Loader/Autoloader.php';
 $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('Kokx_');
 
+// resource loader
+$defaultLoader = new Kokx_Application_ResourceLoader(array(
+    'basePath'  => MODULES . DIRECTORY_SEPARATOR . 'default',
+    'namespace' => 'Default'
+));
+
 // front controller
 $front = Zend_Controller_Front::getInstance();
 
