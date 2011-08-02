@@ -203,6 +203,9 @@ Op deze coördinaten in de ruimte zweven nu [size=12]<?= formatNumber($this->res
 <? if ($this->result['moonchance'] > 0): ?>
 	De kans dat een maan ontstaat uit het puin is <?= formatNumber($this->result['moonchance'], '#ff0000') ?> %
 <? endif; ?>
+<? if ($this->result['moon']): ?>
+    De enorme hoeveelheden van rondzwevende metaal- en kristaldeeltjes trekken elkaar aan en vormen langzaam een maan in een baan rond de planeet: [color=#ff0000][b]Maan gegeven![/b][/color]
+<? endif; ?>
 
 <? if (!empty($this->debris)): ?>
 	<? foreach ($this->debris as $debris): ?>

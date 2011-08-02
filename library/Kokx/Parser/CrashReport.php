@@ -317,12 +317,10 @@ class Kokx_Parser_CrashReport
 
         // moon creation
 
-        // De enorme hoeveelheden van rondzwevende metaal- en kristaldeeltjes trekken elkaar aan
-        // en vormen langzaam een maan, in een baan rond de planeet.
-        $regex = 'De enorme hoeveelheden van rondzwevende metaal- en kristaldeeltjes trekken elkaar aan '
-               . 'en vormen langzaam een maan, in een baan rond de planeet.';
+        // De enorme hoeveelheden van rondzwevende metaal- en kristaldeeltjes trekken elkaar aan en vormen langzaam een maan in een baan rond de planeet.
+        $regex = 'De enorme hoeveelheden van rondzwevende metaal(.*?) een maan in een baan rond de planeet.';
         $matches = array();
-        if (preg_match("#{$regex}#i", $this->_source, $matches)) {
+        if (preg_match("#{$regex}#si", $this->_source, $matches)) {
             $this->_result['moon'] = true;
         }
     }

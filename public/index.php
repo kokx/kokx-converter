@@ -21,7 +21,7 @@
  * @package    Index
  */
 
-define('VERSION', '1.3.0');
+define('VERSION', '1.3.2');
 define('LINK', 'http://converter.kokx.nl/');
 
 define('GOOGLE_AD_CLIENT', 'pub-2117246455436779');
