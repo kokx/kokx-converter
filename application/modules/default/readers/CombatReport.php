@@ -32,56 +32,12 @@
 class Default_Reader_CombatReport
 {
 
-    const ATTACKER = 'attacker';
-    const DEFENDER = 'defender';
-    const NONE     = 'none';
-
-
     /**
      * Source
      *
      * @var string
      */
     protected $_source = '';
-
-    /**
-     * All the round data
-     *
-     * @var array
-     */
-    protected $_rounds = array();
-
-    /**
-     * Time of the battle
-     *
-     * @var array
-     */
-    protected $_time = array(
-        'time' => '',
-        'date' => ''
-    );
-
-    /**
-     * The battle's result
-     *
-     * @var array
-     */
-    protected $_result = array(
-        'winner'         => '', // 'none', 'defender' or 'attacker'
-        'attackerlosses' => 0,  // the attacker's losses
-        'defenderlosses' => 0,  // the defender's losses
-    	'stolen'         => array( // the number of stolen goods
-            'metal'   => 0,
-            'crystal' => 0,
-            'deut'    => 0
-        ),
-        'debris' => array( // debris field
-            'metal'   => 0,
-            'crystal' => 0
-        ),
-        'moonchance' => 0,
-        'moon'       => false
-    );
 
     /**
      * Merge fleets or not.
@@ -236,8 +192,7 @@ class Default_Reader_CombatReport
         $matches = array();
         // loop trough the text until we have found all fleets in the round
         while (preg_match('#' . $regex . '#si', $this->_source, $matches)) {
-            var_dump($matches);
-            // extract the info from the matches array
+            // extract the info
             $fleet = new Default_Model_Fleet();
 
             $fleet->setPlayer($matches[2]);
@@ -287,7 +242,7 @@ class Default_Reader_CombatReport
         // check who has won the fight
         if (preg_match('#gewonnen#i', $this->_source)) {
             if (preg_match('#aanvaller heeft het gevecht#i', $this->_source)) {
-                $this->_result['winner'] = self::ATTACKER;
+                $this->_report->setWinner(Default_Model_CombatReport::ATTACKER);
 
                 // the attacker won, get the number of stolen resources
 
@@ -297,41 +252,38 @@ class Default_Reader_CombatReport
                 $matches = array();
                 preg_match('#' . $regex . '#si', $this->_source, $matches);
 
-                $this->_result['stolen'] = array(
-                    'metal'   => (int) str_replace('.', '', $matches[1]),
-                    'crystal' => (int) str_replace('.', '', $matches[2]),
-                    'deut'    => (int) str_replace('.', '', $matches[3]),
-                );
+                $this->_report->setLoot((int) str_replace('.', '', $matches[1]),
+                                        (int) str_replace('.', '', $matches[2]),
+                                        (int) str_replace('.', '', $matches[3]));
             } else {
-                $this->_result['winner'] = self::DEFENDER;
+                $this->_report->setWinner(Default_Model_CombatReport::DEFENDER);
             }
         } else {
-            $this->_result['winner'] = self::NONE;
+                $this->_report->setWinner(Default_Model_CombatReport::DRAW);
         }
 
         // get the attacker's losses
         $matches = array();
         preg_match('#De aanvaller heeft een totaal van ([0-9.]*) eenheden verloren.#i', $this->_source, $matches);
 
-        $this->_result['attackerlosses'] = str_replace('.', '', $matches[1]);
+        $this->_report->setLossesAttacker((int) str_replace('.', '', $matches[1]));
 
         // get the defender's losses
         $matches = array();
         preg_match('#De verdediger heeft een totaal van ([0-9.]*) eenheden verloren.#i', $this->_source, $matches);
 
-        $this->_result['defenderlosses'] = str_replace('.', '', $matches[1]);
+        $this->_report->setLossesDefender((int) str_replace('.', '', $matches[1]));
 
         // get the debris
         $matches = array();
         preg_match('#in de ruimte zweven nu ([0-9.]*) Metaal en ([0-9.]*) Kristal.#i', $this->_source, $matches);
 
-        $this->_result['debris']['metal']   = str_replace('.', '', $matches[1]);
-        $this->_result['debris']['crystal'] = str_replace('.', '', $matches[2]);
+        $this->_report->setDebris((int) str_replace('.', '', $matches[1]), (int) str_replace('.', '', $matches[2]));
 
         // moonchance
         $matches = array();
         if (preg_match('#De kans dat een maan ontstaat uit het puin is ([0-9]{1,2})#i', $this->_source, $matches)) {
-            $this->_result['moonchance'] = (int) str_replace('.', '', $matches[1]);
+            $this->_report->setMoonChance((int) str_replace('.', '', $matches[1]));
         }
 
         // moon creation
@@ -342,7 +294,9 @@ class Default_Reader_CombatReport
                . 'en vormen langzaam een maan, in een baan rond de planeet.';
         $matches = array();
         if (preg_match("#{$regex}#i", $this->_source, $matches)) {
-            $this->_result['moon'] = true;
+            $this->_report->setMoonGiven(true);
+        } else {
+            $this->_report->setMoonGiven(false);
         }
     }
 

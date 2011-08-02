@@ -31,6 +31,11 @@
 class Default_Model_CombatReport
 {
 
+    // constants for the result of the battle
+    const ATTACKER = 'attacker';
+    const DEFENDER = 'defender';
+    const DRAW     = 'draw';
+
     // references to other classes
     /**
      * Array of {@link Default_Model_HarvestReport}, for the debris field.
@@ -123,6 +128,22 @@ class Default_Model_CombatReport
      */
     protected $_moonGiven = false;
 
+    /**
+     * Chance that a moon is given.
+     *
+     * @var int
+     */
+    protected $_moonChance;
+
+    /**
+     * Winner of the battle.
+     *
+     * Either self::ATTACKER, self::DEFENDER or self::DRAW
+     *
+     * @var string
+     */
+    protected $_winner;
+
 
     /**
      * Set the Harvest Reports.
@@ -211,12 +232,214 @@ class Default_Model_CombatReport
     }
 
     /**
-     * Get the rounds
+     * Get the rounds.
      *
      * @return array of {@link Default_Model_CombatRound}'s
      */
     public function getRounds()
     {
         return $this->_rounds;
+    }
+
+    /**
+     * Set the winner.
+     *
+     * @param string $winner
+     *
+     * @return Default_Model_CombatReport
+     */
+    public function setWinner($winner)
+    {
+        if (!in_array($winner, array(self::ATTACKER, self::DEFENDER, self::DRAW))) {
+            // TODO: throw an exception or something like that
+        }
+
+        $this->_winner = $winner;
+
+        return $this;
+    }
+
+    /**
+     * Set the loot.
+     *
+     * @param int $metal
+     * @param int $crystal
+     * @param int $deuterium
+     *
+     * @return Default_Model_CombatReport
+     */
+    public function setLoot($metal, $crystal, $deuterium)
+    {
+        $this->_metal     = $metal;
+        $this->_crystal   = $crystal;
+        $this->_deuterium = $deuterium;
+
+        return $this;
+    }
+
+    /**
+     * Get the stolen metal.
+     *
+     * @return int
+     */
+    public function getMetal()
+    {
+        return $this->_metal;
+    }
+
+    /**
+     * Get the stolen crystal.
+     *
+     * @return int
+     */
+    public function getCrystal()
+    {
+        return $this->_crystal;
+    }
+
+    /**
+     * Get the stolen deuterium.
+     *
+     * @return int
+     */
+    public function getDeuterium()
+    {
+        return $this->_deuterium;
+    }
+
+    /**
+     * Set the attacker's losses
+     *
+     * @param int $losses
+     *
+     * @return Default_Model_CombatReport
+     */
+    public function setLossesAttacker($losses)
+    {
+        $this->_lossesAttacker = $losses;
+
+        return $this;
+    }
+
+    /**
+     * Get the attacker's losses
+     *
+     * @return int
+     */
+    public function getLossesAttacker()
+    {
+        return $this->_lossesAttacker;
+    }
+
+    /**
+     * Set the defender's losses
+     *
+     * @param int $losses
+     *
+     * @return Default_Model_CombatReport
+     */
+    public function setLossesDefender($losses)
+    {
+        $this->_lossesDefender = $losses;
+
+        return $this;
+    }
+
+    /**
+     * Get the attacker's losses
+     *
+     * @return int
+     */
+    public function getLossesDefender()
+    {
+        return $this->_lossesDefender;
+    }
+
+    /**
+     * Set the debris field.
+     *
+     * @param int $metal
+     * @param int $crystal
+     *
+     * @return Default_Model_CombatReport
+     */
+    public function setDebris($metal, $crystal)
+    {
+        $this->_debrisMetal   = $metal;
+        $this->_debrisCrystal = $crystal;
+
+        return $this;
+    }
+
+    /**
+     * Get the metal in the debris field.
+     *
+     * @return int
+     */
+    public function getDebrisMetal()
+    {
+        return $this->_debrisMetal;
+    }
+
+    /**
+     * Get the crystal in the debris field.
+     *
+     * @return int
+     */
+    public function getDebrisCrystal()
+    {
+        return $this->_debrisCrystal;
+    }
+
+    /**
+     * Set the chance that a moon is created.
+     *
+     * @param int $chance
+     *
+     * @return Default_Model_CombatReport
+     */
+    public function setMoonChance($chance)
+    {
+        $this->_moonChance = $chance;
+
+        return $this;
+    }
+
+    /**
+     * Get the chance that a moon is created.
+     *
+     * @return int
+     */
+    public function getMoonChance()
+    {
+        return $this->_moonChance;
+    }
+
+    /**
+     * Set if a moon is given.
+     *
+     * @param boolean $given
+     *
+     * @return Default_Model_CombatReport
+     */
+    public function setMoonGiven($given)
+    {
+        if ($given) {
+            $this->_moonGiven = true;
+        } else {
+            $this->_moonGiven = false;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get if a moon is given.
+     *
+     * @return boolean
+     */
+    public function getMoonGiven()
+    {
+        return $this->_moonGiven;
     }
 }
