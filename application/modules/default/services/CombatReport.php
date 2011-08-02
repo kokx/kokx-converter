@@ -51,5 +51,17 @@ class Default_Service_CombatReport
         }
 
         $report = $reader->parse($data['report']);
+
+        // harvest reports and raids
+        if (isset($data['harvest_reports') && !empty($data['harvest_reports']) && is_string($data['harvest_reports'])) {
+            $hrReader = new Default_Reader_HarvestReport();
+
+            $report->setHarvestReports($hrReader->parse($data['harvest_reports']));
+        }
+        if (isset($data['raids']) && !emtpy($data['raids']) && is_string($data['raids'])) {
+            $raidReader = new Default_Reader_Raid();
+
+            $report->setRaids($raidReader->parse($data['raids']));
+        }
     }
 }

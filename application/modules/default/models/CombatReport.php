@@ -122,4 +122,53 @@ class Default_Model_CombatReport
      * @var boolean
      */
     protected $_moonGiven = false;
+
+
+    /**
+     * Set the Harvest Reports.
+     *
+     * @param array $reports array of {@link Default_Model_HarvestReport}'s
+     *
+     * @return Default_Model_CombatReport
+     */
+    public function setHarvestReports(array $reports)
+    {
+        $this->_hrs = $reports;
+
+        return $this;
+    }
+
+    /**
+     * Get the Harvest reports.
+     *
+     * @return array
+     */
+    public function getHarvestReports()
+    {
+        return $this->_hrs;
+    }
+
+    /**
+     * Set the Raid reports.
+     *
+     * @param array $raids array of {@link Default_Model_Raid}'s
+     *
+     * @return Default_Model_Raid
+     */
+    public function setRaidReports(array $raids)
+    {
+        $this->_raids = $raids;
+
+        return $this;
+    }
+
+    /**
+     * Get the raid reports
+     *
+     * @return array
+     */
+    public function getRaidReports()
+    {
+        return $this->_raids;
+    }
 }
