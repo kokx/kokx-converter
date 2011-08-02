@@ -18,66 +18,72 @@
  * @category   KokxConverter
  * @license    http://www.gnu.org/licenses/gpl.txt
  * @copyright  Copyright (c) 2009 Kokx
- * @package    Kokx_Parser
+ * @package    Default
+ * @subpackage Readers
  */
 
 /**
- * CR parser
+ * HR parser
  *
  * @category   Kokx
- * @package    Kokx_Parser
+ * @package    Default
+ * @subpackage Readers
  */
-class Kokx_Parser_Raid
+class Default_Reader_HarvestReport
 {
 
     /**
-     * The battle's result
+     * The harvest reports
      *
      * @var array
      */
-    protected $_raids = array();
+    protected $_harvest = array();
 
 
     /**
-     * Get the battle result
+     * Get the harvest reports
      *
      * @return array
      */
-    public function getRaids()
+    public function getHarvest()
     {
-        return $this->_raids;
+        return $this->_harvest;
     }
 
     /**
-     * Parse a crash report
+     * Parse a harvest report
      *
      * @param string $source
      *
-     * @return Kokx_Parser_Raid
+     * @return Kokx_Parser_Debris
      */
     public function parse($source)
     {
-        // the source could have multiple CR's
         /**
-         * The source only has to contain something like:
+         * Example report:
          *
-         * 99.552 Metaal, 3.748 Kristal en 17.333 Deuterium
+         * Je 8001 recyclers hebben een totale opslagcapaciteit van 101.264.259.
+         * In het bestemmingsveld zweven 0 metaal en 0 kristal in de ruimte.
+         * Je hebt 0 metaal en 0 kristal opgehaald.
          */
-
-        $regex = '([0-9.]*) Metaal, ([0-9.]*) Kristal en ([0-9.]*) Deuterium';
+        $regex  = 'Je ([0-9.]*?) recyclers hebben een totale opslagcapaciteit van ([0-9.]*?). ';
+        $regex .= 'In het bestemmingsveld zweven ([0-9.]*?) metaal en ([0-9.]*?) kristal in de ruimte. ';
+        $regex .= 'Je hebt ([0-9.]*?) metaal en ([0-9.]*?) kristal opgehaald.';
 
         $matches = array();
 
         preg_match_all('/' . $regex . '/i', $source, $matches, PREG_SET_ORDER);
 
         foreach ($matches as $match) {
-            $this->_raids[] = array(
-                'metal'   => (int) str_replace('.', '', $match[1]),
-                'crystal' => (int) str_replace('.', '', $match[2]),
-                'deut'    => (int) str_replace('.', '', $match[3])
+            $this->_harvest[] = array(
+                'recs'         => str_replace('.', '', $match[1]),
+                'storage'      => str_replace('.', '', $match[2]),
+                'fieldmetal'   => str_replace('.', '', $match[3]),
+                'fieldcrystal' => str_replace('.', '', $match[4]),
+                'metal'        => str_replace('.', '', $match[5]),
+                'crystal'      => str_replace('.', '', $match[6])
             );
         }
-
 
         return $this;
     }

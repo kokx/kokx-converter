@@ -18,16 +18,18 @@
  * @category   KokxConverter
  * @license    http://www.gnu.org/licenses/gpl.txt
  * @copyright  Copyright (c) 2009 Kokx
- * @package    Kokx_Parser
+ * @package    Default
+ * @subpackage Readers
  */
 
 /**
  * CR parser
  *
  * @category   KokxConverter
- * @package    Kokx_Parser
+ * @package    Default
+ * @subpackage Readers
  */
-class Kokx_Parser_CrashReport
+class Default_Reader_CrashReport
 {
 
     const ATTACKER = 'attacker';
@@ -125,7 +127,7 @@ class Kokx_Parser_CrashReport
 
         // check the CR
         if (false === $this->_source) {
-            throw new Kokx_Parser_Exception('Bad CR');
+            throw new Exception('Bad CR');
         }
 
         $matches = array();
@@ -135,7 +137,7 @@ class Kokx_Parser_CrashReport
             $this->_time['date'] = $matches[1];
             $this->_time['time'] = $matches[2];
         } else {
-            throw new Kokx_Parser_Exception('Bad CR');
+            throw new Exception('Bad CR');
         }
 
         $this->_source = substr($this->_source, strlen($matches[0]));
