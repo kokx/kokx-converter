@@ -29,12 +29,13 @@
  * @package    Default
  * @subpackage Readers
  */
-class Default_Reader_CrashReport
+class Default_Reader_CombatReport
 {
 
     const ATTACKER = 'attacker';
     const DEFENDER = 'defender';
     const NONE     = 'none';
+
 
     /**
      * Source
@@ -82,6 +83,13 @@ class Default_Reader_CrashReport
         'moon'       => false
     );
 
+    /**
+     * Merge fleets or not.
+     *
+     * @var boolean
+     */
+    protected $_mergeFleets = true;
+
 
     /**
      * Get all the rounds
@@ -114,6 +122,28 @@ class Default_Reader_CrashReport
     }
 
     /**
+     * Set if we have to merge fleets or not.
+     *
+     * @param boolean $mergeFleets
+     *
+     * @return void
+     */
+    public function setMergeFleets($mergeFleets)
+    {
+        $this->_mergeFleets = $mergeFleets;
+    }
+
+    /**
+     * Check if we have to merge fleets.
+     * 
+     * @return boolean
+     */
+    public function getMergeFleets()
+    {
+        return $this->_mergeFleets;
+    }
+
+    /**
      * Parse a crash report
      *
      * @param string $source
@@ -121,7 +151,7 @@ class Default_Reader_CrashReport
      *
      * @return array
      */
-    public function parse($source, $mergeFleets = false)
+    public function parse($source)
     {
         $this->_source = stristr($source, 'De volgende vloten kwamen elkaar tegen op');
 
@@ -151,7 +181,7 @@ class Default_Reader_CrashReport
         $this->_parseResult();
 
         // check if we should merge multiple fleets of the same attacker or defender into one
-        if ($mergeFleets) {
+        if ($this->getMergeFleets()) {
             $this->_mergeFleets();
         }
 
