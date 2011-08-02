@@ -37,7 +37,7 @@ class Default_CombatReport
      *
      * @var array
      */
-    protected array $_hrs;
+    protected $_hrs;
 
     /**
      * Array of {@link Default_Raid}, for raids after the target has been
@@ -45,14 +45,14 @@ class Default_CombatReport
      *
      * @var array
      */
-    protected array $_raids;
+    protected $_raids;
 
     /**
      * Array of {@link Default_CombatRound}, for founds of the combat.
      *
      * @var array
      */
-    protected array $_rounds;
+    protected $_rounds;
 
     // properties of a CR
     
@@ -113,6 +113,13 @@ class Default_CombatReport
      *
      * @var DateTime
      */
-    protected DateTime $_time;
-    
+    protected $_time;
+
+    // other things that could happen
+    /**
+     * Moon given.
+     *
+     * @var boolean
+     */
+    protected $_moonGiven = false;
 }
