@@ -33,12 +33,46 @@ class IndexController extends Zend_Controller_Action
 {
 
     /**
+     * CR service
+     *
+     * @var Default_Service_CombatReport
+     */
+    protected $_crService;
+
+
+    /**
+     * Get the CR service
+     *
+     * @return Default_Service_CombatReport
+     */
+    protected function _getCrService()
+    {
+        if (null === $this->_crService) {
+            $this->_crService = new Default_Service_CombatReport();
+        }
+
+        return $this->_crService;
+    }
+
+    /**
      * Index action.
      *
      * @return void
      */
     public function indexAction()
     {
-        // nothing yet
+        $crService = $this->_getCrService();
+
+        $settings = $crService->getDefaultSettings();
+
+        if ($this->getRequest()->isPost()) {
+            $settings = $crService->readSettings($_POST);
+            $report   = $crService->readReport($_POST, $settings);
+
+            $this->view->report = $report;
+            $this->view->data   = $_POST;
+        }
+
+        $this->view->settings = $settings;
     }
 }

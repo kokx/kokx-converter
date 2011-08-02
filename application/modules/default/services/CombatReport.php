@@ -33,35 +33,98 @@ class Default_Service_CombatReport
 {
 
     /**
+     * Themes.
+     *
+     * @var array
+     */
+    protected $_themes = array(
+        'kokx'         => 'kokx',
+        'kokx-nolines' => 'kokx-nolines',
+        'tsjerk'       => 'Albert Fish',
+        'virus'        => 'ViRuS'
+    );
+
+
+    /**
+     * Get the available themes
+     *
+     * @return array
+     */
+    public function getThemes()
+    {
+        return $this->_themes;
+    }
+
+    /**
      * Read a CombatReport.
      *
      * @param array $data
      *
      * @return Default_Model_CombatReport
      */
-    public function readReport(array $data)
+    public function readReport(array $data, array $settings)
     {
         $reader = new Default_Reader_CombatReport();
 
-        // check if we need to do fleet merging
-        if ($data['merge_fleets'] == '1') {
-            $reader->setMergeFleets(true);
-        } else {
-            $reader->setMergeFleets(false);
-        }
+        $reader->setMergeFleets($settings['merge_fleets']);
 
         $report = $reader->parse($data['report']);
 
         // harvest reports and raids
-        if (isset($data['harvest_reports') && !empty($data['harvest_reports']) && is_string($data['harvest_reports'])) {
+        if (isset($data['harvest_reports']) && !empty($data['harvest_reports']) && is_string($data['harvest_reports'])) {
             $hrReader = new Default_Reader_HarvestReport();
 
             $report->setHarvestReports($hrReader->parse($data['harvest_reports']));
         }
-        if (isset($data['raids']) && !emtpy($data['raids']) && is_string($data['raids'])) {
+        if (isset($data['raids']) && !empty($data['raids']) && is_string($data['raids'])) {
             $raidReader = new Default_Reader_Raid();
 
             $report->setRaids($raidReader->parse($data['raids']));
         }
+
+        return $report;
+    }
+
+    /**
+     * Get the default settings
+     *
+     * @return array
+     */
+    public function getDefaultSettings()
+    {
+        return array(
+            'theme'        => 'kokx',
+            'middle_text'  => 'Na het gevecht...',
+            'hide_time'    => true,
+            'merge_fleets' => true
+        );
+    }
+
+    /**
+     * Read the settings
+     *
+     * @param array $data
+     *
+     * @return array Settings
+     */
+    public function readSettings(array $data)
+    {
+        // set defaults
+        $settings = $this->getDefaultSettings();
+
+        if (isset($data['theme']) && isset($this->_themes[$data['theme']])) {
+            $settings['theme'] = $data['theme'];
+        }
+        if (isset($data['middle_text']) && is_string($data['middle_text'])) {
+            $settings['middle_text'] = htmlspecialchars($data['middle_text']);
+        }
+        if (isset($data['hide_time']) && ($data['theme'] != '1')) {
+            $settings['hide_time'] = false;
+        }
+        if (isset($data['merge_fleets']) && ($data['merge_fleets'] != '1')) {
+            $settings['merge_fleets'] = false;
+        }
+
+        return $settings;
     }
 }
