@@ -171,4 +171,52 @@ class Default_Model_CombatReport
     {
         return $this->_raids;
     }
+
+    /**
+     * Set the time of battle.
+     *
+     * @param DateTime $time
+     *
+     * @return Default_Model_CombatReport
+     */
+    public function setTime(DateTime $time)
+    {
+        $this->_time = $time;
+
+        return $this;
+    }
+
+    /**
+     * Get the time of the battle.
+     *
+     * @return DateTime
+     */
+    public function getTime()
+    {
+        return $this->_time;
+    }
+
+    /**
+     * Add a round to the CR.
+     *
+     * @param Default_Model_CombatRound $round
+     *
+     * @return Default_Model_CombatReport
+     */
+    public function addRound(Default_Model_CombatRound $round)
+    {
+        $this->_rounds[] = $round;
+
+        return $this;
+    }
+
+    /**
+     * Get the rounds
+     *
+     * @return array of {@link Default_Model_CombatRound}'s
+     */
+    public function getRounds()
+    {
+        return $this->_rounds;
+    }
 }

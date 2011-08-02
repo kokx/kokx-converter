@@ -90,6 +90,13 @@ class Default_Reader_CombatReport
      */
     protected $_mergeFleets = true;
 
+    /**
+     * The resulting report.
+     *
+     * @var Default_Model_CombatReport
+     */
+    protected $_report;
+
 
     /**
      * Get all the rounds
@@ -160,22 +167,20 @@ class Default_Reader_CombatReport
             throw new Exception('Bad CR');
         }
 
+        $this->_report = new Default_Model_CombatReport();
+
         $matches = array();
 
-        if (preg_match('#^De volgende vloten kwamen elkaar tegen op \(([0-9]{2}.[0-9]{2}.[0-9]{4}) ([0-9]{2}:[0-9]{2}:[0-9]{2})\):#i', $this->_source, $matches)) {
-            // redesign style
-            $this->_time['date'] = $matches[1];
-            $this->_time['time'] = $matches[2];
+        if (preg_match('#^De volgende vloten kwamen elkaar tegen op \(([0-9]{2}).([0-9]{2}).([0-9]{4}) ([0-9]{2}):([0-9]{2}):([0-9]{2})\):#i', $this->_source, $matches)) {
+            $this->_report->setTime(new DateTime($matches[3] . ":" . $matches[2] . ":" . $matches[1] . " " . $matches[4] . ":" . $matches[5] . ":" . $matches[6]));
         } else {
             throw new Exception('Bad CR');
         }
 
         $this->_source = substr($this->_source, strlen($matches[0]));
 
-        $this->_rounds = array();
-
         while (preg_match('#(Aanvaller|Verdediger) (.*) \[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]#i', $this->_source)) {
-            $this->_rounds[] = $this->_parseRedesignRound();
+            $this->_report->addRound($this->_parseRedesignRound());
         }
 
         $this->_parseResult();
