@@ -33,54 +33,45 @@ class Default_Reader_Raid
 {
 
     /**
-     * The battle's result
-     *
-     * @var array
-     */
-    protected $_raids = array();
-
-
-    /**
-     * Get the battle result
-     *
-     * @return array
-     */
-    public function getRaids()
-    {
-        return $this->_raids;
-    }
-
-    /**
      * Parse a crash report
      *
      * @param string $source
      *
-     * @return Kokx_Parser_Raid
+     * @return array  of {@link Default_Reader_Raid}'s
      */
     public function parse($source)
     {
-        // the source could have multiple CR's
+        $raids = array();
         /**
          * The source only has to contain something like:
          *
-         * 99.552 Metaal, 3.748 Kristal en 17.333 Deuterium
+         *
+         * De aanvaller heeft het gevecht gewonnen! De aanvaller steelt 13.962 metaal, 4.463 kristal en 123.168 deuterium.
+         *
+         * De aanvaller heeft een totaal van 0 eenheden verloren.
+         * De verdediger heeft een totaal van 11.056.000 eenheden verloren.
+         * Op deze coördinaten in de ruimte zweven nu 2.407.800 metaal en 909.000 kristal.
          */
 
-        $regex = '([0-9.]*) Metaal, ([0-9.]*) Kristal en ([0-9.]*) Deuterium';
+        $regex = '([0-9.]*) metaal, ([0-9.]*) kristal en ([0-9.]*) deuterium'
+               . '.*?aanvaller heeft een totaal van ([0-9.]*) eenheden verloren'
+               . '.*?verdediger heeft een totaal van ([0-9.]*) eenheden verloren';
 
         $matches = array();
 
         preg_match_all('/' . $regex . '/i', $source, $matches, PREG_SET_ORDER);
 
         foreach ($matches as $match) {
-            $this->_raids[] = array(
-                'metal'   => (int) str_replace('.', '', $match[1]),
-                'crystal' => (int) str_replace('.', '', $match[2]),
-                'deut'    => (int) str_replace('.', '', $match[3])
+            $raids[] = new Default_Model_Raid(
+                (int) str_replace('.', '', $match[1]),
+                (int) str_replace('.', '', $match[2]),
+                (int) str_replace('.', '', $match[3]),
+                (int) str_replace('.', '', $match[4]),
+                (int) str_replace('.', '', $match[5])
             );
         }
 
 
-        return $this;
+        return $raids;
     }
 }

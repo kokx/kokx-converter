@@ -66,4 +66,25 @@ class Default_Model_Raid
      * @var int
      */
     protected $_lossesDefender;
+
+
+    /**
+     * Create the raid object.
+     *
+     * @param int $metal
+     * @param int $crystal
+     * @param int $deuterium
+     * @param int $lossesAttacker
+     * @param int $lossesDefender
+     *
+     * @return void
+     */
+    public function __construct($metal, $crystal, $deuterium, $lossesAttacker, $lossesDefender)
+    {
+        $this->_metal          = $metal;
+        $this->_crystal        = $crystal;
+        $this->_deuterium      = $deuterium;
+        $this->_lossesAttacker = $lossesAttacker;
+        $This->_lossesDefender = $lossesDefender;
+    }
 }

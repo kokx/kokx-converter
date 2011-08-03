@@ -82,7 +82,7 @@ class Default_Reader_CombatReport
      * @param string $source
      * @param boolean $mergeFleets
      *
-     * @return array
+     * @return Default_Model_CombatReport
      */
     public function parse($source)
     {

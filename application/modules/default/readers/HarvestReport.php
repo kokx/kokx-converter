@@ -37,7 +37,7 @@ class Default_Reader_HarvestReport
      *
      * @param string $source
      *
-     * @return Kokx_Parser_Debris
+     * @return array  of {@link Default_Model_HarvestReport}'s
      */
     public function parse($source)
     {
