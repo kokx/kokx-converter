@@ -33,24 +33,6 @@ class Default_Reader_HarvestReport
 {
 
     /**
-     * The harvest reports
-     *
-     * @var array
-     */
-    protected $_harvest = array();
-
-
-    /**
-     * Get the harvest reports
-     *
-     * @return array
-     */
-    public function getHarvest()
-    {
-        return $this->_harvest;
-    }
-
-    /**
      * Parse a harvest report
      *
      * @param string $source
@@ -59,6 +41,8 @@ class Default_Reader_HarvestReport
      */
     public function parse($source)
     {
+        $reports = array();
+
         /**
          * Example report:
          *
@@ -75,16 +59,16 @@ class Default_Reader_HarvestReport
         preg_match_all('/' . $regex . '/i', $source, $matches, PREG_SET_ORDER);
 
         foreach ($matches as $match) {
-            $this->_harvest[] = array(
-                'recs'         => str_replace('.', '', $match[1]),
-                'storage'      => str_replace('.', '', $match[2]),
-                'fieldmetal'   => str_replace('.', '', $match[3]),
-                'fieldcrystal' => str_replace('.', '', $match[4]),
-                'metal'        => str_replace('.', '', $match[5]),
-                'crystal'      => str_replace('.', '', $match[6])
+            $reports[] = new Default_Model_HarvestReport(
+                (int) str_replace('.', '', $match[1]),
+                (int) str_replace('.', '', $match[2]),
+                (int) str_replace('.', '', $match[3]),
+                (int) str_replace('.', '', $match[4]),
+                (int) str_replace('.', '', $match[5]),
+                (int) str_replace('.', '', $match[6])
             );
         }
 
-        return $this;
+        return $reports;
     }
 }

@@ -72,4 +72,27 @@ class Default_Model_HarvestReport
      * @var int
      */
     protected $_crystal;
+
+
+    /**
+     * Constructor
+     *
+     * @param int $recyclers
+     * @param int $capacity
+     * @param int $fieldMetal
+     * @param int $fieldCrystal
+     * @param int $metal
+     * @param int $crystal
+     *
+     * @return void
+     */
+    public function __construct($recyclers, $capacity, $fieldMetal, $fieldCrystal, $metal, $crystal)
+    {
+        $this->_recyclers    = $recyclers;
+        $this->_capacity     = $capacity;
+        $this->_fieldMetal   = $fieldMetal;
+        $this->_fieldCrystal = $fieldCrystal;
+        $this->_metal        = $metal;
+        $this->_crystal      = $crystal;
+    }
 }
