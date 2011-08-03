@@ -61,6 +61,16 @@ class Default_Model_CombatRound
     }
 
     /**
+     * Get all the attacking fleets
+     *
+     * @return array
+     */
+    public function getAttackers()
+    {
+        return $this->_attackers;
+    }
+
+    /**
      * Add a defending fleet
      *
      * @param Default_Model_Fleet $fleet
@@ -72,5 +82,15 @@ class Default_Model_CombatRound
         $this->_defenders[] = $fleet;
 
         return $this;
+    }
+
+    /**
+     * Get all the defending fleets
+     *
+     * @return array
+     */
+    public function getDefenders()
+    {
+        return $this->_defenders;
     }
 }

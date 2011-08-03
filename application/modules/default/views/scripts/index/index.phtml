@@ -4,11 +4,13 @@
         Incorrect gevechtsrapport
     <? endif; ?>
     <div id="cr-left">
-        <?= $this->formTextarea('report', $this->report, array('id' => 'cr-input')) ?>
+        <?= $this->formTextarea('report', $this->data['report'], array('id' => 'cr-input')) ?>
     </div>
     <div id="cr-right">
-        Titel: <?= $this->formText('title', $this->title, array('style' => 'width: 406px;')) ?><br />
-        <?= $this->formTextarea('output', empty($this->rounds) ? '': $this->render('report/' . $this->theme . '.phtml'), array('id' => 'cr-output')) ?>
+        Titel: <?= $this->formText('title', 'TODO!!!', array('style' => 'width: 406px;')) ?><br />
+        <? $rendered = isset($this->report) ? $this->render('report/' . $this->settings['theme'] . '.phtml') : '' ?>
+        <? /* <pre><?= $rendered ?></pre> */ ?>
+        <?= $this->formTextarea('output', $rendered, array('id' => 'cr-output')) ?>
     </div>
     <div id="cr-clear">&nbsp;</div>
 </div>
@@ -24,32 +26,32 @@
         <table border="0">
             <tr>
                 <td><label for="theme">Skin</label></td>
-                <td><?= $this->formSelect('theme', $this->theme, null, array(
+                <td><?= $this->formSelect('theme', $this->settings['theme'], null, array(
                     'kokx'         => 'kokx',
                     'kokx-nolines' => 'kokx-nolines',
                     'tsjerk'       => 'Albert Fish',
                     'virus'        => 'ViRuS'
                 )) ?></td>
                 <td><label for="hidetime">Verberg de tijd</label></td>
-                <td><?= $this->formCheckbox('hidetime', null, array('checked' => $this->options['hideTime'])) ?></td>
+                <td><?= $this->formCheckbox('hidetime', null, array('checked' => $this->settings['hide_time'])) ?></td>
             </tr>
             <tr>
                 <td><label for="middletext">Tekst in het midden van de CR</label></td>
-                <td><?= $this->formText('middletext', $this->options['middleText']) ?></td>
+                <td><?= $this->formText('middletext', $this->settings['middle_text']) ?></td>
                 <td><label for="merge_fleets">Voeg vloten samen</label></td>
-                <td><?= $this->formCheckbox('merge_fleets', null, array('checked' => $this->options['mergeFleets'])) ?></td>
+                <td><?= $this->formCheckbox('merge_fleets', null, array('checked' => $this->settings['merge_fleets'])) ?></td>
             </tr>
         </table>
         <div>
             <br />
             <hr />
             <h2>Naraids</h2>
-            <?= $this->formTextarea('raids', $this->afterRaids, array('rows' => 5, 'cols' => 100)) ?>
+            <?= $this->formTextarea('raids', $this->data['raids'], array('rows' => 5, 'cols' => 100)) ?>
             <br />
             <br />
             <hr />
             <h2>Puinrapporten</h2>
-            <?= $this->formTextarea('harvest_reports', $this->debrisReports, array('rows' => 5, 'cols' => 100)) ?>
+            <?= $this->formTextarea('harvest_reports', $this->data['harvest_reports'], array('rows' => 5, 'cols' => 100)) ?>
         </div>
     </div>
 </div>

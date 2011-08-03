@@ -65,14 +65,25 @@ class IndexController extends Zend_Controller_Action
 
         $settings = $crService->getDefaultSettings();
 
-        if ($this->getRequest()->isPost()) {
-            $settings = $crService->readSettings($_POST);
-            $report   = $crService->readReport($_POST, $settings);
+        $this->view->data = array(
+            'report' => ''
+        );
+        $this->view->error = false;
 
-            $this->view->report = $report;
-            $this->view->data   = $_POST;
+        if ($this->getRequest()->isPost()) {
+            try {
+                $settings = $crService->readSettings($_POST);
+                $report   = $crService->readReport($_POST, $settings);
+
+                $this->view->report = $report;
+                $this->view->data   = $_POST;
+            } catch (Exception $e) {
+                $this->view->error = true;
+            }
         }
 
         $this->view->settings = $settings;
+
+        $this->view->strictVars(true);
     }
 }

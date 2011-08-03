@@ -42,7 +42,7 @@ class Default_Model_CombatReport
      *
      * @var array
      */
-    protected $_hrs;
+    protected $_hrs = array();
 
     /**
      * Array of {@link Default_Model_Raid}, for raids after the target has been
@@ -50,14 +50,14 @@ class Default_Model_CombatReport
      *
      * @var array
      */
-    protected $_raids;
+    protected $_raids = array();
 
     /**
      * Array of {@link Default_Model_CombatRound}, for founds of the combat.
      *
      * @var array
      */
-    protected $_rounds;
+    protected $_rounds = array();
 
     // properties of a CR
     
@@ -176,7 +176,7 @@ class Default_Model_CombatReport
      *
      * @return Default_Model_Raid
      */
-    public function setRaidReports(array $raids)
+    public function setRaids(array $raids)
     {
         $this->_raids = $raids;
 
@@ -188,7 +188,7 @@ class Default_Model_CombatReport
      *
      * @return array
      */
-    public function getRaidReports()
+    public function getRaids()
     {
         return $this->_raids;
     }
@@ -257,6 +257,16 @@ class Default_Model_CombatReport
         $this->_winner = $winner;
 
         return $this;
+    }
+
+    /**
+     * Get the winner
+     *
+     * @return string
+     */
+    public function getWinner()
+    {
+        return $this->_winner;
     }
 
     /**

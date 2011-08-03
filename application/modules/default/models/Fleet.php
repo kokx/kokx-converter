@@ -89,8 +89,24 @@ class Default_Model_Fleet
      *
      * @return array of {@link Default_Model_Ship}'s
      */
-    public function getShip()
+    public function getShips()
     {
         return $this->_ships;
+    }
+
+    /**
+     * Get a ship by name
+     *
+     * @return Default_Model_Ship
+     */
+    public function getShip($name)
+    {
+        foreach ($this->_ships as $ship) {
+            if ($ship->getName() == $name) {
+                return $ship;
+            }
+        }
+
+        return null;
     }
 }

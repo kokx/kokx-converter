@@ -55,36 +55,6 @@ class Default_Reader_CombatReport
 
 
     /**
-     * Get all the rounds
-     *
-     * @return array
-     */
-    public function getRounds()
-    {
-        return $this->_rounds;
-    }
-
-    /**
-     * Get the battle time
-     *
-     * @return array
-     */
-    public function getTime()
-    {
-        return $this->_time;
-    }
-
-    /**
-     * Get the battle result
-     *
-     * @return array
-     */
-    public function getResult()
-    {
-        return $this->_result;
-    }
-
-    /**
      * Set if we have to merge fleets or not.
      *
      * @param boolean $mergeFleets
@@ -146,7 +116,7 @@ class Default_Reader_CombatReport
             $this->_mergeFleets();
         }
 
-        return $this;
+        return $this->_report;
     }
 
     /**
