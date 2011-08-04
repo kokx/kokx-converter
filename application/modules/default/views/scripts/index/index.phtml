@@ -8,9 +8,7 @@
     </div>
     <div id="cr-right">
         Titel: <?= $this->formText('title', 'TODO!!!', array('style' => 'width: 406px;')) ?><br />
-        <? $rendered = isset($this->report) ? $this->render('report/' . $this->settings['theme'] . '.phtml') : '' ?>
-        <? /* <pre><?= $rendered ?></pre> */ ?>
-        <?= $this->formTextarea('output', $rendered, array('id' => 'cr-output')) ?>
+        <?= $this->formTextarea('output', $this->rendered, array('id' => 'cr-output')) ?>
     </div>
     <div id="cr-clear">&nbsp;</div>
 </div>

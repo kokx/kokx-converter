@@ -29,7 +29,7 @@
  * @package    Default
  * @subpackage Renderer
  */
-abstract class Default_Renderer_RendererAbstract
+abstract class Default_Renderer_RendererAbstract implements Default_Renderer_Renderer
 {
 
     /**
@@ -38,6 +38,35 @@ abstract class Default_Renderer_RendererAbstract
      * @var Default_Model_CombatReport
      */
     public $_report;
+
+    /**
+     * The default Zend_View instance
+     *
+     * @var Zend_View
+     */
+    public $_view;
+
+    /**
+     * The settings
+     *
+     * @var array
+     */
+    public $_settings;
+
+
+    /**
+     * Construct the renderer
+     *
+     * @param array $settings
+     *
+     * @return void
+     *
+     * @todo Read the settings in correctly
+     */
+    public function __construct(array $settings = array())
+    {
+        $this->_settings = $settings;
+    }
 
     /**
      * Render a CR.
@@ -49,6 +78,7 @@ abstract class Default_Renderer_RendererAbstract
     public function render(Default_Model_CombatReport $report)
     {
         $this->_report = $report;
+        $this->getView()->report = $report;
 
         $return = $this->_renderTime();
 
@@ -58,6 +88,29 @@ abstract class Default_Renderer_RendererAbstract
 
         return $return;
     }
+
+    /**
+     * Get the view
+     *
+     * @return Zend_View
+     */
+    public function getView()
+    {
+        if (null === $this->_view) {
+            $this->_view = new Zend_View();
+
+            $this->_view->setScriptPath($this->_getViewScriptPath());
+        }
+
+        return $this->_view;
+    }
+
+    /**
+     * Get the view path.
+     *
+     * @return string
+     */
+    abstract public function _getViewScriptPath();
 
     /**
      * Render the time.

@@ -66,7 +66,7 @@ class Default_Service_CombatReport
     {
         $reader = new Default_Reader_CombatReport();
 
-        $reader->setMergeFleets($settings['merge_fleets']);
+        $reader->setMergeFleets(false /* TODO: change this back: $settings['merge_fleets']*/);
 
         $report = $reader->parse($data['report']);
 

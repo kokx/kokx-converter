@@ -79,6 +79,10 @@ class IndexController extends Zend_Controller_Action
 
                 $this->view->report = $report;
                 $this->view->data   = $_POST;
+
+                $renderer = new Default_Renderer_Kokx($settings);
+
+                $this->view->rendered = $renderer->render($report);
             } catch (Exception $e) {
                 $this->view->error = true;
             }

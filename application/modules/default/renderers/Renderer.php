@@ -29,46 +29,14 @@
  * @package    Default
  * @subpackage Renderer
  */
-class Default_Renderer_Kokx extends Default_Renderer_RendererAbstract
+interface Default_Renderer_Renderer
 {
-
     /**
-     * Get the view path.
+     * Render a CR.
+     *
+     * @param Default_Model_CombatReport $report
      *
      * @return string
      */
-    public function _getViewScriptPath()
-    {
-        return dirname(__FILE__) . DIRECTORY_SEPARATOR . 'kokx';
-    }
-
-    /**
-     * Render the time.
-     *
-     * @return string
-     */
-    public function _renderTime()
-    {
-        return $this->getView()->render('time.phtml');
-    }
-
-    /**
-     * Render the rounds.
-     *
-     * @return string
-     */
-    public function _renderRounds()
-    {
-        return "";
-    }
-
-    /**
-     * Render the result of the battle.
-     *
-     * @return string
-     */
-    public function _renderResult()
-    {
-        return "";
-    }
+    public function render(Default_Model_CombatReport $report);
 }
