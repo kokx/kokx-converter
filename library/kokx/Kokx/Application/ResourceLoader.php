@@ -58,6 +58,10 @@ class Kokx_Application_ResourceLoader extends Zend_Loader_Autoloader_Resource
                 'namespace' => 'Reader',
                 'path'      => 'readers',
             ),
+            'renderer' => array(
+                'namespace' => 'Renderer',
+                'path'      => 'renderers'
+            ),
             'model'   => array(
                 'namespace' => 'Model',
                 'path'      => 'models',
