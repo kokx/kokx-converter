@@ -66,7 +66,9 @@ class IndexController extends Zend_Controller_Action
         $settings = $crService->getDefaultSettings();
 
         $this->view->data = array(
-            'report' => ''
+            'report'          => '',
+            'raids'           => '',
+            'harvest_reports' => ''
         );
         $this->view->error = false;
 
