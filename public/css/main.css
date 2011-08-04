@@ -34,8 +34,8 @@ div#container {
 }
 
 input, select {
-	border: 1px solid #000000;
-	background-color: #2F374C;
+	border: 2px solid #000000;
+	background-color: #3F476C;
 	color: #7B90B8;
 	width: 181px;
 }
@@ -44,14 +44,14 @@ input#submit {
 }
 
 input#title {
-	border: 1px solid #000000;
-	background-color: #1F273C;
-	color: #7B90B8;
+	border: 2px solid #000000;
+	background-color: #3F476C;
+	color: #7BB0D8;
 }
 
 textarea {
-	border: 1px solid #000000;
-	background-color: #1F273C;
+	border: 2px solid #000000;
+	background-color: #3F476C;
 	color: #7B90B8;
 }
 div#cr-container textarea {
