@@ -78,6 +78,7 @@ if ($this->options['hideTime']) {
 <? /* the first round, attackers */ ?>
 <? foreach ($this->rounds[0]['attackers'] as $slot): ?>
     [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?>
+
     [color=red]________________________________________________[/color]
 
     <? foreach ($slot['fleet'] as $ship => $number): ?>
@@ -90,6 +91,7 @@ if ($this->options['hideTime']) {
 <? /* the first round */ ?>
 <? foreach ($this->rounds[0]['defenders'] as $slot): ?>
     [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?>
+
     [color=green]________________________________________________[/color]
 
     <? foreach ($slot['fleet'] as $ship => $number): ?>
@@ -111,6 +113,7 @@ $last = count($this->rounds) - 1;
 /* the last round, attackers */ ?>
 <? foreach ($this->rounds[$last]['attackers'] as $key => $slot): ?>
     [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?>
+
     [color=red]________________________________________________[/color]
 
     <?php
@@ -143,6 +146,7 @@ $last = count($this->rounds) - 1;
 <? /* the last round for the defenders */ ?>
 <? foreach ($this->rounds[$last]['defenders'] as $key => $slot): ?>
     [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?>
+
     [color=green]________________________________________________[/color]
 
     <?php
