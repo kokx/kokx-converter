@@ -21,7 +21,7 @@
  * @package    Index
  */
 
-define('VERSION', '1.3.2');
+define('VERSION', '1.3.3-dev');
 define('LINK', 'http://converter.kokx.nl/');
 
 define('GOOGLE_AD_CLIENT', 'pub-2117246455436779');
@@ -167,7 +167,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['report'])) {
         $view->debris = $debrisParser->parse($_POST['debris_reports'])->getHarvest();
     }
     // skin
-    if (isset($_POST['theme']) && in_array($_POST['theme'], array('kokx', 'kokx-nolines', 'tsjerk', 'virus'))) {
+    if (isset($_POST['theme']) && in_array($_POST['theme'], array('kokx', 'kokx-nolines', 'tsjerk', 'virus', 'nexus'))) {
         $view->theme = $_POST['theme'];
     } else {
         $view->theme = 'kokx';
