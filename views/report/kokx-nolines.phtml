@@ -77,8 +77,7 @@ if ($this->options['hideTime']) {
 
 <? /* the first round, attackers */ ?>
 <? foreach ($this->rounds[0]['attackers'] as $slot): ?>
-    [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
-    Wapens: XXX% Schilden: XXX% Romp beplating: XXX%
+    [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?>
 
     <? foreach ($slot['fleet'] as $ship => $number): ?>
         [color=#FC850C]<?= $ship ?> <?= formatNumber($number) ?>[/color]
@@ -88,8 +87,7 @@ if ($this->options['hideTime']) {
 
 <? /* the first round */ ?>
 <? foreach ($this->rounds[0]['defenders'] as $slot): ?>
-    [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
-    Wapens: XXX% Schilden: XXX% Romp beplating: XXX%
+    [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?>
 
     <? foreach ($slot['fleet'] as $ship => $number): ?>
         [color=#1C84BE]<?= $ship ?> <?= formatNumber($number) ?>[/color]
@@ -108,7 +106,7 @@ $last = count($this->rounds) - 1;
 
 /* the last round, attackers */ ?>
 <? foreach ($this->rounds[$last]['attackers'] as $key => $slot): ?>
-    [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
+    [color=red][b]Aanvaller[/b][/color] <?= $slot['player']['name'] ?>
 
     <?php
     // calculations for the first round
@@ -138,7 +136,7 @@ $last = count($this->rounds) - 1;
 
 <? /* the last round for the defenders */ ?>
 <? foreach ($this->rounds[$last]['defenders'] as $key => $slot): ?>
-    [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?> ([X:XXX:XX])
+    [color=green][b]Verdediger[/b][/color] <?= $slot['player']['name'] ?>
 
     <?php
     // calculations for the first round
