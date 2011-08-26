@@ -20,12 +20,11 @@ $firstFleets = $firstRound->getAttackers();
             <? $oldFleet = $firstFleets[$key]; ?>
             <? /* we have old data about the fleet */ ?>
             <? foreach ($oldFleet->getShips() as $ship): ?>
-                <? $newCount = ($fleet->getShip($ship->getName()) != null) ? $fleet->getShip($ship->getName())->getCount() : 0;  ?>
-                [color=#FC850C]<?= $ship->getName(); ?> <?= $this->formatNumber($ship->getCount()) ?> [b]( -<?= $this->formatNumber($ship->getCount() - $newCount) ?> )[/b][/color]
+                <?= $this->formatShip(true, $ship, $fleet); ?>
             <? endforeach; ?>
         <? else: ?>
             <? foreach ($fleet->getShips() as $ship): ?>
-                [color=#FC850C]<?= $ship->getName() ?> <?= $this->formatNumber($ship->getCount()) ?>[/color]
+                <?= $this->formatShip(true, $ship); ?>
             <? endforeach; ?>
         <? endif; ?>
     <? endif; ?>
@@ -46,12 +45,11 @@ $firstFleets = $firstRound->getDefenders(); ?>
             <? $oldFleet = $firstFleets[$key]; ?>
             <? /* we have old data about the fleet */ ?>
             <? foreach ($oldFleet->getShips() as $ship): ?>
-                <? $newCount = ($fleet->getShip($ship->getName()) != null) ? $fleet->getShip($ship->getName())->getCount() : 0;  ?>
-                [color=#1C84BE]<?= $ship->getName(); ?> <?= $this->formatNumber($ship->getCount()) ?> [b]( -<?= $this->formatNumber($ship->getCount() - $newCount) ?> )[/b][/color]
+                <?= $this->formatShip(false, $ship, $fleet); ?>
             <? endforeach; ?>
         <? else: ?>
             <? foreach ($fleet->getShips() as $ship): ?>
-                [color=#1C84BE]<?= $ship->getName() ?> <?= $this->formatNumber($ship->getCount()) ?>[/color]
+                <?= $this->formatShip(false, $ship); ?>
             <? endforeach; ?>
         <? endif; ?>
     <? endif; ?>
