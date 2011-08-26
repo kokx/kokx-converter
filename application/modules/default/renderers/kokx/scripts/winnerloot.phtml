@@ -7,9 +7,9 @@
 <? endif; ?>
 De aanvaller steelt:
 <? if ($this->report->getWinner() == Default_Model_CombatReport::ATTACKER): ?>
-	[color=#3183E7][b]<?= $this->formatNumber($this->report->getMetal()) ?>[/b][/color] Metaal, [color=#3183E7][b]<?= $this->formatNumber($this->report->getCrystal()) ?>[/b][/color] Kristal en [color=#3183E7][b]<?= $this->formatNumber($this->report->getDeuterium()) ?>[/b][/color] Deuterium
+	<?= $this->colorNumber($this->report->getMetal()) ?> Metaal, <?= $this->colorNumber($this->report->getCrystal()) ?> Kristal en <?= $this->colorNumber($this->report->getDeuterium()) ?> Deuterium
 	<? foreach ($this->report->getRaids() as $raid): ?>
-	    [color=#3183E7][b]<?= $this->formatNumber($raid['metal']) ?>[/b][/color] Metaal, [color=#3183E7][b]<?= $this->formatNumber($raid['crystal']) ?>[/b][/color] Kristal en [color=#3183E7][b]<?= $this->formatNumber($raid['deut']) ?>[/b][/color] Deuterium
+	    <?= $this->colorNumber($raid->getMetal()) ?> Metaal, <?= $this->colorNumber($raid->getCrystal()) ?> Kristal en <?= $this->colorNumber($raid->getDeuterium()) ?> Deuterium
 	<? endforeach; ?>
 <? else: ?>
 	- Metaal, - Kristal en - Deuterium

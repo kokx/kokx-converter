@@ -1,15 +1,15 @@
-<? if (!empty($this->debris)): ?>
-	<? foreach ($this->debris as $debris): ?>
+<? if (count($this->report->getHarvestReports()) > 0): ?>
+	<? foreach ($this->report->getHarvestReports() as $hr): ?>
 		_____________________________________
 
-		Je [color=#FC850C][b]<?= $this->formatNumber($debris['recs']) ?>[/b][/color] recyclers hebben een totale opslagcapaciteit van [color=#FC850C][b]<?= $this->formatNumber($debris['storage']) ?>[/b][/color].
-		In het bestemmingsveld zweven [color=#FC850C][b]<?= $this->formatNumber($debris['fieldmetal']) ?>[/b][/color] metaal en [color=#FC850C][b]<?= $this->formatNumber($debris['fieldcrystal']) ?>[/b][/color] kristal in de ruimte.
-		Je hebt [color=#FC850C][b]<?= $this->formatNumber($debris['metal']) ?>[/b][/color] metaal en [color=#FC850C][b]<?= $this->formatNumber($debris['crystal']) ?>[/b][/color] kristal opgehaald.
+		Je <?= $this->colorNumber($hr->getRecyclers(), '#FC850C') ?> recyclers hebben een totale opslagcapaciteit van <?= $this->colorNumber($hr->getCapacity(), '#FC850C') ?>.
+		In het bestemmingsveld zweven <?= $this->colorNumber($hr->getFieldMetal(), '#FC850C') ?> metaal en <?= $this->colorNumber($hr->getFieldCrystal(), '#FC850C') ?> kristal in de ruimte.
+		Je hebt <?= $this->colorNumber($hr->getMetal(), '#FC850C') ?> metaal en <?= $this->colorNumber($hr->getCrystal(), '#FC850C') ?> kristal opgehaald.
 
-		<? $percent = ($debris['metal'] + $debris['crystal']) / ($debris['fieldmetal'] + $debris['fieldcrystal']) * 100 ?>
-		Opgehaald: [b][color=#3183E7]<?= round($percent) ?>%[/color][/b]
+		<? $percent = ($hr->getMetal() + $hr->getCrystal()) / ($hr->getFieldMetal() + $hr->getFieldCrystal()) * 100 ?>
+		Opgehaald: <?= $this->colorNumber($percent, '#FC850C') ?>%
     <? endforeach; ?>
     __________________________
 
-	Er is een totaal van [color=#FC850C][b]<?= $this->formatNumber($this->totalDebris) ?>[/b][/color] Eenheden puin opgehaald.
+	Er is een totaal van <?= $this->colorNumber($this->totalDebris, '#FC850C') ?> Eenheden puin opgehaald.
 <? endif; ?>

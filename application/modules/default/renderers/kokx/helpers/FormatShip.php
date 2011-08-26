@@ -45,9 +45,9 @@ class Default_Renderer_Kokx_Helper_FormatShip extends Zend_View_Helper_Abstract
     {
         if (null === $fleet) {
             if ($attacker) {
-                return "[color=#FC850C]{$ship->getName()} {$this->view->formatNumber($ship->getCount())}[/color]";
+                return "[color=#FC850C]{$ship->getName()} {$this->view->formatNumber($ship->getCount())}[/color]\n";
             } else {
-                return "[color=#1C84BE]{$ship->getName()} {$this->view->formatNumber($ship->getCount())}[/color]";
+                return "[color=#1C84BE]{$ship->getName()} {$this->view->formatNumber($ship->getCount())}[/color]\n";
             }
         } else {
             /*
@@ -57,10 +57,10 @@ class Default_Renderer_Kokx_Helper_FormatShip extends Zend_View_Helper_Abstract
             $newCount = ($fleet->getShip($ship->getName()) != null) ? $fleet->getShip($ship->getName())->getCount() : 0;
             if ($attacker) {
                 return "[color=#FC850C]{$ship->getName()} {$this->view->formatNumber($ship->getCount())} "
-                     . "[b]( -{$this->view->formatNumber($ship->getCount() - $newCount)} )[/b][/color]";
+                     . "[b]( -{$this->view->formatNumber($ship->getCount() - $newCount)} )[/b][/color]\n";
             } else {
                 return "[color=#1C84BE]{$ship->getName()} {$this->view->formatNumber($ship->getCount())} "
-                     . "[b]( -{$this->view->formatNumber($ship->getCount() - $newCount)} )[/b][/color]";
+                     . "[b]( -{$this->view->formatNumber($ship->getCount() - $newCount)} )[/b][/color]\n";
             }
         }
     }

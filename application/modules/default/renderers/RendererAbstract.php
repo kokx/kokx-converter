@@ -178,6 +178,16 @@ abstract class Default_Renderer_RendererAbstract implements Default_Renderer_Ren
      */
     public function _renderResult()
     {
+        $this->getView()->totalDebris = 0;
+        foreach ($this->_report->getHarvestReports() as $hr) {
+            $this->getView()->totalDebris += $hr->getMetal() + $hr->getCrystal();
+        }
+
+        $this->getView()->totalRaids = $this->_report->getMetal() + $this->_report->getCrystal() + $this->_report->getDeuterium();
+        foreach ($this->_report->getRaids() as $raid) {
+            $this->getView()->totalRaids += $raid->getMetal() + $raid->getCrystal() + $raid->getDeuterium();
+        }
+
         return $this->_renderWinnerLoot()
              . $this->_renderLossesMoon()
              . $this->_renderDebris()

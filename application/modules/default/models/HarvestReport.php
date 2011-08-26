@@ -95,4 +95,64 @@ class Default_Model_HarvestReport
         $this->_metal        = $metal;
         $this->_crystal      = $crystal;
     }
+
+    /**
+     * Get the number of recyclers.
+     *
+     * @return int
+     */
+    public function getRecyclers()
+    {
+        return $this->_recyclers;
+    }
+
+    /**
+     * Get the capacity.
+     *
+     * @return int
+     */
+    public function getCapacity()
+    {
+        return $this->_capacity;
+    }
+
+    /**
+     * Get the metal in the field.
+     *
+     * @return int
+     */
+    public function getFieldMetal()
+    {
+        return $this->_fieldMetal;
+    }
+
+    /**
+     * Get the crystal in the field.
+     *
+     * @return int
+     */
+    public function getFieldCrystal()
+    {
+        return $this->_fieldCrystal;
+    }
+
+    /**
+     * Get the metal recycled.
+     *
+     * @return int
+     */
+    public function getMetal()
+    {
+        return $this->_metal;
+    }
+
+    /**
+     * Get the crystal recycled.
+     *
+     * @return int
+     */
+    public function getCrystal()
+    {
+        return $this->_crystal;
+    }
 }

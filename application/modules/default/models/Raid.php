@@ -87,4 +87,54 @@ class Default_Model_Raid
         $this->_lossesAttacker = $lossesAttacker;
         $This->_lossesDefender = $lossesDefender;
     }
+
+    /**
+     * Get the stolen metal.
+     *
+     * @return int
+     */
+    public function getMetal()
+    {
+        return $this->_metal;
+    }
+
+    /**
+     * Get the stolen crystal.
+     *
+     * @return int
+     */
+    public function getCrystal()
+    {
+        return $this->_crystal;
+    }
+
+    /**
+     * Get the stolen deuterium.
+     *
+     * @return int
+     */
+    public function getDeuterium()
+    {
+        return $this->_deuterium;
+    }
+
+    /**
+     * Get the attacker's losses.
+     *
+     * @return int
+     */
+    public function getLossesAttacker()
+    {
+        return $this->_lossesAttacker;
+    }
+
+    /**
+     * Get the defender's losses.
+     *
+     * @return int
+     */
+    public function getLossesDefender()
+    {
+        return $this->_lossesDefender;
+    }
 }
