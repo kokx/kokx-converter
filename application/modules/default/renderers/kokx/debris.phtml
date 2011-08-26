@@ -1,6 +1,5 @@
 <? if (!empty($this->debris)): ?>
 	<? foreach ($this->debris as $debris): ?>
-		<? $totalDebris += $debris['metal'] + $debris['crystal'] ?>
 		_____________________________________
 
 		Je [color=#FC850C][b]<?= $this->renderer->formatNumber($debris['recs']) ?>[/b][/color] recyclers hebben een totale opslagcapaciteit van [color=#FC850C][b]<?= $this->renderer->formatNumber($debris['storage']) ?>[/b][/color].
@@ -12,5 +11,5 @@
     <? endforeach; ?>
     __________________________
 
-	Er is een totaal van [color=#FC850C][b]<?= $this->renderer->formatNumber($totalDebris) ?>[/b][/color] Eenheden puin opgehaald.
+	Er is een totaal van [color=#FC850C][b]<?= $this->renderer->formatNumber($this->totalDebris) ?>[/b][/color] Eenheden puin opgehaald.
 <? endif; ?>

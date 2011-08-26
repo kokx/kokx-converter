@@ -1,6 +1,6 @@
 [align=center]De volgende vloten kwamen elkaar tegen op <?php
 $time = $this->report->getTime();
-if ($this->settings['hide_time']) {
+if ($this->hideTime) {
     echo $time->format('d-m-Y --:--:--');
 } else {
     echo $time->format('d-m-Y H:i:s');
