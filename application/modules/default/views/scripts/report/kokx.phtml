@@ -133,7 +133,7 @@ $firstRound = $rounds[0]->getAttackers();
     <? elseif(isset($oldFleet)): ?>
     	<? foreach ($oldFleet->getShips() as $ship): ?>
             <? $newCount = ($fleet->getShip($ship->getName()) != null) ? $fleet->getShip($ship->getName())->getCount() : 0;  ?>
-            [color=#1C84AE]<?= $ship->getName(); ?> <?= formatNumber($ship->getCount()) ?> [b]( -<?= formatNumber($ship->getCount() - $newCount) ?> )[/b][/color]
+            [color=#FC850C]<?= $ship->getName(); ?> <?= formatNumber($ship->getCount()) ?> [b]( -<?= formatNumber($ship->getCount() - $newCount) ?> )[/b][/color]
         <? endforeach; ?>
     <? else: ?>
         <? foreach ($fleet as $ship): ?>

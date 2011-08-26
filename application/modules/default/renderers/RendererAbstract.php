@@ -100,9 +100,23 @@ abstract class Default_Renderer_RendererAbstract implements Default_Renderer_Ren
             $this->_view = new Zend_View();
 
             $this->_view->setScriptPath($this->_getViewScriptPath());
+
+            $this->_view->renderer = $this;
         }
 
         return $this->_view;
+    }
+
+    /**
+     * Format a number.
+     *
+     * @param int
+     *
+     * @return string
+     */
+    public function formatNumber($number)
+    {
+        return number_format($number, 0, ',', '.');
     }
 
     /**
@@ -110,26 +124,26 @@ abstract class Default_Renderer_RendererAbstract implements Default_Renderer_Ren
      *
      * @return string
      */
-    abstract public function _getViewScriptPath();
+    abstract protected function _getViewScriptPath();
 
     /**
      * Render the time.
      *
      * @return string
      */
-    abstract public function _renderTime();
+    abstract protected function _renderTime();
 
     /**
      * Render the rounds.
      *
      * @return string
      */
-    abstract public function _renderRounds();
+    abstract protected function _renderRounds();
 
     /**
      * Render the result of the battle.
      *
      * @return string
      */
-    abstract public function _renderResult();
+    abstract protected function _renderResult();
 }

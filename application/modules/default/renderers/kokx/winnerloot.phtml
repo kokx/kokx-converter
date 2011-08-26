@@ -1,0 +1,17 @@
+<? if ($this->report->getWinner() == Default_Model_CombatReport::DRAW): ?>
+	Het gevecht eindigt in een remise.
+<? elseif ($this->report->getWinner() == Default_Model_CombatReport::ATTACKER): ?>
+	De aanvaller heeft het gevecht gewonnen!
+<? else: ?>
+	De verdediger heeft het gevecht gewonnen!
+<? endif; ?>
+De aanvaller steelt:
+<? if ($this->report->getWinner() == Default_Model_CombatReport::ATTACKER): ?>
+	[color=#3183E7][b]<?= $this->renderer->formatNumber($this->report->getMetal()) ?>[/b][/color] Metaal, [color=#3183E7][b]<?= $this->renderer->formatNumber($this->report->getCrystal()) ?>[/b][/color] Kristal en [color=#3183E7][b]<?= $this->renderer->formatNumber($this->report->getDeuterium()) ?>[/b][/color] Deuterium
+	<? foreach ($this->report->getRaids() as $raid): ?>
+	    [color=#3183E7][b]<?= $this->renderer->formatNumber($raid['metal']) ?>[/b][/color] Metaal, [color=#3183E7][b]<?= $this->renderer->formatNumber($raid['crystal']) ?>[/b][/color] Kristal en [color=#3183E7][b]<?= $this->renderer->formatNumber($raid['deut']) ?>[/b][/color] Deuterium
+	<? endforeach; ?>
+<? else: ?>
+	- Metaal, - Kristal en - Deuterium
+<? endif; ?>
+

@@ -1,0 +1,34 @@
+<? if ($this->totalRaids > 0): ?>
+	De aanvaller heeft een totaal van [color=#FC850C][b]<?= $this->renderer->formatNumber($this->totalRaids, '#FC850C') ?>[/b][/color] Eenheden gestolen.
+<? endif; ?>
+	__________________
+
+	[color=#3183E7][size=16][b]Totale samenvatting winst/verlies:[/b][/size][/color]
+<? if ($this->report->getWinner() == Default_Model_CombatReport::ATTACKER): ?>
+<?php
+// calculate the result
+$attackerResult = $this->totalDebris + $this->totalRaids - $this->report->getLossesAttacker();
+$defenderResult = $this->report->getLossesDefender();
+?>
+	De aanvaller heeft [color=#FC850C][b]<?= $this->renderer->formatNumber(abs($attackerResult), '#FC850C') ?>[/b][/color] Eenheden <?= ($attackerResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
+	De verdediger heeft [color=#FC850C][b]<?= $this->renderer->formatNumber($defenderResult, '#FC850C') ?>[/b][/color] Eenheden verlies gemaakt.
+<? elseif ($this->report->getWinner() == Default_Model_CombatReport::DRAW): ?>
+<?php
+// calculate the result
+$attackerResult = $this->totalDebris + $this->totalRaids - $this->report->getLossesAttacker();
+$defenderResult = $this->report->getLossesDefender();
+?>
+    De aanvaller heeft [color=#FC850C][b]<?= $this->renderer->formatNumber(abs($attackerResult), '#FC850C') ?>[/b][/color] Eenheden <?= ($attackerResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
+    De verdediger heeft [color=#FC850C][b]<?= $this->renderer->formatNumber($defenderResult, '#FC850C') ?>[/b][/color] Eenheden verlies gemaakt.
+<? else: ?>
+<?php
+// calculate the result
+$attackerResult = $this->report->getLossesAttacker();
+$defenderResult = $this->totalDebris - $this->report->getLossesDefender();
+?>
+	De aanvaller heeft [color=#FC850C][b]<?= $this->renderer->formatNumber($attackerResult, '#FC850C') ?>[/b][/color] Eenheden verlies gemaakt.
+	De verdediger heeft [color=#FC850C][b]<?= $this->renderer->formatNumber(abs($defenderResult), '#FC850C') ?>[/b][/color] Eenheden <?= ($defenderResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
+<? endif; ?>
+
+<? /* and a link to the Converter site*/ ?>
+[size=10][url=<?= LINK ?>]Converted by Kokx's CR Converter <?= VERSION ?> (skin: kokx)[/url][/size][/align]

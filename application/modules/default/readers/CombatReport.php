@@ -176,7 +176,7 @@ class Default_Reader_CombatReport
                 $numbers = explode("\t", trim($matches[11]));
 
                 foreach ($ships as $key => $ship) {
-                    $fleet->addShip(new Default_Model_Ship($ship, $numbers[$key]));
+                    $fleet->addShip(new Default_Model_Ship($ship, $this->_convertToInt($numbers[$key])));
                 }
             }
 
@@ -331,5 +331,17 @@ class Default_Reader_CombatReport
             }
         }
         return $fleet1;
+    }
+
+    /**
+     * Convert to integer.
+     *
+     * @param string $number
+     *
+     * @return int
+     */
+    protected function _convertToInt($number)
+    {
+        return (int) str_replace('.', '', $number);
     }
 }
