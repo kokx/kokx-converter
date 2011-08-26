@@ -2,14 +2,14 @@
 	<? foreach ($this->debris as $debris): ?>
 		_____________________________________
 
-		Je [color=#FC850C][b]<?= $this->renderer->formatNumber($debris['recs']) ?>[/b][/color] recyclers hebben een totale opslagcapaciteit van [color=#FC850C][b]<?= $this->renderer->formatNumber($debris['storage']) ?>[/b][/color].
-		In het bestemmingsveld zweven [color=#FC850C][b]<?= $this->renderer->formatNumber($debris['fieldmetal']) ?>[/b][/color] metaal en [color=#FC850C][b]<?= $this->renderer->formatNumber($debris['fieldcrystal']) ?>[/b][/color] kristal in de ruimte.
-		Je hebt [color=#FC850C][b]<?= $this->renderer->formatNumber($debris['metal']) ?>[/b][/color] metaal en [color=#FC850C][b]<?= $this->renderer->formatNumber($debris['crystal']) ?>[/b][/color] kristal opgehaald.
+		Je [color=#FC850C][b]<?= $this->formatNumber($debris['recs']) ?>[/b][/color] recyclers hebben een totale opslagcapaciteit van [color=#FC850C][b]<?= $this->formatNumber($debris['storage']) ?>[/b][/color].
+		In het bestemmingsveld zweven [color=#FC850C][b]<?= $this->formatNumber($debris['fieldmetal']) ?>[/b][/color] metaal en [color=#FC850C][b]<?= $this->formatNumber($debris['fieldcrystal']) ?>[/b][/color] kristal in de ruimte.
+		Je hebt [color=#FC850C][b]<?= $this->formatNumber($debris['metal']) ?>[/b][/color] metaal en [color=#FC850C][b]<?= $this->formatNumber($debris['crystal']) ?>[/b][/color] kristal opgehaald.
 
 		<? $percent = ($debris['metal'] + $debris['crystal']) / ($debris['fieldmetal'] + $debris['fieldcrystal']) * 100 ?>
 		Opgehaald: [b][color=#3183E7]<?= round($percent) ?>%[/color][/b]
     <? endforeach; ?>
     __________________________
 
-	Er is een totaal van [color=#FC850C][b]<?= $this->renderer->formatNumber($this->totalDebris) ?>[/b][/color] Eenheden puin opgehaald.
+	Er is een totaal van [color=#FC850C][b]<?= $this->formatNumber($this->totalDebris) ?>[/b][/color] Eenheden puin opgehaald.
 <? endif; ?>

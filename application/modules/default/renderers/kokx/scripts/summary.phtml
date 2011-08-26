@@ -1,5 +1,5 @@
 <? if ($this->totalRaids > 0): ?>
-	De aanvaller heeft een totaal van [color=#FC850C][b]<?= $this->renderer->formatNumber($this->totalRaids, '#FC850C') ?>[/b][/color] Eenheden gestolen.
+	De aanvaller heeft een totaal van [color=#FC850C][b]<?= $this->formatNumber($this->totalRaids, '#FC850C') ?>[/b][/color] Eenheden gestolen.
 <? endif; ?>
 	__________________
 
@@ -10,24 +10,24 @@
 $attackerResult = $this->totalDebris + $this->totalRaids - $this->report->getLossesAttacker();
 $defenderResult = $this->report->getLossesDefender();
 ?>
-	De aanvaller heeft [color=#FC850C][b]<?= $this->renderer->formatNumber(abs($attackerResult), '#FC850C') ?>[/b][/color] Eenheden <?= ($attackerResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
-	De verdediger heeft [color=#FC850C][b]<?= $this->renderer->formatNumber($defenderResult, '#FC850C') ?>[/b][/color] Eenheden verlies gemaakt.
+	De aanvaller heeft [color=#FC850C][b]<?= $this->formatNumber(abs($attackerResult), '#FC850C') ?>[/b][/color] Eenheden <?= ($attackerResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
+	De verdediger heeft [color=#FC850C][b]<?= $this->formatNumber($defenderResult, '#FC850C') ?>[/b][/color] Eenheden verlies gemaakt.
 <? elseif ($this->report->getWinner() == Default_Model_CombatReport::DRAW): ?>
 <?php
 // calculate the result
 $attackerResult = $this->totalDebris + $this->totalRaids - $this->report->getLossesAttacker();
 $defenderResult = $this->report->getLossesDefender();
 ?>
-    De aanvaller heeft [color=#FC850C][b]<?= $this->renderer->formatNumber(abs($attackerResult), '#FC850C') ?>[/b][/color] Eenheden <?= ($attackerResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
-    De verdediger heeft [color=#FC850C][b]<?= $this->renderer->formatNumber($defenderResult, '#FC850C') ?>[/b][/color] Eenheden verlies gemaakt.
+    De aanvaller heeft [color=#FC850C][b]<?= $this->formatNumber(abs($attackerResult), '#FC850C') ?>[/b][/color] Eenheden <?= ($attackerResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
+    De verdediger heeft [color=#FC850C][b]<?= $this->formatNumber($defenderResult, '#FC850C') ?>[/b][/color] Eenheden verlies gemaakt.
 <? else: ?>
 <?php
 // calculate the result
 $attackerResult = $this->report->getLossesAttacker();
 $defenderResult = $this->totalDebris - $this->report->getLossesDefender();
 ?>
-	De aanvaller heeft [color=#FC850C][b]<?= $this->renderer->formatNumber($attackerResult, '#FC850C') ?>[/b][/color] Eenheden verlies gemaakt.
-	De verdediger heeft [color=#FC850C][b]<?= $this->renderer->formatNumber(abs($defenderResult), '#FC850C') ?>[/b][/color] Eenheden <?= ($defenderResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
+	De aanvaller heeft [color=#FC850C][b]<?= $this->formatNumber($attackerResult, '#FC850C') ?>[/b][/color] Eenheden verlies gemaakt.
+	De verdediger heeft [color=#FC850C][b]<?= $this->formatNumber(abs($defenderResult), '#FC850C') ?>[/b][/color] Eenheden <?= ($defenderResult > 0) ? 'winst' : 'verlies' ?> gemaakt.
 <? endif; ?>
 
 <? /* and a link to the Converter site*/ ?>

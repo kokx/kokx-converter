@@ -122,18 +122,6 @@ abstract class Default_Renderer_RendererAbstract implements Default_Renderer_Ren
     }
 
     /**
-     * Format a number.
-     *
-     * @param int
-     *
-     * @return string
-     */
-    public function formatNumber($number)
-    {
-        return number_format($number, 0, ',', '.');
-    }
-
-    /**
      * Render the time.
      *
      * @return string

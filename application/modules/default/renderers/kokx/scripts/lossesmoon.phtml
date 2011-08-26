@@ -1,7 +1,7 @@
-De aanvaller heeft een totaal van [color=#3183E7][b]<?= $this->renderer->formatNumber($this->report->getLossesAttacker()) ?>[/b][/color] Eenheden verloren.
-De verdediger heeft een totaal van [color=#3183E7][b]<?= $this->renderer->formatNumber($this->report->getLossesDefender()) ?>[/b][/color] Eenheden verloren.
-Op deze coördinaten in de ruimte zweven nu [color=#3183E7][b]<?= $this->renderer->formatNumber($this->report->getDebrisMetal()) ?>[/b][/color] Metaal en [color=#3183E7][b]<?= $this->renderer->formatNumber($this->report->getDebrisCrystal()) ?>[/b][/color] Kristal.
+De aanvaller heeft een totaal van [color=#3183E7][b]<?= $this->formatNumber($this->report->getLossesAttacker()) ?>[/b][/color] Eenheden verloren.
+De verdediger heeft een totaal van [color=#3183E7][b]<?= $this->formatNumber($this->report->getLossesDefender()) ?>[/b][/color] Eenheden verloren.
+Op deze coördinaten in de ruimte zweven nu [color=#3183E7][b]<?= $this->formatNumber($this->report->getDebrisMetal()) ?>[/b][/color] Metaal en [color=#3183E7][b]<?= $this->formatNumber($this->report->getDebrisCrystal()) ?>[/b][/color] Kristal.
 <? if ($this->report->getMoonChance() > 0): ?>
-	De kans dat een maan ontstaat uit het puin is [color=#3183E7][b]<?= $this->renderer->formatNumber($this->report->getMoonChance()) ?> %[/b][/color]
+	De kans dat een maan ontstaat uit het puin is [color=#3183E7][b]<?= $this->formatNumber($this->report->getMoonChance()) ?> %[/b][/color]
 <? endif; ?>
 
