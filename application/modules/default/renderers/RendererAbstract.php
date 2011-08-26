@@ -69,11 +69,18 @@ abstract class Default_Renderer_RendererAbstract implements Default_Renderer_Ren
     }
 
     /**
+     * Get the view prefix.
+     *
+     * @return string
+     */
+    abstract protected function _getViewBasePrefix();
+
+    /**
      * Get the view path.
      *
      * @return string
      */
-    abstract protected function _getViewScriptPath();
+    abstract protected function _getViewBasePath();
 
     /**
      * Render a CR.
@@ -106,7 +113,7 @@ abstract class Default_Renderer_RendererAbstract implements Default_Renderer_Ren
         if (null === $this->_view) {
             $this->_view = new Zend_View(array('strictVars' => true));
 
-            $this->_view->setScriptPath($this->_getViewScriptPath());
+            $this->_view->setBasePath($this->_getViewBasePath(), $this->_getViewBasePrefix());
 
             $this->_view->renderer = $this;
         }

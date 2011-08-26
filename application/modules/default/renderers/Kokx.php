@@ -33,13 +33,22 @@ class Default_Renderer_Kokx extends Default_Renderer_RendererAbstract
 {
 
     /**
+     * Get the view base prefix
+     *
+     * @return string
+     */
+    public function _getViewBasePrefix()
+    {
+        return 'Default_Renderer_Kokx';
+    }
+
+    /**
      * Get the view path.
      *
      * @return string
      */
-    public function _getViewScriptPath()
+    public function _getViewBasePath()
     {
         return dirname(__FILE__) . DIRECTORY_SEPARATOR . 'kokx';
     }
-
 }
