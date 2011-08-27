@@ -1,6 +1,6 @@
 De aanvaller heeft een totaal van <?= $this->colorNumber($this->report->getLossesAttacker()) ?> Eenheden verloren.
 De verdediger heeft een totaal van <?= $this->colorNumber($this->report->getLossesDefender()) ?> Eenheden verloren.
-Op deze coördinaten in de ruimte zweven nu <?= $this->colorNumber($this->report->getDebrisMetal()) ?> Metaal en <?= $this->colorNumber($this->report->getDebrisCrystal()) ?> Kristal.
+Op deze coordinaten in de ruimte zweven nu <?= $this->colorNumber($this->report->getDebrisMetal()) ?> Metaal en <?= $this->colorNumber($this->report->getDebrisCrystal()) ?> Kristal.
 <? if ($this->report->getMoonChance() > 0): ?>
 	De kans dat een maan ontstaat uit het puin is <?= $this->colorNumber($this->report->getMoonChance()) ?> %
 <? endif; ?>
