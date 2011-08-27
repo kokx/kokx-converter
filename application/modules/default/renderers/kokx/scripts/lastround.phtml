@@ -10,11 +10,11 @@ $firstFleets = $firstRound->getAttackers();
 
 <? /* attackers */ ?>
 <? foreach ($lastRound->getAttackers() as $key => $fleet): ?>
-    [color=red][b]Aanvaller[/b][/color] <?= $fleet->getPlayer() . "\n" ?>
+    [color=red][b]<?= $this->translate("Attacker") ?>[/b][/color] <?= $fleet->getPlayer() . "\n" ?>
     [color=red]________________________________________________[/color]
 
     <? if (count($fleet->getShips()) < 1): ?>
-        [b]Vernietigd![/b]
+    [b]<?= $this->translate("Destroyed!") ?>[/b]
     <? else: ?>
         <? if (isset($firstFleets[$key])): ?>
             <? $oldFleet = $firstFleets[$key]; ?>
@@ -35,11 +35,11 @@ $firstFleets = $firstRound->getAttackers();
 <? /* defenders */
 $firstFleets = $firstRound->getDefenders(); ?>
 <? foreach ($lastRound->getDefenders() as $key => $fleet): ?>
-    [color=green][b]Verdediger[/b][/color] <?= $fleet->getPlayer() . "\n" ?>
+    [color=green][b]<?= $this->translate("Defender") ?>[/b][/color] <?= $fleet->getPlayer() . "\n" ?>
     [color=green]________________________________________________[/color]
 
     <? if (count($fleet->getShips()) < 1): ?>
-        [b]Vernietigd![/b]
+    [b]<?= $this->translate("Destroyed!") ?>[/b]
     <? else: ?>
         <? if (isset($firstFleets[$key])): ?>
             <? $oldFleet = $firstFleets[$key]; ?>

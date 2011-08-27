@@ -1,17 +1,17 @@
 <? if ($this->report->getWinner() == Default_Model_CombatReport::DRAW): ?>
-	Het gevecht eindigt in een remise.
+    <?= $this->translate("The battle ends in a draw.") . "\n" ?>
 <? elseif ($this->report->getWinner() == Default_Model_CombatReport::ATTACKER): ?>
-	De aanvaller heeft het gevecht gewonnen!
+    <?= $this->translate("The attacker has won the battle!") . "\n" ?>
 <? else: ?>
-	De verdediger heeft het gevecht gewonnen!
+    <?= $this->translate("The defender has won the battle!") . "\n" ?>
 <? endif; ?>
-De aanvaller steelt:
+<?= $this->translate("The attacker captured:") . "\n" ?>
 <? if ($this->report->getWinner() == Default_Model_CombatReport::ATTACKER): ?>
-	<?= $this->colorNumber($this->report->getMetal()) ?> Metaal, <?= $this->colorNumber($this->report->getCrystal()) ?> Kristal en <?= $this->colorNumber($this->report->getDeuterium()) ?> Deuterium
+<?= $this->colorNumber($this->report->getMetal()) ?> <?= $this->translate("metal") ?>, <?= $this->colorNumber($this->report->getCrystal()) ?> <?= $this->translate("crystal") ?> <?= $this->translate("and") ?> <?= $this->colorNumber($this->report->getDeuterium()) ?> <?= $this->translate("deuterium") ?>
 	<? foreach ($this->report->getRaids() as $raid): ?>
-	    <?= $this->colorNumber($raid->getMetal()) ?> Metaal, <?= $this->colorNumber($raid->getCrystal()) ?> Kristal en <?= $this->colorNumber($raid->getDeuterium()) ?> Deuterium
+    <?= $this->colorNumber($raid->getMetal()) ?> <?= $this->translate("metal") ?>, <?= $this->colorNumber($raid->getCrystal()) ?> <?= $this->translate("crystal") ?> <?= $this->translate("and") ?> <?= $this->colorNumber($raid->getDeuterium()) ?> <?= $this->translate("deuterium") ?>
 	<? endforeach; ?>
 <? else: ?>
-	- Metaal, - Kristal en - Deuterium
+- <?= $this->translate("metal") ?>, - <?= $this->translate("crystal") ?> <?= $this->translate("and") ?> - <?= $this->translate("deuterium") ?>
 <? endif; ?>
 

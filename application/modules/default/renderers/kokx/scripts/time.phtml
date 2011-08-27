@@ -1,4 +1,5 @@
-[align=center]De volgende vloten kwamen elkaar tegen op <?php
+[align=center]<?php
+echo $this->translate("On ");
 $time = $this->report->getTime();
 if ($this->hideTime) {
     echo $time->format('d-m-Y --:--:--');
@@ -7,4 +8,5 @@ if ($this->hideTime) {
 }
 
 $rounds = $this->report->getRounds();
-?> , toen het tot een gevecht kwam:
+echo $this->translate(" , the following fleets met in battle:");
+?>

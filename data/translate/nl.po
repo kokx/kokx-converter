@@ -1,0 +1,110 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Kokx's OGame CR Converter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-27 03:30+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
+"Language-Team: Kokx <pieter@kokx.nl>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: ../../\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-SearchPath-0: application\n"
+
+#: application/modules/default/renderers/kokx/scripts/time.phtml:2
+msgid "On "
+msgstr "De volgende vloten kwamen elkaar tegen op "
+
+#: application/modules/default/renderers/kokx/scripts/time.phtml:11
+msgid " , the following fleets met in battle:"
+msgstr ", toen het tot een gevecht kwam:"
+
+#: application/modules/default/renderers/kokx/scripts/firstround.phtml:7
+#: application/modules/default/renderers/kokx/scripts/lastround.phtml:13
+msgid "Attacker"
+msgstr "Aanvaller"
+
+#: application/modules/default/renderers/kokx/scripts/firstround.phtml:19
+#: application/modules/default/renderers/kokx/scripts/lastround.phtml:38
+msgid "Defender"
+msgstr "Verdediger"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:2
+msgid "The battle ends in a draw."
+msgstr "Het gevecht eindigt in een remise."
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:4
+msgid "The attacker has won the battle!"
+msgstr "De aanvaller heeft het gevecht gewonnen!"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:6
+msgid "The defender has won the battle!"
+msgstr "De verdediger heeft het gevecht gewonnen!"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:8
+msgid "The attacker captured:"
+msgstr "De aanvaller steelt:"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:10
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:12
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:15
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:3
+msgid "metal"
+msgstr "Metaal"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:10
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:12
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:15
+msgid "crystal"
+msgstr "Kristal"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:10
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:12
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:15
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:3
+msgid "and"
+msgstr "en"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:10
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:12
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:15
+msgid "deuterium"
+msgstr "Deuterium"
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:1
+#, c-format
+msgid "The attacker lost a total of %s units."
+msgstr "De aanvaller heeft een totaal van %s Eenheden verloren."
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:2
+#, c-format
+msgid "The defender lost a total of %s units."
+msgstr "De verdediger heeft een totaal van %s Eenheden verloren."
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:3
+msgid "At these space coordinates now float "
+msgstr "Op deze coordinaten in de ruimte zweven nu "
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:3
+msgid "crystal."
+msgstr "Kristal."
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:5
+#, fuzzy
+msgid "The chance for a moon to be created is: "
+msgstr "Maankans: "
+
+#: application/modules/default/renderers/kokx/scripts/lastround.phtml:17
+#: application/modules/default/renderers/kokx/scripts/lastround.phtml:42
+msgid "Destroyed!"
+msgstr "Vernietigd!"
+
+#~ msgid " units."
+#~ msgstr " Eenheden verloren."
+

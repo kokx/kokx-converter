@@ -56,6 +56,14 @@ define('APP', ROOT . DIRECTORY_SEPARATOR . 'application');
  * Modules location.
  */
 define('MODULES', APP . DIRECTORY_SEPARATOR . 'modules');
+/**
+ * Data location.
+ */
+define('DATA', ROOT . DIRECTORY_SEPARATOR . 'data');
+/**
+ * Translate location.
+ */
+define('TRANSLATE', DATA . DIRECTORY_SEPARATOR . 'translate');
 
 ini_set('xdebug.var_display_max_depth', 20);
 
@@ -78,6 +86,14 @@ $defaultLoader = new Kokx_Application_ResourceLoader(array(
     'basePath'  => MODULES . DIRECTORY_SEPARATOR . 'default',
     'namespace' => 'Default'
 ));
+
+// translation config
+$translate = new Zend_Translate(array(
+    'adapter' => 'gettext',
+    'content' => TRANSLATE . DIRECTORY_SEPARATOR . 'nl.mo'
+));
+
+Zend_Registry::set('Zend_Translate', $translate);
 
 // front controller
 $front = Zend_Controller_Front::getInstance();
