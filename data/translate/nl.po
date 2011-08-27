@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kokx's OGame CR Converter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-27 13:14+0100\n"
+"POT-Creation-Date: 2011-08-27 19:35+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
 "Language-Team: Kokx <pieter@kokx.nl>\n"
@@ -105,6 +105,51 @@ msgstr "Kleine planetaire schildkoepel"
 #: data/translate/ids/ships.php:55
 msgid "Large Shield Dome"
 msgstr "Grote planetaire schildkoepel"
+
+#: application/layouts/default.phtml:27
+#: application/layouts/default.phtml:47
+msgid "Kokx's OGame CR converter"
+msgstr "Kokx's OGame CR converter"
+
+#: application/modules/default/views/scripts/index/index.phtml:4
+msgid "Invalid CR"
+msgstr "Incorrect gevechtsrapport"
+
+#: application/modules/default/views/scripts/index/index.phtml:10
+msgid "Title:"
+msgstr "Titel:"
+
+#: application/modules/default/views/scripts/index/index.phtml:16
+msgid "Convert!"
+msgstr "Converteer!"
+
+#: application/modules/default/views/scripts/index/index.phtml:20
+msgid "Generic options"
+msgstr "Algemene opties"
+
+#: application/modules/default/views/scripts/index/index.phtml:23
+msgid "Skin"
+msgstr "Skin"
+
+#: application/modules/default/views/scripts/index/index.phtml:30
+msgid "Hide the time"
+msgstr "Verberg de tijd"
+
+#: application/modules/default/views/scripts/index/index.phtml:34
+msgid "Text in the middle of the CR"
+msgstr "Tekst in het midden van de CR"
+
+#: application/modules/default/views/scripts/index/index.phtml:36
+msgid "Merge fleets of the same player"
+msgstr "Voeg vloten van dezelfde speler samen"
+
+#: application/modules/default/views/scripts/index/index.phtml:43
+msgid "Raids"
+msgstr "Naraids"
+
+#: application/modules/default/views/scripts/index/index.phtml:48
+msgid "Harvest Reports"
+msgstr "Puinrapporten"
 
 #: application/modules/default/renderers/kokx/scripts/time.phtml:2
 msgid "On "
@@ -260,6 +305,8 @@ msgstr "De verdediger heeft een totaal van %s Eenheden verloren."
 msgid "Destroyed!"
 msgstr "Vernietigd!"
 
+#~ msgid "Hide options"
+#~ msgstr "Verberg opties"
 #~ msgid "Je "
 #~ msgstr "Je "
 #~ msgid " units."

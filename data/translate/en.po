@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kokx's OGame CR Converter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-27 13:20+0100\n"
+"POT-Creation-Date: 2011-08-27 19:37+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
 "Language-Team: Kokx <pieter@kokx.nl>\n"
@@ -105,6 +105,51 @@ msgstr "Small Shield Dome"
 #: data/translate/ids/ships.php:55
 msgid "Large Shield Dome"
 msgstr "Large Shield Dome"
+
+#: application/layouts/default.phtml:27
+#: application/layouts/default.phtml:47
+msgid "Kokx's OGame CR converter"
+msgstr "Kokx's OGame CR converter"
+
+#: application/modules/default/views/scripts/index/index.phtml:4
+msgid "Invalid CR"
+msgstr "Invalid CR"
+
+#: application/modules/default/views/scripts/index/index.phtml:10
+msgid "Title:"
+msgstr "Title:"
+
+#: application/modules/default/views/scripts/index/index.phtml:16
+msgid "Convert!"
+msgstr "Convert!"
+
+#: application/modules/default/views/scripts/index/index.phtml:20
+msgid "Generic options"
+msgstr "Generic options"
+
+#: application/modules/default/views/scripts/index/index.phtml:23
+msgid "Skin"
+msgstr "Skin"
+
+#: application/modules/default/views/scripts/index/index.phtml:30
+msgid "Hide the time"
+msgstr "Hide the time"
+
+#: application/modules/default/views/scripts/index/index.phtml:34
+msgid "Text in the middle of the CR"
+msgstr "Text in the middle of the CR"
+
+#: application/modules/default/views/scripts/index/index.phtml:36
+msgid "Merge fleets of the same player"
+msgstr "Merge fleets of the same player"
+
+#: application/modules/default/views/scripts/index/index.phtml:43
+msgid "Raids"
+msgstr "Raids"
+
+#: application/modules/default/views/scripts/index/index.phtml:48
+msgid "Harvest Reports"
+msgstr "Harvest Reports"
 
 #: application/modules/default/renderers/kokx/scripts/time.phtml:2
 msgid "On "

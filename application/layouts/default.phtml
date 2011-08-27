@@ -24,7 +24,7 @@
 <html>
 
 <head>
-<title>Kokx's OGame CR converter</title>
+<title><?= $this->translate("Kokx's OGame CR converter") ?></title>
 
 <script type="text/javascript" src="/js/main.js"></script>
 <link rel="stylesheet" type="text/css" media="screen, handheld, projection" href="/css/main.css" />
@@ -33,18 +33,18 @@
 <body>
 <div id="container">
     <div id="lang">
-        <div id="lang-nl" class="lang lang-selected">
+        <div id="lang-nl" class="lang<?= ($this->translate()->getTranslator()->getLocale() == 'nl') ? ' lang-selected' : ''; ?>">
             <a href="?lang=nl"><img src="/images/flags/Netherlands-Flag.png" alt="Netherlands" /><br />
             Nederlands</a>
         </div>
-        <div id="lang-en" class="lang">
+        <div id="lang-en" class="lang<?= ($this->translate()->getTranslator()->getLocale() == 'en') ? ' lang-selected' : ''; ?>">
             <a href="?lang=en"><img src="/images/flags/United-Kingdom-flag.png" /><br />
             English</a>
         </div>
     </div>
     <br />
     <div id="header">
-        <h1>Kokx's OGame CR converter</h1>
+        <h1><?= $this->translate("Kokx's OGame CR converter") ?></h1>
     </div>
     <br />
     <div id="adsense">

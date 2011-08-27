@@ -90,10 +90,30 @@ $defaultLoader = new Kokx_Application_ResourceLoader(array(
 // translation config
 $translate = new Zend_Translate(array(
     'adapter' => 'gettext',
-    'content' => TRANSLATE . DIRECTORY_SEPARATOR . 'nl.mo'
+    'content' => TRANSLATE,
+    'locale'  => 'auto',
+    'scan'    => Zend_Translate::LOCALE_FILENAME
 ));
 
 Zend_Registry::set('Zend_Translate', $translate);
+
+/**
+ * Order for determining the locale:
+ * 
+ * 1. If there is a $_GET['lang'] parameter, use that locale, also sets the session
+ * 2. If there is a session setting, use that locale
+ * 3. If the browser has setting, use that locale
+ * 4. Fall back to en
+ */
+$session = new Zend_Session_Namespace('lang');
+
+if (isset($_GET['lang']) && $translate->isAvailable($_GET['lang'])) {
+    $translate->setLocale($_GET['lang']);
+    $session->lang = $_GET['lang'];
+}
+if (isset($session->lang) && $translate->isAvailable($session->lang)) {
+    $translate->setLocale($session->lang);
+}
 
 // front controller
 $front = Zend_Controller_Front::getInstance();
