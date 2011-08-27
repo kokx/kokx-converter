@@ -21,12 +21,12 @@ div#lang {
 }
 div.lang {
     text-align: center;
-    background-color: #3F476C;
+    background-color: #1F274C;
     border: 1px solid #000000;
     width: 100px;
 }
 div.lang-selected {
-    background-color: #1F274C;
+    background-color: #3F476C;
 }
 div#lang-nl {
     float: left;

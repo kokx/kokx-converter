@@ -71,6 +71,7 @@ class IndexController extends Zend_Controller_Action
             'harvest_reports' => ''
         );
         $this->view->error = false;
+        $this->view->rendered = "";
 
         if ($this->getRequest()->isPost()) {
             try {
@@ -78,7 +79,7 @@ class IndexController extends Zend_Controller_Action
                 $report   = $crService->readReport($_POST, $settings);
 
                 $this->view->report = $report;
-                $this->view->data   = $_POST;
+                $this->view->data   = $crService->getData();
 
                 $renderer = new Default_Renderer_Kokx($settings);
 

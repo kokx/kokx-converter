@@ -44,6 +44,13 @@ class Default_Service_CombatReport
         'virus'        => 'ViRuS'
     );
 
+    /**
+     * The processed data
+     *
+     * @var array
+     */
+    protected $_data = array();
+
 
     /**
      * Get the available themes
@@ -66,7 +73,9 @@ class Default_Service_CombatReport
     {
         $reader = new Default_Reader_CombatReport();
 
-        $reader->setMergeFleets(false /* TODO: change this back: $settings['merge_fleets']*/);
+        $reader->setMergeFleets($settings['merge_fleets']);
+
+        $data['report'] = utf8_encode($data['report']);
 
         $report = $reader->parse($data['report']);
 
@@ -81,6 +90,8 @@ class Default_Service_CombatReport
 
             $report->setRaids($raidReader->parse($data['raids']));
         }
+
+        $this->_data = $data;
 
         return $report;
     }
@@ -98,6 +109,16 @@ class Default_Service_CombatReport
             'hide_time'    => true,
             'merge_fleets' => true
         );
+    }
+
+    /**
+     * Get the data.
+     *
+     * @return array.
+     */
+    public function getData()
+    {
+        return $this->_data;
     }
 
     /**
