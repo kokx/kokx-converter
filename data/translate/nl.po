@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kokx's OGame CR Converter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-27 19:35+0100\n"
+"POT-Creation-Date: 2011-08-28 00:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
 "Language-Team: Kokx <pieter@kokx.nl>\n"
@@ -160,12 +160,10 @@ msgid " , the following fleets met in battle:"
 msgstr ", toen het tot een gevecht kwam:"
 
 #: application/modules/default/renderers/kokx/scripts/firstround.phtml:7
-#: application/modules/default/renderers/kokx/scripts/lastround.phtml:13
 msgid "Attacker"
 msgstr "Aanvaller"
 
 #: application/modules/default/renderers/kokx/scripts/firstround.phtml:19
-#: application/modules/default/renderers/kokx/scripts/lastround.phtml:38
 msgid "Defender"
 msgstr "Verdediger"
 

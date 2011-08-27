@@ -176,7 +176,7 @@ class Default_Reader_Dutch_CombatReport
                 $numbers = explode("\t", trim($matches[11]));
 
                 foreach ($ships as $key => $ship) {
-                    $fleet->addShip(new Default_Model_Ship($ship, $this->_convertToInt($numbers[$key])));
+                    $fleet->addShip($this->_createShip($ship, $this->_convertToInt($numbers[$key])));
                 }
             }
 
@@ -200,6 +200,89 @@ class Default_Reader_Dutch_CombatReport
         }
 
         return $round;
+    }
+
+    /**
+     * Create a ship
+     *
+     * @param string $name
+     * @param int $count
+     *
+     * @return Default_Model_Ship
+     */
+    protected function _createShip($name, $count)
+    {
+        $name = trim(str_replace(' ', '', strtolower($name)));
+
+        switch ($name) {
+            // ships
+            case 'k.vrachtschip':
+                $name = Default_Model_Ship::SMALL_CARGO;
+                break;
+            case 'g.vrachtschip':
+                $name = Default_Model_Ship::LARGE_CARGO;
+                break;
+            case 'l.gevechtsschip':
+                $name = Default_Model_Ship::LIGHT_FIGTHER;
+                break;
+            case 'z.gevechtsschip':
+                $name = Default_Model_Ship::HEAVY_LASER;
+                break;
+            case 'kruiser':
+                $name = Default_Model_Ship::CRUISER;
+                break;
+            case 'slagschip':
+                $name = Default_Model_Ship::BATTLESHIP;
+                break;
+            case 'kol.schip.':
+                $name = Default_Model_Ship::COLONY_SHIP;
+                break;
+            case 'recycler':
+                $name = Default_Model_Ship::RECYCLER;
+                break;
+            case 'spionagesonde':
+                $name = Default_Model_Ship::ESPIONAGE_PROBE;
+                break;
+            case 'bommenwerper':
+                $name = Default_Model_Ship::BOMBER;
+                break;
+            case 'zonne-energiesatelliet':
+                $name = Default_Model_Ship::SOLAR_SATTELITE;
+                break;
+            case 'vernietiger':
+                $name = Default_Model_Ship::DESTROYER;
+                break;
+            case 'sterdesdoods':
+                $name = Default_Model_Ship::DEATHSTAR;
+                break;
+            case 'interceptor.':
+                $name = Default_Model_Ship::BATTLECRUISER;
+                break;
+            // defenses
+            case 'raketten':
+                $name = Default_Model_Ship::ROCKET_LAUNCHER;
+                break;
+            case 'k.laser':
+                $name = Default_Model_Ship::LIGHT_LASER;
+                break;
+            case 'g.laser':
+                $name = Default_Model_Ship::HEAVY_LASER;
+                break;
+            case 'gauss':
+                $name = Default_Model_Ship::GAUSS_CANNON;
+                break;
+            case 'plasma':
+                $name = Default_Model_Ship::PLASMA_TURRET;
+                break;
+            case 'k.koepel':
+                $name = Default_Model_Ship::SMALL_SHIELD_DOME;
+                break;
+            case 'g.koepel':
+                $name = Default_Model_Ship::LARGE_SHIELD_DOME;
+                break;
+        }
+
+        return new Default_Model_Ship($name, $count);
     }
 
     /**
