@@ -97,6 +97,8 @@ class Default_Model_Fleet
     /**
      * Get a ship by name
      *
+     * @param string $name
+     *
      * @return Default_Model_Ship
      */
     public function getShip($name)
@@ -108,5 +110,23 @@ class Default_Model_Fleet
         }
 
         return null;
+    }
+
+    /**
+     * Check if we have a certain ship.
+     * 
+     * @param string $name
+     *
+     * @return boolean
+     */
+    public function hasShip($name)
+    {
+        foreach ($this->_ships as $ship) {
+            if ($ship->getName() == $name) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

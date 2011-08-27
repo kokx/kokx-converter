@@ -23,55 +23,52 @@
  */
 
 /**
- * Raid parser
+ * HR parser
  *
  * @category   Kokx
  * @package    Default
- * @subpackage Readers
+ * @subpackage Readers_Dutch
  */
-class Default_Reader_Raid
+class Default_Reader_Dutch_HarvestReport
 {
 
     /**
-     * Parse a crash report
+     * Parse a harvest report
      *
      * @param string $source
      *
-     * @return array  of {@link Default_Reader_Raid}'s
+     * @return array  of {@link Default_Model_HarvestReport}'s
      */
     public function parse($source)
     {
-        $raids = array();
-        /**
-         * The source only has to contain something like:
-         *
-         *
-         * De aanvaller heeft het gevecht gewonnen! De aanvaller steelt 13.962 metaal, 4.463 kristal en 123.168 deuterium.
-         *
-         * De aanvaller heeft een totaal van 0 eenheden verloren.
-         * De verdediger heeft een totaal van 11.056.000 eenheden verloren.
-         * Op deze coördinaten in de ruimte zweven nu 2.407.800 metaal en 909.000 kristal.
-         */
+        $reports = array();
 
-        $regex = '([0-9.]*) metaal, ([0-9.]*) kristal en ([0-9.]*) deuterium'
-               . '.*?aanvaller heeft een totaal van ([0-9.]*) eenheden verloren'
-               . '.*?verdediger heeft een totaal van ([0-9.]*) eenheden verloren';
+        /**
+         * Example report:
+         *
+         * Je 8001 recyclers hebben een totale opslagcapaciteit van 101.264.259.
+         * In het bestemmingsveld zweven 0 metaal en 0 kristal in de ruimte.
+         * Je hebt 0 metaal en 0 kristal opgehaald.
+         */
+        $regex  = 'Je ([0-9.]*?) recyclers hebben een totale opslagcapaciteit van ([0-9.]*?). ';
+        $regex .= 'In het bestemmingsveld zweven ([0-9.]*?) metaal en ([0-9.]*?) kristal in de ruimte. ';
+        $regex .= 'Je hebt ([0-9.]*?) metaal en ([0-9.]*?) kristal opgehaald.';
 
         $matches = array();
 
         preg_match_all('/' . $regex . '/i', $source, $matches, PREG_SET_ORDER);
 
         foreach ($matches as $match) {
-            $raids[] = new Default_Model_Raid(
+            $reports[] = new Default_Model_HarvestReport(
                 (int) str_replace('.', '', $match[1]),
                 (int) str_replace('.', '', $match[2]),
                 (int) str_replace('.', '', $match[3]),
                 (int) str_replace('.', '', $match[4]),
-                (int) str_replace('.', '', $match[5])
+                (int) str_replace('.', '', $match[5]),
+                (int) str_replace('.', '', $match[6])
             );
         }
 
-
-        return $raids;
+        return $reports;
     }
 }

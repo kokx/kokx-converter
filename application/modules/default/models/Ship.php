@@ -107,4 +107,16 @@ class Default_Model_Ship
     {
         return $this->_count;
     }
+
+    /**
+     * Add a number of ships to the count.
+     *
+     * @param int $count  Count to add
+     *
+     * @return Default_Model_Ship
+     */
+    public function addCount($count)
+    {
+        $this->_count += $count;
+    }
 }

@@ -71,24 +71,16 @@ class Default_Service_CombatReport
      */
     public function readReport(array $data, array $settings)
     {
-        $reader = new Default_Reader_CombatReport();
-
-        $reader->setMergeFleets($settings['merge_fleets']);
-
         $data['report'] = utf8_encode($data['report']);
 
-        $report = $reader->parse($data['report']);
+        $report = Default_Reader_Reader::readReport($data['report'], $settings);
 
         // harvest reports and raids
         if (isset($data['harvest_reports']) && !empty($data['harvest_reports']) && is_string($data['harvest_reports'])) {
-            $hrReader = new Default_Reader_HarvestReport();
-
-            $report->setHarvestReports($hrReader->parse($data['harvest_reports']));
+            $report->setHarvestReports(Default_Reader_Reader::readHarvestReports($data['harvest_reports']));
         }
         if (isset($data['raids']) && !empty($data['raids']) && is_string($data['raids'])) {
-            $raidReader = new Default_Reader_Raid();
-
-            $report->setRaids($raidReader->parse($data['raids']));
+            $report->setHarvestReports(Default_Reader_Reader::readRaids($data['raids']));
         }
 
         $this->_data = $data;

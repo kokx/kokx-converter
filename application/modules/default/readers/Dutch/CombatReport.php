@@ -27,9 +27,9 @@
  *
  * @category   KokxConverter
  * @package    Default
- * @subpackage Readers
+ * @subpackage Readers_Dutch
  */
-class Default_Reader_CombatReport
+class Default_Reader_Dutch_CombatReport
 {
 
     /**
@@ -277,57 +277,55 @@ class Default_Reader_CombatReport
      */
     private function _mergeFleets()
     {
-        foreach ($this->_rounds as $key => $round) {
-
+        foreach ($this->_report->getRounds() as $round) {
             // first merge the fleets of the attackers
             $attackers = array();
-            foreach ($round['attackers'] as $slot) {
-                $name = $slot['player']['name'];
-                if (isset($attackers[$name])) {
+            foreach ($round->getAttackers() as $fleet) {
+                $player = $fleet->getPlayer();
+                if (isset($attackers[$player])) {
                     // merge this fleet into the previous one
-                    $attackers[$name]['fleet'] = $this->_mergeFleet($attackers[$name]['fleet'], $slot['fleet']);
+                    $attackers[$player] = $this->_mergeFleet($attackers[$player], $fleet);
                 } else {
                     // we haven't seen this attacker before, create a new slot
-                    $attackers[$name] = $slot;
+                    $attackers[$player] = $fleet;
                 }
             }
+
+            $round->setAttackers(array_values($attackers));
+            unset($attackers);
 
             // now merge the fleets of the defenders
             $defenders = array();
-            foreach ($round['defenders'] as $slot) {
-                $name = $slot['player']['name'];
-                if (isset($attackers[$name])) {
+            foreach ($round->getDefenders() as $fleet) {
+                $player = $fleet->getPlayer();
+                if (isset($defenders[$player])) {
                     // merge this fleet into the previous one
-                    $defenders[$name]['fleet'] = $this->_mergeFleet($defenders[$name]['fleet'], $slot['fleet']);
+                    $defenders[$player] = $this->_mergeFleet($defenders[$player], $fleet);
                 } else {
                     // we haven't seen this attacker before, create a new slot
-                    $defenders[$name] = $slot;
+                    $defenders[$player] = $fleet;
                 }
             }
 
-            $round['attackers'] = array_values($attackers);
-            $round['defenders'] = array_values($defenders);
-
-            // at the end, change the round
-            $this->_rounds[$key] = $round;
+            $round->setDefenders(array_values($defenders));
         }
     }
 
     /**
      * Merge two fleets
      *
-     * @param array $fleet1
-     * @param array $fleet2
+     * @param Default_Model_Fleet $fleet1
+     * @param Default_Model_Fleet $fleet2
      *
      * @return array
      */
-    public function _mergeFleet(array $fleet1, array $fleet2)
+    public function _mergeFleet(Default_Model_Fleet $fleet1, Default_Model_Fleet $fleet2)
     {
-        foreach ($fleet2 as $ship => $amount) {
-            if (isset($fleet1[$ship])) {
-                $fleet1[$ship] += $amount;
+        foreach ($fleet2->getShips() as $ship) {
+            if ($fleet1->hasShip($ship->getName())) {
+                $fleet1->getShip($ship->getName())->addCount($ship->getCount());
             } else {
-                $fleet1[$ship] = $amount;
+                $fleet1->addShip($ship);
             }
         }
         return $fleet1;
