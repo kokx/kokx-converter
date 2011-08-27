@@ -46,6 +46,33 @@ class Default_Model_Ship
      */
     protected $_count;
 
+    // ship types
+    const SMALL_CARGO     = 'Small Cargo';
+    const LARGE_CARGO     = 'Large Cargo';
+    const LIGHT_FIGTHER   = 'Light Fighter';
+    const HEAVY_FIGHTER   = 'Heavy Fighter';
+    const CRUISER         = 'Cruiser';
+    const BATTLESHIP      = 'Battleship';
+    const COLONY_SHIP     = 'Colony Ship';
+    const RECYCLER        = 'Recycler';
+    const ESPIONAGE_PROBE = 'Espionage Probe';
+    const BOMBER          = 'Bomber';
+    const SOLAR_SATTELITE = 'Solar Sattelite';
+    const DESTROYER       = 'Destroyer';
+    const DEATHSTAR       = 'Deathstar';
+    const BATTLECRUISER   = 'Battlecruiser';
+
+    // defense types
+    const ROCKET_LAUNCHER   = 'Rocket Launcher';
+    const LIGHT_LASER       = 'Light Laser';
+    const HEAVY_LASER       = 'Heavy Laser';
+    const GAUSS_CANNON      = 'Gauss Cannon';
+    const ION_CANNON        = 'Ion Cannon';
+    const PLASMA_TURRET     = 'Plasma Turret';
+    const SMALL_SHIELD_DOME = 'Small Shield Dome';
+    const LARGE_SHIELD_DOME = 'Large Shield Dome';
+
+
 
     /**
      * Constructor
