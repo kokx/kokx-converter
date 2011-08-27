@@ -55,7 +55,6 @@ input, select {
 	border: 2px solid #000000;
 	background-color: #3F476C;
 	color: #7B90B8;
-	width: 181px;
 }
 input#submit {
 	width: auto;
