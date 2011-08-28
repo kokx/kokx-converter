@@ -4,7 +4,7 @@
 
         <?= $this->translate("Your ") . $this->colorNumber($hr->getRecyclers(), '#FC850C') . $this->translate(" recycler(s) have a total cargo capacity of ") . $this->colorNumber($hr->getCapacity(), '#FC850C') ?>.
         <?= $this->translate("At the target, ") . $this->colorNumber($hr->getFieldMetal(), '#FC850C') . $this->translate(" metal and ") . $this->colorNumber($hr->getFieldCrystal(), '#FC850C') . $this->translate(" crystal are floating in space.") . "\n" ?>
-        <?= $this->translate("You have harvested ") . $this->colorNumber($hr->getMetal(), '#FC850C') . $this->translate(" metal and ") . $this->colorNumber($hr->getCrystal(), '#FC850C') . $this->translate(" crystal.") ?>
+        <?= $this->translate("You have harvested %s metal and %s crystal.", $this->colorNumber($hr->getMetal(), '#FC850C'), $this->colorNumber($hr->getCrystal(), '#FC850C')) ?>
 
 		<? $percent = ($hr->getMetal() + $hr->getCrystal()) / ($hr->getFieldMetal() + $hr->getFieldCrystal()) * 100 ?>
 		<?= $this->translate("Recycled: ") . $this->colorNumber($percent, '#FC850C') ?>%

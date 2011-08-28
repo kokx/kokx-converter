@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kokx's OGame CR Converter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-28 02:33+0100\n"
+"POT-Creation-Date: 2011-08-28 03:29+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
 "Language-Team: Kokx <pieter@kokx.nl>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "X-Poedit-Basepath: ../../\n"
 "X-Poedit-SearchPath-0: application\n"
 "X-Poedit-SearchPath-1: data/translate/ids\n"
+
+#: application/modules/default/services/CombatReport.php:100
+msgid "After the battle..."
+msgstr "After the battle..."
 
 #: data/translate/ids/ships.php:32
 msgid "Small Cargo"
@@ -220,7 +224,6 @@ msgid "At the target, "
 msgstr "At the target, "
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:6
-#: application/modules/default/renderers/kokx/scripts/debris.phtml:7
 msgid " metal and "
 msgstr " metal and "
 
@@ -229,12 +232,9 @@ msgid " crystal are floating in space."
 msgstr " crystal are floating in space."
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:7
-msgid "You have harvested "
-msgstr "You have harvested "
-
-#: application/modules/default/renderers/kokx/scripts/debris.phtml:7
-msgid " crystal."
-msgstr " crystal."
+#, c-format
+msgid "You have harvested %s metal and %s crystal."
+msgstr "You have harvested %s metal and %s crystal."
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:10
 msgid "Recycled: "
@@ -308,4 +308,7 @@ msgstr "The defender made a profit of %s units."
 #: application/modules/default/renderers/kokx/scripts/lastround.phtml:42
 msgid "Destroyed!"
 msgstr "Destroyed!"
+
+#~ msgid " crystal."
+#~ msgstr " crystal."
 

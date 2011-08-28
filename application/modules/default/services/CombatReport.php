@@ -97,7 +97,7 @@ class Default_Service_CombatReport
     {
         return array(
             'theme'        => 'kokx',
-            'middle_text'  => 'Na het gevecht...',
+            'middle_text'  => Zend_Registry::get('Zend_Translate')->_("After the battle..."),
             'hide_time'    => true,
             'merge_fleets' => true
         );

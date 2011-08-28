@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kokx's OGame CR Converter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-28 02:32+0100\n"
+"POT-Creation-Date: 2011-08-28 03:28+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
 "Language-Team: Kokx <pieter@kokx.nl>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-SearchPath-0: application\n"
 "X-Poedit-SearchPath-1: data/translate/ids\n"
+
+#: application/modules/default/services/CombatReport.php:100
+msgid "After the battle..."
+msgstr "Na het gevecht..."
 
 #: data/translate/ids/ships.php:32
 msgid "Small Cargo"
@@ -220,7 +224,6 @@ msgid "At the target, "
 msgstr "In het bestemmingsveld zweven "
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:6
-#: application/modules/default/renderers/kokx/scripts/debris.phtml:7
 msgid " metal and "
 msgstr " Metaal en "
 
@@ -229,12 +232,9 @@ msgid " crystal are floating in space."
 msgstr " kristal in de ruimte."
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:7
-msgid "You have harvested "
-msgstr "Je hebt "
-
-#: application/modules/default/renderers/kokx/scripts/debris.phtml:7
-msgid " crystal."
-msgstr " Kristal."
+#, c-format
+msgid "You have harvested %s metal and %s crystal."
+msgstr "Je hebt %s metaal en %s kristal opgehaald."
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:10
 msgid "Recycled: "
@@ -309,6 +309,10 @@ msgstr "De verdediger heeft een totaal van %s Eenheden verloren."
 msgid "Destroyed!"
 msgstr "Vernietigd!"
 
+#~ msgid "You have harvested "
+#~ msgstr "Je hebt "
+#~ msgid " crystal."
+#~ msgstr " Kristal."
 #~ msgid "Hide options"
 #~ msgstr "Verberg opties"
 #~ msgid "Je "
