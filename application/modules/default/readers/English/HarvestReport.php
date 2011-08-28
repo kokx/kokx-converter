@@ -29,7 +29,7 @@
  * @package    Default
  * @subpackage Readers_Dutch
  */
-class Default_Reader_Dutch_HarvestReport
+class Default_Reader_English_HarvestReport
 {
 
     /**
@@ -46,13 +46,13 @@ class Default_Reader_Dutch_HarvestReport
         /**
          * Example report:
          *
-         * Je 8001 recyclers hebben een totale opslagcapaciteit van 101.264.259.
-         * In het bestemmingsveld zweven 0 metaal en 0 kristal in de ruimte.
-         * Je hebt 0 metaal en 0 kristal opgehaald.
+         * Your 1000 recycler(s) have a total cargo capacity of 20.000.000.
+         * At the target, 13.731.100 metal and 8.863.600 crystal are floating in space.
+         * You have harvested 11.136.400 metal and 8.863.600 crystal. 
          */
-        $regex  = 'Je ([0-9.]*?) recyclers hebben een totale opslagcapaciteit van ([0-9.]*?). ';
-        $regex .= 'In het bestemmingsveld zweven ([0-9.]*?) metaal en ([0-9.]*?) kristal in de ruimte. ';
-        $regex .= 'Je hebt ([0-9.]*?) metaal en ([0-9.]*?) kristal opgehaald.';
+        $regex  = 'Your ([0-9.]*) recycler.*? cargo capacity of ([0-9.]*).*?';
+        $regex .= 'At the target, ([0-9.]*) metal and ([0-9.]*) crystal are floating.*?';
+        $regex .= 'have harvested ([0-9.]*) metal and ([0-9.]*) crystal';
 
         $matches = array();
 
