@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kokx's OGame CR Converter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-28 03:29+0100\n"
+"POT-Creation-Date: 2011-08-28 05:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
 "Language-Team: Kokx <pieter@kokx.nl>\n"
@@ -18,7 +18,17 @@ msgstr ""
 "X-Poedit-SearchPath-0: application\n"
 "X-Poedit-SearchPath-1: data/translate/ids\n"
 
-#: application/modules/default/services/CombatReport.php:100
+#: application/modules/default/renderers/RendererAbstract.php:139
+#: application/modules/default/renderers/RendererAbstract.php:140
+msgid " & "
+msgstr " & "
+
+#: application/modules/default/renderers/RendererAbstract.php:138
+#, php-format
+msgid "%s vs %s (A: %s, D: %s) [TOT: %s]"
+msgstr "%s vs %s (A: %s, D: %s) [TOT: %s]"
+
+#: application/modules/default/services/CombatReport.php:119
 msgid "After the battle..."
 msgstr "After the battle..."
 
@@ -212,39 +222,48 @@ msgid "deuterium"
 msgstr "deuterium"
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:5
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:5
 msgid "Your "
 msgstr "Your "
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:5
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:5
 msgid " recycler(s) have a total cargo capacity of "
 msgstr " recycler(s) have a total cargo capacity of "
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:6
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:6
 msgid "At the target, "
 msgstr "At the target, "
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:6
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:6
 msgid " metal and "
 msgstr " metal and "
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:6
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:6
 msgid " crystal are floating in space."
 msgstr " crystal are floating in space."
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:7
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:7
 #, c-format
 msgid "You have harvested %s metal and %s crystal."
 msgstr "You have harvested %s metal and %s crystal."
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:10
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:10
 msgid "Recycled: "
 msgstr "Recycled: "
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:14
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:14
 msgid "A total of "
 msgstr "A total of "
 
 #: application/modules/default/renderers/kokx/scripts/debris.phtml:14
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:14
 msgid " units debris has been recycled."
 msgstr " units debris has been recycled."
 
@@ -252,6 +271,10 @@ msgstr " units debris has been recycled."
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:20
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:32
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:41
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:1
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:16
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:28
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:37
 #, c-format
 msgid "The attacker lost a total of %s units."
 msgstr "The attacker lost a total of %s units."
@@ -260,52 +283,68 @@ msgstr "The attacker lost a total of %s units."
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:22
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:34
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:43
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:2
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:18
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:30
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:39
 #, c-format
 msgid "The defender lost a total of %s units."
 msgstr "The defender lost a total of %s units."
 
 #: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:3
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:3
 msgid "At these space coordinates now float "
 msgstr "At these space coordinates now float "
 
 #: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:3
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:3
 msgid "crystal."
 msgstr "crystal."
 
 #: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:5
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:5
 msgid "The chance for a moon to be created is: "
 msgstr "The chance for a moon to be created is: "
 
 #: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:8
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:8
 msgid "The enormous amounts of free metal and crystal draw together and form a moon around the planet: "
 msgstr "The enormous amounts of free metal and crystal draw together and form a moon around the planet: "
 
 #: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:9
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:9
 msgid "Moon given!"
 msgstr "Moon given!"
 
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:2
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:2
 #, c-format
 msgid "The attacker captured a total of %s units."
 msgstr "The attacker captured a total of %s units."
 
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:6
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:6
 msgid "Summary of profit/losses:"
 msgstr "Summary of profit/losses:"
 
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:18
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:30
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:14
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:26
 #, c-format
 msgid "The attacker made a profit of %s units."
 msgstr "The attacker made a profit of %s units."
 
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:45
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:41
 #, c-format
 msgid "The defender made a profit of %s units."
 msgstr "The defender made a profit of %s units."
 
 #: application/modules/default/renderers/kokx/scripts/lastround.phtml:17
 #: application/modules/default/renderers/kokx/scripts/lastround.phtml:42
+#: application/modules/default/renderers/tsjerk/scripts/lastround.phtml:17
+#: application/modules/default/renderers/tsjerk/scripts/lastround.phtml:42
 msgid "Destroyed!"
 msgstr "Destroyed!"
 

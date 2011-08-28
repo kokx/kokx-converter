@@ -72,7 +72,8 @@ class IndexController extends Zend_Controller_Action
             'theme'           => 'kokx'
         );
         $this->view->error = false;
-        $this->view->rendered = "";
+        $this->view->rendered = '';
+        $this->view->title    = '';
 
         if ($this->getRequest()->isPost()) {
             try {
@@ -85,6 +86,7 @@ class IndexController extends Zend_Controller_Action
                 $renderer = $crService->getRenderer($settings);
 
                 $this->view->rendered = $renderer->render($report);
+                $this->view->title    = $renderer->renderTitle($report);
             } catch (Exception $e) {
                 var_dump($e);
                 $this->view->error = true;

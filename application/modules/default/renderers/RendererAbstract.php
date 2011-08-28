@@ -104,6 +104,46 @@ abstract class Default_Renderer_RendererAbstract implements Default_Renderer_Ren
     }
 
     /**
+     * Get the title for a CR.
+     *
+     * @param Default_Model_CombatReport $report
+     *
+     * @return string
+     */
+    public function renderTitle(Default_Model_CombatReport $report)
+    {
+        $rounds = $report->getRounds();
+
+        // get the attackers
+        $attackers = array();
+
+        foreach ($rounds[0]->getAttackers() as $fleet) {
+            /* @var $fleet Default_Model_Fleet */
+            $attackers[$fleet->getPlayer()] = '';
+        }
+        $attackers = array_keys($attackers);
+
+        // get the defenders
+        $defenders = array();
+
+        foreach ($rounds[0]->getDefenders() as $fleet) {
+            /* @var $fleet Default_Model_Fleet */
+            $defenders[$fleet->getPlayer()] = '';
+        }
+        $defenders = array_keys($defenders);
+
+        // stats
+        $totalLosses = $report->getLossesAttacker() + $report->getLossesDefender();
+
+        return $this->getView()->translate("%s vs %s (A: %s, D: %s) [TOT: %s]",
+            implode($this->getView()->translate(" & "), $attackers),
+            implode($this->getView()->translate(" & "), $defenders),
+            $this->getView()->formatNumber($report->getLossesAttacker()),
+            $this->getView()->formatNumber($report->getLossesDefender()),
+            $this->getView()->formatNumber($totalLosses));
+    }
+
+    /**
      * Get the view
      *
      * @return Zend_View

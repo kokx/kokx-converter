@@ -39,4 +39,13 @@ interface Default_Renderer_Renderer
      * @return string
      */
     public function render(Default_Model_CombatReport $report);
+
+    /**
+     * Get the title for a CR.
+     *
+     * @param Default_Model_CombatReport $report
+     *
+     * @return string
+     */
+    public function renderTitle(Default_Model_CombatReport $report);
 }
