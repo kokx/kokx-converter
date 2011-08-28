@@ -168,7 +168,8 @@ abstract class Default_Renderer_RendererAbstract implements Default_Renderer_Ren
      */
     public function _renderTime()
     {
-        $this->getView()->hideTime = $this->_settings['hide_time'] ?: true;
+        $this->getView()->hideTime = isset($this->_settings['hide_time']) ?
+                                     $this->_settings['hide_time'] : true;
 
         return $this->getView()->render('time.phtml');
     }
