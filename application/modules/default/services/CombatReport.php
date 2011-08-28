@@ -101,6 +101,9 @@ class Default_Service_CombatReport
             case 'tsjerk':
                 return new Default_Renderer_Tsjerk($settings);
                 break;
+            case 'kokx-nolines':
+                return new Default_Renderer_KokxNolines($settings);
+                break;
             case 'kokx':
             default:
                 return new Default_Renderer_Kokx($settings);
