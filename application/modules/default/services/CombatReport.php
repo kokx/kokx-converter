@@ -98,6 +98,9 @@ class Default_Service_CombatReport
     public function getRenderer(array $settings)
     {
         switch ($settings['theme']) {
+            case 'virus':
+                return new Default_Renderer_Virus($settings);
+                break;
             case 'tsjerk':
                 return new Default_Renderer_Tsjerk($settings);
                 break;
