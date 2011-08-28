@@ -51,7 +51,7 @@ class Default_Renderer_Virus_Helper_FormatShip extends Zend_View_Helper_Abstract
              * contains the new fleet.
              */
             $newCount = ($fleet->getShip($ship->getName()) != null) ? $fleet->getShip($ship->getName())->getCount() : 0;
-            return "[color=white]{$this->view->translate($ship->getName())} {$this->view->formatNumber($ship->getCount())} "
+            return "[color=white]{$this->view->translate($ship->getName())} {$newCount} "
                  . "[b]( -{$this->view->formatNumber($ship->getCount() - $newCount)} )[/b][/color]\n";
         }
     }

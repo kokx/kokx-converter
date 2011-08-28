@@ -52,7 +52,7 @@ class Default_Renderer_Nexus_Helper_FormatShip extends Zend_View_Helper_Abstract
              */
             $newCount = ($fleet->getShip($ship->getName()) != null) ? $fleet->getShip($ship->getName())->getCount() : 0;
 
-            return "[color=#ff6600]{$this->view->translate($ship->getName())} {$this->view->formatNumber($ship->getCount())} "
+            return "[color=#ff6600]{$this->view->translate($ship->getName())} {$newCount} "
                 . "[b]( -{$this->view->formatNumber($ship->getCount() - $newCount)} )[/b][/color]\n";
         }
     }

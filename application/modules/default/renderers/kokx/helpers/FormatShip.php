@@ -56,10 +56,10 @@ class Default_Renderer_Kokx_Helper_FormatShip extends Zend_View_Helper_Abstract
              */
             $newCount = ($fleet->getShip($ship->getName()) != null) ? $fleet->getShip($ship->getName())->getCount() : 0;
             if ($attacker) {
-                return "[color=#FC850C]{$this->view->translate($ship->getName())} {$this->view->formatNumber($ship->getCount())} "
+                return "[color=#FC850C]{$this->view->translate($ship->getName())} {$newCount} "
                      . "[b]( -{$this->view->formatNumber($ship->getCount() - $newCount)} )[/b][/color]\n";
             } else {
-                return "[color=#1C84BE]{$this->view->translate($ship->getName())} {$this->view->formatNumber($ship->getCount())} "
+                return "[color=#1C84BE]{$this->view->translate($ship->getName())} {$newCount} "
                      . "[b]( -{$this->view->formatNumber($ship->getCount() - $newCount)} )[/b][/color]\n";
             }
         }
