@@ -68,7 +68,8 @@ class IndexController extends Zend_Controller_Action
         $this->view->data = array(
             'report'          => '',
             'raids'           => '',
-            'harvest_reports' => ''
+            'harvest_reports' => '',
+            'theme'           => 'kokx'
         );
         $this->view->error = false;
         $this->view->rendered = "";
@@ -81,7 +82,7 @@ class IndexController extends Zend_Controller_Action
                 $this->view->report = $report;
                 $this->view->data   = $crService->getData();
 
-                $renderer = new Default_Renderer_Kokx($settings);
+                $renderer = $crService->getRenderer($settings);
 
                 $this->view->rendered = $renderer->render($report);
             } catch (Exception $e) {

@@ -89,6 +89,25 @@ class Default_Service_CombatReport
     }
 
     /**
+     * Get the renderer.
+     *
+     * @param array $settings
+     *
+     * @return Default_Renderer_Renderer
+     */
+    public function getRenderer(array $settings)
+    {
+        switch ($settings['theme']) {
+            case 'tsjerk':
+                return new Default_Renderer_Tsjerk($settings);
+                break;
+            case 'kokx':
+            default:
+                return new Default_Renderer_Kokx($settings);
+        }
+    }
+
+    /**
      * Get the default settings
      *
      * @return array
