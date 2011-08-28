@@ -43,7 +43,7 @@ class Default_Model_Fleet
      *
      * @var array
      */
-    protected $_ships;
+    protected $_ships = array();
 
 
     /**
