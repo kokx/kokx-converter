@@ -1,0 +1,15 @@
+<? if (count($this->report->getHarvestReports()) > 0): ?>
+	<? foreach ($this->report->getHarvestReports() as $hr): ?>
+		[color=yellow]_____________________________________[/color]
+
+        <?= $this->translate("Your ") . $this->colorNumber($hr->getRecyclers()) . $this->translate(" recycler(s) have a total cargo capacity of ") . $this->colorNumber($hr->getCapacity()) ?>.
+        <?= $this->translate("At the target, ") . $this->colorNumber($hr->getFieldMetal()) . $this->translate(" metal and ") . $this->colorNumber($hr->getFieldCrystal()) . $this->translate(" crystal are floating in space.") . "\n" ?>
+        <?= $this->translate("You have harvested %s metal and %s crystal.", $this->colorNumber($hr->getMetal()), $this->colorNumber($hr->getCrystal())) ?>
+
+		<? $percent = ($hr->getMetal() + $hr->getCrystal()) / ($hr->getFieldMetal() + $hr->getFieldCrystal()) * 100 ?>
+		<?= $this->translate("Recycled: ") . $this->colorNumber($percent) ?>%
+    <? endforeach; ?>
+    [color=yellow]__________________________[/color]
+
+	<?= $this->translate("A total of ") . $this->colorNumber($this->totalDebris) . $this->translate(" units debris has been recycled.") ?>
+<? endif; ?>

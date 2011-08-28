@@ -1,9 +1,9 @@
 <? if ($this->totalRaids > 0): ?>
     <?= $this->translate("The attacker captured a total of %s units.", $this->colorNumber($this->totalRaids)) . "\n" ?>
 <? endif; ?>
-	__________________
+	[color=yellow]__________________[/color]
 
-    [color=blue][size=16][b]<?= $this->translate("Summary of profit/losses:") ?>[/b][/size][/color]
+    [size=16][b]<?= $this->translate("Summary of profit/losses:") ?>[/b][/size]
 <? if ($this->report->getWinner() == Default_Model_CombatReport::ATTACKER): ?>
 <?php
 /*
@@ -45,6 +45,6 @@ $defenderResult = $this->totalDebris - $this->report->getLossesDefender();
         <?= $this->translate("The defender made a profit of %s units.", $this->colorNumber(abs($defenderResult))) ?>
     <? endif; ?>
 <? endif; ?>
-
+[/color]
 <? /* and a link to the Converter site*/ ?>
-[size=10][url=<?= LINK ?>]Converted by Kokx's CR Converter <?= VERSION ?> (skin: ViRuS)[/url][/size][/align]
+[size=10][url=<?= LINK ?>]Converted by Kokx's CR Converter <?= VERSION ?> (skin: Nexus)[/url][/size][/align]

@@ -41,7 +41,8 @@ class Default_Service_CombatReport
         'kokx'         => 'kokx',
         'kokx-nolines' => 'kokx-nolines',
         'tsjerk'       => 'Albert Fish',
-        'virus'        => 'ViRuS'
+        'virus'        => 'ViRuS',
+        'nexus'        => 'Nexus'
     );
 
     /**
@@ -103,6 +104,9 @@ class Default_Service_CombatReport
                 break;
             case 'tsjerk':
                 return new Default_Renderer_Tsjerk($settings);
+                break;
+            case 'nexus':
+                return new Default_Renderer_Nexus($settings);
                 break;
             case 'kokx-nolines':
                 return new Default_Renderer_KokxNolines($settings);
