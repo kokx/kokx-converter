@@ -88,7 +88,6 @@ class IndexController extends Zend_Controller_Action
                 $this->view->rendered = $renderer->render($report);
                 $this->view->title    = $renderer->renderTitle($report);
             } catch (Exception $e) {
-                var_dump($e);
                 $this->view->error = true;
             }
         }

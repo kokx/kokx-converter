@@ -88,7 +88,7 @@ class Default_Reader_Dutch_Raid
                 (int) str_replace('.', '', $match[3]),
                 0, 0 // temporarily, the attacker and defender losses will be 0
                      // until we implement good support for this
-            ));
+            );
         }
 
 

@@ -55,7 +55,7 @@ class Default_Reader_Reader
         if (stripos($source, 'De volgende vloten kwamen elkaar tegen op') !== false) {
             // use the dutch reader
             $reader = new Default_Reader_Dutch_CombatReport();
-        } else if (stripos($source, 'the following fleets met in battle')) {
+        } else if (stripos($source, 'the following fleets met in battle') !== false) {
             // use the english reader
             $reader = new Default_Reader_English_CombatReport();
         } else {
@@ -78,10 +78,10 @@ class Default_Reader_Reader
      */
     public static function readHarvestReports($source)
     {
-        if (stripos($source, 'recyclers hebben een totale opslagcapaciteit van')) {
+        if (stripos($source, 'recyclers hebben een totale opslagcapaciteit van') !== false) {
             // use the dutch reader
             $reader = new Default_Reader_Dutch_HarvestReport();
-        } else if (stripos($source, 'recycler(s) have a total cargo capacity of')) {
+        } else if (stripos($source, 'recycler(s) have a total cargo capacity of') !== false) {
             // use the english reader
             $reader = new Default_Reader_English_HarvestReport();
         } else {
@@ -100,10 +100,10 @@ class Default_Reader_Reader
      */
     public static function readRaids($source)
     {
-        if (stripos($source, 'De aanvaller heeft een totaal van')) {
+        if (preg_match("/([0-9.]*) metaal, ([0-9.]*) kristal en ([0-9.]*) deuterium/i", $source)) {
             // use the dutch reader
             $reader = new Default_Reader_Dutch_Raid();
-        } else if (stripos($source, 'The attacker lost a total of')) {
+        } else if (preg_match("/([0-9.]*) metal, ([0-9.]*) crystal and ([0-9.]*) deuterium/i", $source)) {
             // use the english reader
             $reader = new Default_Reader_English_Raid();
         } else {
