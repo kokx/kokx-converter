@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kokx's OGame CR Converter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-28 00:15+0100\n"
+"POT-Creation-Date: 2011-08-28 02:32+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
 "Language-Team: Kokx <pieter@kokx.nl>\n"
@@ -186,7 +186,6 @@ msgstr "De aanvaller steelt:"
 #: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:10
 #: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:12
 #: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:15
-#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:3
 msgid "metal"
 msgstr "Metaal"
 
@@ -199,7 +198,6 @@ msgstr "Kristal"
 #: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:10
 #: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:12
 #: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:15
-#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:3
 msgid "and"
 msgstr "en"
 
@@ -277,6 +275,14 @@ msgstr "Kristal."
 #: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:5
 msgid "The chance for a moon to be created is: "
 msgstr "Maankans: "
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:8
+msgid "The enormous amounts of free metal and crystal draw together and form a moon around the planet: "
+msgstr "De enorme hoeveelheden van rondzwevende metaal- en kristaldeeltjes trekken elkaar aan en vormen langzaam een maan, in een baan rond de planeet: "
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:9
+msgid "Moon given!"
+msgstr "Maan gegeven!"
 
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:2
 #, c-format

@@ -27,9 +27,9 @@
  *
  * @category   KokxConverter
  * @package    Default
- * @subpackage Readers_Dutch
+ * @subpackage Readers_English
  */
-class Default_Reader_Dutch_CombatReport
+class Default_Reader_English_CombatReport
 {
 
     /**
@@ -86,7 +86,7 @@ class Default_Reader_Dutch_CombatReport
      */
     public function parse($source)
     {
-        $this->_source = stristr($source, 'De volgende vloten kwamen elkaar tegen op');
+        $this->_source = stristr($source, 'On');
 
         // check the CR
         if (false === $this->_source) {
@@ -97,7 +97,7 @@ class Default_Reader_Dutch_CombatReport
 
         $matches = array();
 
-        if (preg_match('#^De volgende vloten kwamen elkaar tegen op \(([0-9]{2}).([0-9]{2}).([0-9]{4}) ([0-9]{2}):([0-9]{2}):([0-9]{2})\):#i', $this->_source, $matches)) {
+        if (preg_match('#^On \(([0-9]{2}).([0-9]{2}).([0-9]{4}) ([0-9]{2}):([0-9]{2}):([0-9]{2})\) the following fleets met in battle:#i', $this->_source, $matches)) {
             $this->_report->setTime(new DateTime($matches[3] . ":" . $matches[2] . ":" . $matches[1] . " " . $matches[4] . ":" . $matches[5] . ":" . $matches[6]));
         } else {
             throw new Exception('Bad CR');
@@ -105,7 +105,7 @@ class Default_Reader_Dutch_CombatReport
 
         $this->_source = substr($this->_source, strlen($matches[0]));
 
-        while (preg_match('#(Aanvaller|Verdediger) (.*) \[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]#i', $this->_source)) {
+        while (preg_match('#(Attacker|Defender) (.*) \[([0-9]:[0-9]{1,3}:[0-9]{1,2})\]#i', $this->_source)) {
             $this->_report->addRound($this->_parseRound());
         }
 
@@ -137,7 +137,7 @@ class Default_Reader_Dutch_CombatReport
         $round = new Default_Model_CombatRound();
 
         // first find the first attacker
-        $this->_source = stristr($this->_source, 'Aanvaller');
+        $this->_source = stristr($this->_source, 'Attacker');
 
         /*
          * Aanvaller Touch [2:193:9] Wapens: 110% Schilden: 90% Pantser: 110%
@@ -152,10 +152,10 @@ class Default_Reader_Dutch_CombatReport
          */
 
         // complicated regex that extracts all info from a fleet slot
-        $regex = '.*?(Aanvaller|Verdediger) ([^\n\r]*?)(\s*?\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\])?'
-               . '(\s*?Wapens: ([0-9]{0,2})0% Schilden: ([0-9]{0,2})0% Pantser: ([0-9]{0,2})0%)?\s*'
-               . '(Soort([A-Za-z.-\s]*)\s*' . 'Aantal([0-9.\s]*).*?Wapens' . '|vernietigd.)\s*'
-               . '.*?(?=Aanvaller|Verdediger)';
+        $regex = '.*?(Attacker|Defender) ([^\n\r]*?)(\s*?\[([0-9]:[0-9]{1,3}:[0-9]{1,2})\])?'
+               . '(\s*?Weapons: ([0-9]{0,2})0% Shields: ([0-9]{0,2})0% Armour: ([0-9]{0,2})0%)?\s*'
+               . '(Type([A-Za-z.-\s]*)\s*' . 'Total([0-9.\s]*).*?Weapons' . '|destroyed.)\s*'
+               . '.*?(?=Attacker|Defender)';
 
         $foundDefender = false;
 
@@ -167,7 +167,7 @@ class Default_Reader_Dutch_CombatReport
 
             $fleet->setPlayer($matches[2]);
 
-            if ($matches[9] != 'vernietigd.') {
+            if ($matches[9] != 'destroyed.') {
                 $matches[10] = str_replace(array("\n", "\r", "  "), "\t", $matches[10]);
                 $matches[11] = str_replace(array("\n", "\r", "  "), "\t", $matches[11]);
 
@@ -181,7 +181,7 @@ class Default_Reader_Dutch_CombatReport
             }
 
             // check if it is an attacker or a defender
-            if (strtolower($matches[1]) == 'aanvaller') {
+            if (strtolower($matches[1]) == 'attacker') {
                 if ($foundDefender) {
                     break;
                 }
@@ -216,71 +216,71 @@ class Default_Reader_Dutch_CombatReport
 
         switch ($name) {
             // ships
-            case 'k.vrachtschip':
+            case 's.cargo':
                 $name = Default_Model_Ship::SMALL_CARGO;
                 break;
-            case 'g.vrachtschip':
+            case 'l.cargo':
                 $name = Default_Model_Ship::LARGE_CARGO;
                 break;
-            case 'l.gevechtsschip':
+            case 'l.fighter':
                 $name = Default_Model_Ship::LIGHT_FIGTHER;
                 break;
-            case 'z.gevechtsschip':
+            case 'h.fighter':
                 $name = Default_Model_Ship::HEAVY_LASER;
                 break;
-            case 'kruiser':
+            case 'cruiser':
                 $name = Default_Model_Ship::CRUISER;
                 break;
-            case 'slagschip':
+            case 'battleship':
                 $name = Default_Model_Ship::BATTLESHIP;
                 break;
-            case 'kol.schip.':
+            case 'col.ship':
                 $name = Default_Model_Ship::COLONY_SHIP;
                 break;
-            case 'recycler':
+            case 'recy.':
                 $name = Default_Model_Ship::RECYCLER;
                 break;
-            case 'spionagesonde':
+            case 'esp.probe':
                 $name = Default_Model_Ship::ESPIONAGE_PROBE;
                 break;
-            case 'bommenwerper':
+            case 'bomber':
                 $name = Default_Model_Ship::BOMBER;
                 break;
-            case 'zonne-energiesatelliet':
+            case 'sol.sat':
                 $name = Default_Model_Ship::SOLAR_SATTELITE;
                 break;
-            case 'vernietiger':
+            case 'dest.':
                 $name = Default_Model_Ship::DESTROYER;
                 break;
-            case 'sterdesdoods':
+            case 'deathstar':
                 $name = Default_Model_Ship::DEATHSTAR;
                 break;
-            case 'interceptor.':
+            case 'battlecr.':
                 $name = Default_Model_Ship::BATTLECRUISER;
                 break;
             // defenses
-            case 'raketten':
+            case 'r.launcher':
                 $name = Default_Model_Ship::ROCKET_LAUNCHER;
                 break;
-            case 'k.laser':
+            case 'l.laser':
                 $name = Default_Model_Ship::LIGHT_LASER;
                 break;
-            case 'g.laser':
+            case 'h.laser':
                 $name = Default_Model_Ship::HEAVY_LASER;
                 break;
             case 'gauss':
                 $name = Default_Model_Ship::GAUSS_CANNON;
                 break;
-            case 'ion.k':
+            case 'ionc.':
                 $name = Default_Model_Ship::ION_CANNON;
                 break;
             case 'plasma':
                 $name = Default_Model_Ship::PLASMA_TURRET;
                 break;
-            case 'k.koepel':
+            case 's.dome':
                 $name = Default_Model_Ship::SMALL_SHIELD_DOME;
                 break;
-            case 'g.koepel':
+            case 'l.dome':
                 $name = Default_Model_Ship::LARGE_SHIELD_DOME;
                 break;
         }
@@ -296,14 +296,14 @@ class Default_Reader_Dutch_CombatReport
     protected function _parseResult()
     {
         // check who has won the fight
-        if (preg_match('#gewonnen#i', $this->_source)) {
-            if (preg_match('#aanvaller heeft het gevecht#i', $this->_source)) {
+        if (preg_match('#has won the battle#i', $this->_source)) {
+            if (preg_match('#attacker has won the battle#i', $this->_source)) {
                 $this->_report->setWinner(Default_Model_CombatReport::ATTACKER);
 
                 // the attacker won, get the number of stolen resources
 
-                // De aanvaller heeft het gevecht gewonnen! De aanvaller steelt 26.971 metaal, 16.303 kristal en 11.528 deuterium.
-                $regex = 'De aanvaller steelt\s*?([0-9.]*) metaal, ([0-9.]*) kristal en ([0-9.]*) deuterium';
+                // The attacker has won the battle! He captured 67.585 metal, 36.070 crystal and 10.421 deuterium.
+                $regex = 'He captured\s*?([0-9.]*) metal, ([0-9.]*) crystal and ([0-9.]*) deuterium';
 
                 $matches = array();
                 preg_match('#' . $regex . '#si', $this->_source, $matches);
@@ -320,34 +320,32 @@ class Default_Reader_Dutch_CombatReport
 
         // get the attacker's losses
         $matches = array();
-        preg_match('#De aanvaller heeft een totaal van ([0-9.]*) eenheden verloren.#i', $this->_source, $matches);
+        preg_match('#The attacker lost a total of ([0-9.]*) units.#i', $this->_source, $matches);
 
         $this->_report->setLossesAttacker((int) str_replace('.', '', $matches[1]));
 
         // get the defender's losses
         $matches = array();
-        preg_match('#De verdediger heeft een totaal van ([0-9.]*) eenheden verloren.#i', $this->_source, $matches);
+        preg_match('#The defender lost a total of ([0-9.]*) units.#i', $this->_source, $matches);
 
         $this->_report->setLossesDefender((int) str_replace('.', '', $matches[1]));
 
         // get the debris
         $matches = array();
-        preg_match('#in de ruimte zweven nu ([0-9.]*) Metaal en ([0-9.]*) Kristal.#i', $this->_source, $matches);
+        preg_match('#At these space coordinates now float ([0-9.]*) metal and ([0-9.]*) crystal.#i', $this->_source, $matches);
 
         $this->_report->setDebris((int) str_replace('.', '', $matches[1]), (int) str_replace('.', '', $matches[2]));
 
         // moonchance
         $matches = array();
-        if (preg_match('#De kans dat een maan ontstaat uit het puin is ([0-9]{1,2})#i', $this->_source, $matches)) {
+        if (preg_match('#The chance for a moon to be created is ([0-9]{1,2})#i', $this->_source, $matches)) {
             $this->_report->setMoonChance((int) str_replace('.', '', $matches[1]));
         }
 
         // moon creation
 
-        // De enorme hoeveelheden van rondzwevende metaal- en kristaldeeltjes trekken elkaar aan
-        // en vormen langzaam een maan, in een baan rond de planeet.
-        $regex = 'De enorme hoeveelheden van rondzwevende metaal- en kristaldeeltjes trekken elkaar aan '
-               . 'en vormen langzaam een maan, in een baan rond de planeet.';
+        // The enormous amounts of free metal and crystal draw together and form a moon around the planet.
+        $regex = 'form a moon around the planet.';
         $matches = array();
         if (preg_match("#{$regex}#i", $this->_source, $matches)) {
             $this->_report->setMoonGiven(true);

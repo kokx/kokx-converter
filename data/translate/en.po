@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kokx's OGame CR Converter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-27 19:37+0100\n"
+"POT-Creation-Date: 2011-08-28 02:33+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
 "Language-Team: Kokx <pieter@kokx.nl>\n"
@@ -160,12 +160,10 @@ msgid " , the following fleets met in battle:"
 msgstr " , the following fleets met in battle:"
 
 #: application/modules/default/renderers/kokx/scripts/firstround.phtml:7
-#: application/modules/default/renderers/kokx/scripts/lastround.phtml:13
 msgid "Attacker"
 msgstr "Attacker"
 
 #: application/modules/default/renderers/kokx/scripts/firstround.phtml:19
-#: application/modules/default/renderers/kokx/scripts/lastround.phtml:38
 msgid "Defender"
 msgstr "Defender"
 
@@ -188,7 +186,6 @@ msgstr "The attacker captured:"
 #: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:10
 #: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:12
 #: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:15
-#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:3
 msgid "metal"
 msgstr "metal"
 
@@ -201,7 +198,6 @@ msgstr "crystal"
 #: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:10
 #: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:12
 #: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:15
-#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:3
 msgid "and"
 msgstr "and"
 
@@ -279,6 +275,14 @@ msgstr "crystal."
 #: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:5
 msgid "The chance for a moon to be created is: "
 msgstr "The chance for a moon to be created is: "
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:8
+msgid "The enormous amounts of free metal and crystal draw together and form a moon around the planet: "
+msgstr "The enormous amounts of free metal and crystal draw together and form a moon around the planet: "
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:9
+msgid "Moon given!"
+msgstr "Moon given!"
 
 #: application/modules/default/renderers/kokx/scripts/summary.phtml:2
 #, c-format

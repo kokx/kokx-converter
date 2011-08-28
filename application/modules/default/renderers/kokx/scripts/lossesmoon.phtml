@@ -4,4 +4,7 @@
 <? if ($this->report->getMoonChance() > 0): ?>
     <?= $this->translate("The chance for a moon to be created is: ") . $this->colorNumber($this->report->getMoonChance()) . " %\n" ?>
 <? endif; ?>
-
+<? if ($this->report->getMoonGiven()): ?>
+<?= $this->translate("The enormous amounts of free metal and crystal draw together and form a moon around the planet: ")
+  . "[color=#3183E7][b]" . $this->translate("Moon given!") . "[/b][/color]\n" ?>
+<? endif ?>
