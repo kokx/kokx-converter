@@ -90,9 +90,13 @@ $defaultLoader = new Kokx_Application_ResourceLoader(array(
 // translation config
 $translate = new Zend_Translate(array(
     'adapter' => 'gettext',
-    'content' => TRANSLATE,
-    'locale'  => 'auto',
-    'scan'    => Zend_Translate::LOCALE_FILENAME
+    'content' => TRANSLATE . DIRECTORY_SEPARATOR . 'en.mo',
+    'locale'  => 'en'
+));
+$translate->addTranslation(array(
+    'adapter' => 'gettext',
+    'content' => TRANSLATE . DIRECTORY_SEPARATOR . 'nl.mo',
+    'locale'  => 'nl'
 ));
 
 Zend_Registry::set('Zend_Translate', $translate);
