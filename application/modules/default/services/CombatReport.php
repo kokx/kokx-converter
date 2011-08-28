@@ -80,7 +80,7 @@ class Default_Service_CombatReport
             $report->setHarvestReports(Default_Reader_Reader::readHarvestReports($data['harvest_reports']));
         }
         if (isset($data['raids']) && !empty($data['raids']) && is_string($data['raids'])) {
-            $report->setHarvestReports(Default_Reader_Reader::readRaids($data['raids']));
+            $report->setRaids(Default_Reader_Reader::readRaids($data['raids']));
         }
 
         $this->_data = $data;

@@ -7,9 +7,9 @@
 <? endif; ?>
 <?= $this->translate("The attacker captured:") . "\n" ?>
 <? if ($this->report->getWinner() == Default_Model_CombatReport::ATTACKER): ?>
-<?= $this->colorNumber($this->report->getMetal()) ?> <?= $this->translate("metal") ?>, <?= $this->colorNumber($this->report->getCrystal()) ?> <?= $this->translate("crystal") ?> <?= $this->translate("and") ?> <?= $this->colorNumber($this->report->getDeuterium()) ?> <?= $this->translate("deuterium") ?>
+<?= $this->colorNumber($this->report->getMetal()) ?> <?= $this->translate("metal") ?>, <?= $this->colorNumber($this->report->getCrystal()) ?> <?= $this->translate("crystal") ?> <?= $this->translate("and") ?> <?= $this->colorNumber($this->report->getDeuterium()) ?> <?= $this->translate("deuterium") . "\n" ?>
 	<? foreach ($this->report->getRaids() as $raid): ?>
-    <?= $this->colorNumber($raid->getMetal()) ?> <?= $this->translate("metal") ?>, <?= $this->colorNumber($raid->getCrystal()) ?> <?= $this->translate("crystal") ?> <?= $this->translate("and") ?> <?= $this->colorNumber($raid->getDeuterium()) ?> <?= $this->translate("deuterium") ?>
+    <?= $this->colorNumber($raid->getMetal()) ?> <?= $this->translate("metal") ?>, <?= $this->colorNumber($raid->getCrystal()) ?> <?= $this->translate("crystal") ?> <?= $this->translate("and") ?> <?= $this->colorNumber($raid->getDeuterium()) ?> <?= $this->translate("deuterium") . "\n" ?>
 	<? endforeach; ?>
 <? else: ?>
 - <?= $this->translate("metal") ?>, - <?= $this->translate("crystal") ?> <?= $this->translate("and") ?> - <?= $this->translate("deuterium") ?>

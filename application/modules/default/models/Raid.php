@@ -85,7 +85,7 @@ class Default_Model_Raid
         $this->_crystal        = $crystal;
         $this->_deuterium      = $deuterium;
         $this->_lossesAttacker = $lossesAttacker;
-        $This->_lossesDefender = $lossesDefender;
+        $this->_lossesDefender = $lossesDefender;
     }
 
     /**

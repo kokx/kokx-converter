@@ -45,17 +45,37 @@ class Default_Reader_Dutch_Raid
         /**
          * The source only has to contain something like:
          *
-         *
          * De aanvaller heeft het gevecht gewonnen! De aanvaller steelt 13.962 metaal, 4.463 kristal en 123.168 deuterium.
          *
          * De aanvaller heeft een totaal van 0 eenheden verloren.
          * De verdediger heeft een totaal van 11.056.000 eenheden verloren.
          * Op deze coördinaten in de ruimte zweven nu 2.407.800 metaal en 909.000 kristal.
+         *
+         *
+         * [[ REDESIGN short version: ]]
+         * Gevechtsrapport
+         *
+         * gevecht vond plaats op maan [x:xxx:x] (--.--.---- --:--:--)
+         *
+         * Wickedmen van Sinasappelsap [x:xx:x]
+         * vs
+         *
+         * MNN van maan [x:xxx:x]
+         *
+         * schepen/verdediging: 	160 		schepen/verdediging: 	0
+         * eenheden verloren: 	0 		eenheden verloren: 	0
+         * Wapens: 	100% 		Wapens: 	110%
+         * Schilden: 	80% 		Schilden: 	100%
+         * Pantser: 	80% 		Pantser: 	120%
+         * winnaar: Wickedmen
+         * De aanvaller heeft het gevecht gewonnen!
+         * buit : 	1.377.538 metaal, 1.074.657 kristal en 544.996 deuterium.
+         * puinveld : 	0 metaal en 0 kristal.
+         * gerepareerd : 	?
+         * Gedetailleerd gevechtsrapport >> 
          */
 
-        $regex = '([0-9.]*) metaal, ([0-9.]*) kristal en ([0-9.]*) deuterium'
-               . '.*?aanvaller heeft een totaal van ([0-9.]*) eenheden verloren'
-               . '.*?verdediger heeft een totaal van ([0-9.]*) eenheden verloren';
+        $regex = '([0-9.]*) metaal, ([0-9.]*) kristal en ([0-9.]*) deuterium';
 
         $matches = array();
 
@@ -66,9 +86,9 @@ class Default_Reader_Dutch_Raid
                 (int) str_replace('.', '', $match[1]),
                 (int) str_replace('.', '', $match[2]),
                 (int) str_replace('.', '', $match[3]),
-                (int) str_replace('.', '', $match[4]),
-                (int) str_replace('.', '', $match[5])
-            );
+                0, 0 // temporarily, the attacker and defender losses will be 0
+                     // until we implement good support for this
+            ));
         }
 
 

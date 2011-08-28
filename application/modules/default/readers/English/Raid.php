@@ -27,9 +27,9 @@
  *
  * @category   Kokx
  * @package    Default
- * @subpackage Readers_Dutch
+ * @subpackage Readers_English
  */
-class Default_Reader_Dutch_Raid
+class Default_Reader_English_Raid
 {
 
     /**
@@ -45,29 +45,51 @@ class Default_Reader_Dutch_Raid
         /**
          * The source only has to contain something like:
          *
+         * The attacker has won the battle! He captured 180.341 metal, 117.390 crystal and 41.033 deuterium. 
+         * 
+         * The attacker lost a total of 0 units.
+         * The defender lost a total of 0 units.
+         * At these space coordinates now float 0 metal and 0 crystal.
          *
-         * De aanvaller heeft het gevecht gewonnen! De aanvaller steelt 13.962 metaal, 4.463 kristal en 123.168 deuterium.
          *
-         * De aanvaller heeft een totaal van 0 eenheden verloren.
-         * De verdediger heeft een totaal van 11.056.000 eenheden verloren.
-         * Op deze coördinaten in de ruimte zweven nu 2.407.800 metaal en 909.000 kristal.
+         * [[ REDESIGN short version: ]]
+         * Combat Report
+         * 
+         * Combat at Flehm [1:227:5] (27.08.2011 15:08:23) 
+         * 
+         * kokx from Yatas [1:206:7]
+         * vs
+         * 
+         * Wilgold from Flehm [1:227:5]
+         * Ships/Defence: 	 80 		 Ships/Defence: 	 0 
+         * Lost units: 	 0 		 Lost units: 	 0 
+         * Weapons: 	 110% 		 Weapons: 	 40% 
+         * Shields: 	 110% 		 Shields: 	 60% 
+         * Armour: 	 110% 		 Armour: 	 40% 
+         * Winner: kokx 
+         * The attacker has won the battle! 
+         * Loot : 	 180.341 Metal, 117.390 Crystal and 41.033 Deuterium. 
+         * debris field : 	 0 metal and 0 crystal. 
+         * Repaired : 	 ? 
+         * 
+         * Detailed combat report >>
          */
 
-        $regex = '([0-9.]*) metaal, ([0-9.]*) kristal en ([0-9.]*) deuterium'
-               . '.*?aanvaller heeft een totaal van ([0-9.]*) eenheden verloren'
-               . '.*?verdediger heeft een totaal van ([0-9.]*) eenheden verloren';
+        $regex = '([0-9.]*) metal, ([0-9.]*) crystal and ([0-9.]*) deuterium';
 
         $matches = array();
 
         preg_match_all('/' . $regex . '/i', $source, $matches, PREG_SET_ORDER);
 
         foreach ($matches as $match) {
+            // temporarily, the attacker and defender losses will be 0
+            // until we implement good support for this
             $raids[] = new Default_Model_Raid(
                 (int) str_replace('.', '', $match[1]),
                 (int) str_replace('.', '', $match[2]),
                 (int) str_replace('.', '', $match[3]),
-                (int) str_replace('.', '', $match[4]),
-                (int) str_replace('.', '', $match[5])
+                0,
+                0
             );
         }
 
