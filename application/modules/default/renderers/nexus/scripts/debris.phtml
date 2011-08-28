@@ -6,7 +6,7 @@
         <?= $this->translate("At the target, ") . $this->colorNumber($hr->getFieldMetal()) . $this->translate(" metal and ") . $this->colorNumber($hr->getFieldCrystal()) . $this->translate(" crystal are floating in space.") . "\n" ?>
         <?= $this->translate("You have harvested %s metal and %s crystal.", $this->colorNumber($hr->getMetal()), $this->colorNumber($hr->getCrystal())) ?>
 
-		<? $percent = ($hr->getMetal() + $hr->getCrystal()) / ($hr->getFieldMetal() + $hr->getFieldCrystal()) * 100 ?>
+		<? $percent = (($hr->getFieldMetal() + $hr->getFieldCrystal()) > 0) ? ($hr->getMetal() + $hr->getCrystal()) / ($hr->getFieldMetal() + $hr->getFieldCrystal()) * 100 : 0 ?>
 		<?= $this->translate("Recycled: ") . $this->colorNumber($percent) ?>%
     <? endforeach; ?>
     [color=yellow]__________________________[/color]
