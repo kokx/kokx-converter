@@ -1,0 +1,46 @@
+<? if ($this->totalRaids > 0): ?>
+    <?= $this->translate("The attacker captured a total of %s units.", $this->colorNumber($this->totalRaids, '#ff00ff')) . "\n" ?>
+<? endif; ?>
+	__________________
+
+    [color=#ff0000][size=10][b]<?= $this->translate("Summary of profit/losses:") ?>[/b][/size][/color]
+<? if ($this->report->getWinner() == Default_Model_CombatReport::ATTACKER): ?>
+<?php
+// calculate the result
+$attackerResult = $this->totalDebris + $this->totalRaids - $this->report->getLossesAttacker();
+$defenderResult = $this->report->getLossesDefender();
+?>
+    <? if ($attackerResult > 0): ?>
+        <?= $this->translate("The attacker made a profit of %s units.", $this->colorNumber(abs($attackerResult), '#ff00ff')) . "\n" ?>
+    <? else: ?>
+        <?= $this->translate("The attacker lost a total of %s units.", $this->colorNumber(abs($attackerResult), '#ff00ff')) . "\n" ?>
+    <? endif; ?>
+    <?= $this->translate("The defender lost a total of %s units.", $this->colorNumber($defenderResult, '#ff00ff')) . "\n" ?>
+<? elseif ($this->report->getWinner() == Default_Model_CombatReport::DRAW): ?>
+<?php
+// calculate the result
+$attackerResult = $this->totalDebris + $this->totalRaids - $this->report->getLossesAttacker();
+$defenderResult = $this->report->getLossesDefender();
+?>
+    <? if ($attackerResult > 0): ?>
+        <?= $this->translate("The attacker made a profit of %s units.", $this->colorNumber(abs($attackerResult), '#ff00ff')) . "\n" ?>
+    <? else: ?>
+        <?= $this->translate("The attacker lost a total of %s units.", $this->colorNumber(abs($attackerResult), '#ff00ff')) . "\n" ?>
+    <? endif; ?>
+    <?= $this->translate("The defender lost a total of %s units.", $this->colorNumber($defenderResult, '#ff00ff')) . "\n" ?>
+<? else: /* Defender is the winner */ ?>
+<?php
+// calculate the result
+$attackerResult = $this->report->getLossesAttacker();
+$defenderResult = $this->totalDebris - $this->report->getLossesDefender();
+?>
+    <?= $this->translate("The attacker lost a total of %s units.", $this->colorNumber($attackerResult, '#ff00ff')) . "\n" ?>
+    <? if ($defenderResult > 0): ?>
+        <?= $this->translate("The defender lost a total of %s units.", $this->colorNumber(abs($defenderResult), '#ff00ff')) ?>
+    <? else: ?>
+        <?= $this->translate("The defender made a profit of %s units.", $this->colorNumber(abs($defenderResult), '#ff00ff')) ?>
+    <? endif; ?>
+<? endif; ?>
+
+<? /* and a link to the Converter site*/ ?>
+[size=10][url=<?= LINK ?>]Converted by Kokx's CR Converter <?= VERSION ?> (skin: Albert Fish)[/url][/size][/align]

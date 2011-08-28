@@ -1,0 +1,353 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Kokx's OGame CR Converter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-28 05:00+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Pieter Kokx <pieter@kokx.nl>\n"
+"Language-Team: Kokx <pieter@kokx.nl>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: ../../\n"
+"X-Poedit-SearchPath-0: application\n"
+"X-Poedit-SearchPath-1: data/translate/ids\n"
+
+#: application/modules/default/renderers/RendererAbstract.php:139
+#: application/modules/default/renderers/RendererAbstract.php:140
+msgid " & "
+msgstr " & "
+
+#: application/modules/default/renderers/RendererAbstract.php:138
+#, php-format
+msgid "%s vs %s (A: %s, D: %s) [TOT: %s]"
+msgstr "%s vs %s (A: %s, D: %s) [TOT: %s]"
+
+#: application/modules/default/services/CombatReport.php:119
+msgid "After the battle..."
+msgstr "After the battle..."
+
+#: data/translate/ids/ships.php:32
+msgid "Small Cargo"
+msgstr "Small Cargo"
+
+#: data/translate/ids/ships.php:33
+msgid "Large Cargo"
+msgstr "Large Cargo"
+
+#: data/translate/ids/ships.php:34
+msgid "Light Fighter"
+msgstr "Light Fighter"
+
+#: data/translate/ids/ships.php:35
+msgid "Heavy Fighter"
+msgstr "Heavy Fighter"
+
+#: data/translate/ids/ships.php:36
+msgid "Cruiser"
+msgstr "Cruiser"
+
+#: data/translate/ids/ships.php:37
+msgid "Battleship"
+msgstr "Battleship"
+
+#: data/translate/ids/ships.php:38
+msgid "Colony Ship"
+msgstr "Colony Ship"
+
+#: data/translate/ids/ships.php:39
+msgid "Recycler"
+msgstr "Recycler"
+
+#: data/translate/ids/ships.php:40
+msgid "Espionage Probe"
+msgstr "Espionage Probe"
+
+#: data/translate/ids/ships.php:41
+msgid "Bomber"
+msgstr "Bomber"
+
+#: data/translate/ids/ships.php:42
+msgid "Solar Sattelite"
+msgstr "Solar Sattelite"
+
+#: data/translate/ids/ships.php:43
+msgid "Destroyer"
+msgstr "Destroyer"
+
+#: data/translate/ids/ships.php:44
+msgid "Deathstar"
+msgstr "Deathstar"
+
+#: data/translate/ids/ships.php:45
+msgid "Battlecruiser"
+msgstr "Battlecruiser"
+
+#: data/translate/ids/ships.php:48
+msgid "Rocket Launcher"
+msgstr "Rocket Launcher"
+
+#: data/translate/ids/ships.php:49
+msgid "Light Laser"
+msgstr "Light Laser"
+
+#: data/translate/ids/ships.php:50
+msgid "Heavy Laser"
+msgstr "Heavy Laser"
+
+#: data/translate/ids/ships.php:51
+msgid "Gauss Cannon"
+msgstr "Gauss Cannon"
+
+#: data/translate/ids/ships.php:52
+msgid "Ion Cannon"
+msgstr "Ion Cannon"
+
+#: data/translate/ids/ships.php:53
+msgid "Plasma Turret"
+msgstr "Plasma Turret"
+
+#: data/translate/ids/ships.php:54
+msgid "Small Shield Dome"
+msgstr "Small Shield Dome"
+
+#: data/translate/ids/ships.php:55
+msgid "Large Shield Dome"
+msgstr "Large Shield Dome"
+
+#: application/layouts/default.phtml:27
+#: application/layouts/default.phtml:47
+msgid "Kokx's OGame CR converter"
+msgstr "Kokx's OGame CR converter"
+
+#: application/modules/default/views/scripts/index/index.phtml:4
+msgid "Invalid CR"
+msgstr "Invalid CR"
+
+#: application/modules/default/views/scripts/index/index.phtml:10
+msgid "Title:"
+msgstr "Title:"
+
+#: application/modules/default/views/scripts/index/index.phtml:16
+msgid "Convert!"
+msgstr "Convert!"
+
+#: application/modules/default/views/scripts/index/index.phtml:20
+msgid "Generic options"
+msgstr "Generic options"
+
+#: application/modules/default/views/scripts/index/index.phtml:23
+msgid "Skin"
+msgstr "Skin"
+
+#: application/modules/default/views/scripts/index/index.phtml:30
+msgid "Hide the time"
+msgstr "Hide the time"
+
+#: application/modules/default/views/scripts/index/index.phtml:34
+msgid "Text in the middle of the CR"
+msgstr "Text in the middle of the CR"
+
+#: application/modules/default/views/scripts/index/index.phtml:36
+msgid "Merge fleets of the same player"
+msgstr "Merge fleets of the same player"
+
+#: application/modules/default/views/scripts/index/index.phtml:43
+msgid "Raids"
+msgstr "Raids"
+
+#: application/modules/default/views/scripts/index/index.phtml:48
+msgid "Harvest Reports"
+msgstr "Harvest Reports"
+
+#: application/modules/default/renderers/kokx/scripts/time.phtml:2
+msgid "On "
+msgstr "On "
+
+#: application/modules/default/renderers/kokx/scripts/time.phtml:11
+msgid " , the following fleets met in battle:"
+msgstr " , the following fleets met in battle:"
+
+#: application/modules/default/renderers/kokx/scripts/firstround.phtml:7
+msgid "Attacker"
+msgstr "Attacker"
+
+#: application/modules/default/renderers/kokx/scripts/firstround.phtml:19
+msgid "Defender"
+msgstr "Defender"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:2
+msgid "The battle ends in a draw."
+msgstr "The battle ends in a draw."
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:4
+msgid "The attacker has won the battle!"
+msgstr "The attacker has won the battle!"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:6
+msgid "The defender has won the battle!"
+msgstr "The defender has won the battle!"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:8
+msgid "The attacker captured:"
+msgstr "The attacker captured:"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:10
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:12
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:15
+msgid "metal"
+msgstr "metal"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:10
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:12
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:15
+msgid "crystal"
+msgstr "crystal"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:10
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:12
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:15
+msgid "and"
+msgstr "and"
+
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:10
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:12
+#: application/modules/default/renderers/kokx/scripts/winnerloot.phtml:15
+msgid "deuterium"
+msgstr "deuterium"
+
+#: application/modules/default/renderers/kokx/scripts/debris.phtml:5
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:5
+msgid "Your "
+msgstr "Your "
+
+#: application/modules/default/renderers/kokx/scripts/debris.phtml:5
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:5
+msgid " recycler(s) have a total cargo capacity of "
+msgstr " recycler(s) have a total cargo capacity of "
+
+#: application/modules/default/renderers/kokx/scripts/debris.phtml:6
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:6
+msgid "At the target, "
+msgstr "At the target, "
+
+#: application/modules/default/renderers/kokx/scripts/debris.phtml:6
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:6
+msgid " metal and "
+msgstr " metal and "
+
+#: application/modules/default/renderers/kokx/scripts/debris.phtml:6
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:6
+msgid " crystal are floating in space."
+msgstr " crystal are floating in space."
+
+#: application/modules/default/renderers/kokx/scripts/debris.phtml:7
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:7
+#, c-format
+msgid "You have harvested %s metal and %s crystal."
+msgstr "You have harvested %s metal and %s crystal."
+
+#: application/modules/default/renderers/kokx/scripts/debris.phtml:10
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:10
+msgid "Recycled: "
+msgstr "Recycled: "
+
+#: application/modules/default/renderers/kokx/scripts/debris.phtml:14
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:14
+msgid "A total of "
+msgstr "A total of "
+
+#: application/modules/default/renderers/kokx/scripts/debris.phtml:14
+#: application/modules/default/renderers/tsjerk/scripts/debris.phtml:14
+msgid " units debris has been recycled."
+msgstr " units debris has been recycled."
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:1
+#: application/modules/default/renderers/kokx/scripts/summary.phtml:20
+#: application/modules/default/renderers/kokx/scripts/summary.phtml:32
+#: application/modules/default/renderers/kokx/scripts/summary.phtml:41
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:1
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:16
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:28
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:37
+#, c-format
+msgid "The attacker lost a total of %s units."
+msgstr "The attacker lost a total of %s units."
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:2
+#: application/modules/default/renderers/kokx/scripts/summary.phtml:22
+#: application/modules/default/renderers/kokx/scripts/summary.phtml:34
+#: application/modules/default/renderers/kokx/scripts/summary.phtml:43
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:2
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:18
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:30
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:39
+#, c-format
+msgid "The defender lost a total of %s units."
+msgstr "The defender lost a total of %s units."
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:3
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:3
+msgid "At these space coordinates now float "
+msgstr "At these space coordinates now float "
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:3
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:3
+msgid "crystal."
+msgstr "crystal."
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:5
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:5
+msgid "The chance for a moon to be created is: "
+msgstr "The chance for a moon to be created is: "
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:8
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:8
+msgid "The enormous amounts of free metal and crystal draw together and form a moon around the planet: "
+msgstr "The enormous amounts of free metal and crystal draw together and form a moon around the planet: "
+
+#: application/modules/default/renderers/kokx/scripts/lossesmoon.phtml:9
+#: application/modules/default/renderers/tsjerk/scripts/lossesmoon.phtml:9
+msgid "Moon given!"
+msgstr "Moon given!"
+
+#: application/modules/default/renderers/kokx/scripts/summary.phtml:2
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:2
+#, c-format
+msgid "The attacker captured a total of %s units."
+msgstr "The attacker captured a total of %s units."
+
+#: application/modules/default/renderers/kokx/scripts/summary.phtml:6
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:6
+msgid "Summary of profit/losses:"
+msgstr "Summary of profit/losses:"
+
+#: application/modules/default/renderers/kokx/scripts/summary.phtml:18
+#: application/modules/default/renderers/kokx/scripts/summary.phtml:30
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:14
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:26
+#, c-format
+msgid "The attacker made a profit of %s units."
+msgstr "The attacker made a profit of %s units."
+
+#: application/modules/default/renderers/kokx/scripts/summary.phtml:45
+#: application/modules/default/renderers/tsjerk/scripts/summary.phtml:41
+#, c-format
+msgid "The defender made a profit of %s units."
+msgstr "The defender made a profit of %s units."
+
+#: application/modules/default/renderers/kokx/scripts/lastround.phtml:17
+#: application/modules/default/renderers/kokx/scripts/lastround.phtml:42
+#: application/modules/default/renderers/tsjerk/scripts/lastround.phtml:17
+#: application/modules/default/renderers/tsjerk/scripts/lastround.phtml:42
+msgid "Destroyed!"
+msgstr "Destroyed!"
+
+#~ msgid " crystal."
+#~ msgstr " crystal."
+

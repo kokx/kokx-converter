@@ -1,0 +1,80 @@
+<?php
+/**
+ * This file is part of Kokx's CR Converter.
+ *
+ * Kokx's CR Converter is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Kokx's CR Converter is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Kokx's CR Converter.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category   KokxConverter
+ * @license    http://www.gnu.org/licenses/gpl.txt
+ * @copyright  Copyright (c) 2009 Kokx
+ * @package    Kokx_Render
+ */
+?>
+<html>
+
+<head>
+<title><?= $this->translate("Kokx's OGame CR converter") ?></title>
+
+<script type="text/javascript" src="/js/main.js"></script>
+<link rel="stylesheet" type="text/css" media="screen, handheld, projection" href="/css/main.css" />
+</head>
+
+<body>
+<div id="container">
+    <div id="lang">
+        <div id="lang-nl" class="lang<?= ($this->translate()->getTranslator()->getLocale() == 'nl') ? ' lang-selected' : ''; ?>">
+            <a href="?lang=nl"><img src="/images/flags/Netherlands-Flag.png" alt="Netherlands" /><br />
+            Nederlands</a>
+        </div>
+        <div id="lang-en" class="lang<?= ($this->translate()->getTranslator()->getLocale() == 'en') ? ' lang-selected' : ''; ?>">
+            <a href="?lang=en"><img src="/images/flags/United-Kingdom-flag.png" /><br />
+            English</a>
+        </div>
+    </div>
+    <br />
+    <div id="header">
+        <h1><?= $this->translate("Kokx's OGame CR converter") ?></h1>
+    </div>
+    <br />
+    <div id="adsense">
+    <?= $this->render('partial/adsense.phtml'); ?>
+    </div>
+    
+    <div id="container">
+<?= $this->layout()->content; ?>
+    </div>
+
+    <div style="margin-left: 10px;">
+<pre>
+Kokx's CR Converter  Copyright (C) 2009  Kokx
+This program comes with ABSOLUTELY NO WARRANTY; for details, <a href="COPYING.html#section15">click here</a>.
+This is free software, and you are welcome to redistribute it
+under certain conditions; <a href="COPYING.html#terms">click here</a> for details.
+</pre>
+    </div>
+</div>
+
+<? /* Google Analytics code */ ?>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("<?= GOOGLE_GA_TRACKER_ID ?>");
+    pageTracker._trackPageview();
+} catch(err) {}</script>
+    </body>
+
+    </html>

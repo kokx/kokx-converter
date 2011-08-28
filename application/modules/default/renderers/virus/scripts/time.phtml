@@ -1,0 +1,13 @@
+[align=center]<?php
+echo $this->translate("On ");
+$time = $this->report->getTime();
+if ($this->hideTime) {
+    echo $time->format('d-m-Y --:--:--');
+} else {
+    echo $time->format('d-m-Y H:i:s');
+}
+
+$rounds = $this->report->getRounds();
+echo $this->translate(" , the following fleets met in battle:");
+?>
+

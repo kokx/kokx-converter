@@ -1,0 +1,59 @@
+<?php
+$rounds = $this->report->getRounds();
+
+$lastRound = $rounds[count($rounds) - 1];
+$firstRound = $rounds[0];
+
+$firstFleets = $firstRound->getAttackers();
+?>
+
+
+<? /* attackers */ ?>
+<? foreach ($lastRound->getAttackers() as $key => $fleet): ?>
+    [color=red][b]<?= $this->translate("Attacker") ?>[/b][/color] <?= $fleet->getPlayer() . "\n" ?>
+    [color=red]________________________________________________[/color]
+
+    <? if (count($fleet->getShips()) < 1): ?>
+    [b]<?= $this->translate("Destroyed!") ?>[/b]
+    <? else: ?>
+        <? if (isset($firstFleets[$key])): ?>
+            <? $oldFleet = $firstFleets[$key]; ?>
+            <? /* we have old data about the fleet */ ?>
+            <? foreach ($oldFleet->getShips() as $ship): ?>
+                <?= $this->formatShip(true, $ship, $fleet); ?>
+            <? endforeach; ?>
+        <? else: ?>
+            <? foreach ($fleet->getShips() as $ship): ?>
+                <?= $this->formatShip(true, $ship); ?>
+            <? endforeach; ?>
+        <? endif; ?>
+    <? endif; ?>
+    [color=red]_________________________________________[/color]
+
+<? endforeach; ?>
+
+<? /* defenders */
+$firstFleets = $firstRound->getDefenders(); ?>
+<? foreach ($lastRound->getDefenders() as $key => $fleet): ?>
+    [color=green][b]<?= $this->translate("Defender") ?>[/b][/color] <?= $fleet->getPlayer() . "\n" ?>
+    [color=green]________________________________________________[/color]
+
+    <? if (count($fleet->getShips()) < 1): ?>
+    [b]<?= $this->translate("Destroyed!") ?>[/b]
+    <? else: ?>
+        <? if (isset($firstFleets[$key])): ?>
+            <? $oldFleet = $firstFleets[$key]; ?>
+            <? /* we have old data about the fleet */ ?>
+            <? foreach ($oldFleet->getShips() as $ship): ?>
+                <?= $this->formatShip(false, $ship, $fleet); ?>
+            <? endforeach; ?>
+        <? else: ?>
+            <? foreach ($fleet->getShips() as $ship): ?>
+                <?= $this->formatShip(false, $ship); ?>
+            <? endforeach; ?>
+        <? endif; ?>
+    <? endif; ?>
+    [color=green]_________________________________________[/color]
+
+<? endforeach; ?>
+

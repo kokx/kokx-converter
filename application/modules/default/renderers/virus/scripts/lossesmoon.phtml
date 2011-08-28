@@ -1,0 +1,10 @@
+<?= $this->translate("The attacker lost a total of %s units.", $this->colorNumber($this->report->getLossesAttacker())) . "\n" ?>
+<?= $this->translate("The defender lost a total of %s units.", $this->colorNumber($this->report->getLossesDefender()), 'white') . "\n" ?>
+<?= $this->translate("At these space coordinates now float ") . $this->colorNumber($this->report->getDebrisMetal(), 'blue') . " " . $this->translate("metal") . " " . $this->translate("and") . " " . $this->colorNumber($this->report->getDebrisCrystal(), 'blue') . " " . $this->translate("crystal.") . "\n" ?>
+<? if ($this->report->getMoonChance() > 0): ?>
+    <?= $this->translate("The chance for a moon to be created is: ") . $this->colorNumber($this->report->getMoonChance()) . " %\n" ?>
+<? endif; ?>
+<? if ($this->report->getMoonGiven()): ?>
+<?= $this->translate("The enormous amounts of free metal and crystal draw together and form a moon around the planet: ")
+  . "[color=white][b]" . $this->translate("Moon given!") . "[/b][/color]\n" ?>
+<? endif ?>

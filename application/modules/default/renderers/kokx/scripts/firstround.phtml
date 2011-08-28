@@ -1,0 +1,27 @@
+<?php
+$rounds = $this->report->getRounds();
+?>
+
+<? /* attackers */ ?>
+<? foreach ($rounds[0]->getAttackers() as $fleet): ?>
+    [color=red][b]<?= $this->translate("Attacker") ?>[/b][/color] <?= $fleet->getPlayer() . "\n" ?>
+    [color=red]________________________________________________[/color]
+
+    <? foreach ($fleet->getShips() as $ship): ?>
+        <?= $this->formatShip(true, $ship); ?>
+    <? endforeach; ?>
+    [color=red]_________________________________________[/color]
+
+<? endforeach; ?>
+
+<? /* defenders */ ?>
+<? foreach ($rounds[0]->getDefenders() as $fleet): ?>
+    [color=green][b]<?= $this->translate("Defender") ?>[/b][/color] <?= $fleet->getPlayer() . "\n" ?>
+    [color=green]________________________________________________[/color]
+
+    <? foreach ($fleet->getShips() as $ship): ?>
+        <?= $this->formatShip(false, $ship); ?>
+    <? endforeach; ?>
+    [color=green]_________________________________________[/color]
+
+<? endforeach; ?>
