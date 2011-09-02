@@ -226,7 +226,7 @@ class Default_Reader_Dutch_CombatReport
                 $name = Default_Model_Ship::LIGHT_FIGTHER;
                 break;
             case 'z.gevechtsschip':
-                $name = Default_Model_Ship::HEAVY_LASER;
+                $name = Default_Model_Ship::HEAVY_FIGHTER;
                 break;
             case 'kruiser':
                 $name = Default_Model_Ship::CRUISER;
